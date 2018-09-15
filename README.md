@@ -4,6 +4,7 @@
 
 ## About
 - PC 및 Mobile에서 접근 가능한 스마트 주소록 웹사이트를 개발한다.
+- 본 저장소는 스마트 주소록의 Front-end 개발 저장소이며, Vue.js로 구현한다.
 
 ## Features
 - 주소록 CRUD (Create/Read/Update/Delete)
