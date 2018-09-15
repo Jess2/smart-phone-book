@@ -29,6 +29,7 @@
     - Vue.js (v3.0.3)
     - JavaScript
     - Sass
+    - Webpack
     - Jest
     - GitHub
     
