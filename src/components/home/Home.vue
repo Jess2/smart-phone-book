@@ -15,19 +15,16 @@
 
         <router-view></router-view>
     </div>
-
-    <footer-component></footer-component>
   </div>
 </template>
 
 <script>
-import TagComponent from './components/tag/Tag'
-import ListComponent from './components/list/List'
-import LoginComponent from './components/login/Login'
-import FooterComponent from './components/footer/Footer'
+import TagComponent from '../tag/Tag'
+import ListComponent from '../list/List'
+import LoginComponent from '../login/Login'
 
 export default {
-  name: 'App',
+  name: 'Home',
   data () {
     return {
       isLogin: false
@@ -43,8 +40,11 @@ export default {
   components: {
     TagComponent,
     ListComponent,
-    LoginComponent,
-    FooterComponent
+    LoginComponent
   }
 }
 </script>
+
+<style>
+    @import "Home.scss"
+</style>
