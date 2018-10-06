@@ -1,7 +1,104 @@
 .list {
-    background: rgb(47, 0, 255);
-    width: 20%;
     display: inline-block;
     margin: 0;
-    height: 600px;
+    // height: 100vh;
+    width: 100%;
+    
+    .listHeader {
+        width: 100%;
+        padding: 15px 25px 0 25px;
+        
+        .headerTop {
+            .tagSpan {
+                color: #FE642E;
+                font-size: 1.1em;
+                height: 51px;
+                line-height: 43px;
+            }
+            
+            .rightIcon {
+                color: #FE642E;
+                font-size: 1.1em;
+                float: right;
+    
+                i {
+                    color: #FE642E;
+                    margin-left: 10px;
+                }
+
+                .dropdown {
+                    width: 20px;
+                    z-index: 999;
+                    background: none;
+                }
+
+                .btn-group > .btn:first-child {
+                    background: none;
+                    border: none;
+                    color: orangered;
+                    margin: 0;
+                    padding: 0;
+                    height: 10px;
+                }
+
+                .btn-group > .btn:first-child:hover {
+                    border: none;
+                    box-shadow: none;
+                }
+            }
+        }
+        
+        h2 {
+            margin: 0;
+            font-weight: bold;
+
+            i {
+                font-size: 1.1em;
+            }
+        }
+
+        .search {
+            width: 100%;
+            background: #eeeeee;
+            height: 40px;
+            border-radius: 8px;
+            margin: 15px 0 10px 0;
+            padding: 0 10px;
+        }
+        
+        input {
+            width: calc(100% - 30px);
+            background: #eeeeee;
+            border: none;
+            height: 38px;
+            vertical-align: middle;
+            font-size: 1em;
+            margin-top: -1px;
+            padding-left: 5px;
+        }
+
+        input:focus{
+            outline: none;
+        }
+
+        i {
+            color: gray;
+            height: 40px;
+            margin-top: 11px;
+            padding-left: 3px;
+        }
+    }
+
+    .listBody {
+        ul {
+            list-style-type : none;
+            padding: 0 25px;
+            margin-bottom: 200px;
+
+            li {
+                border-bottom: 1px solid #eeeeee;
+                padding: 10px 0 10px 5px;
+            }
+        }
+    }
 }

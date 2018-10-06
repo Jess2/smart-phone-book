@@ -1,9 +1,10 @@
 <template>
   <div class="login">
-    <h1>{{ msg }}</h1>
-
-    <!-- <router-link :to="'/detail'">로그인</router-link> -->
-    <button @click="loginFunc">로그인</button>
+    <div class="loginWrapper">
+      <!-- <p>{{ msg }}</p> -->
+      <button class="google" @click="loginFunc">Google로 로그인</button><br>
+      <button @click="loginFunc">Facebook으로 로그인</button>
+    </div>
   </div>
 </template>
 
@@ -12,7 +13,7 @@ export default {
   name: 'Login',
   data () {
     return {
-      msg: 'Login Page'
+      msg: 'Login'
     }
   },
   methods: {

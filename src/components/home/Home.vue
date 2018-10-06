@@ -7,8 +7,8 @@
     
     <!-- 로그인 되어 있는 경우 -->
     <div v-if="isLogin">
-      <tag-component></tag-component>
-      <list-component></list-component>
+      <!-- <tag-component></tag-component> -->
+      <list-component @login="login"></list-component>
     </div>
   </div>
 </template>

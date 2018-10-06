@@ -1,7 +1,34 @@
 .login {
-    background: red;
+    background: #ffffff;
     width: 100%;
-    display: inline-block;
     margin: 0;
-    height: 600px;
+    height: calc(100vh - 100px);
+    vertical-align: middle;
+    display: table;
+}
+
+.loginWrapper {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+button {
+    font-size: 1em;
+    width: 300px;
+    background: #3b5998;
+    color: white;
+    border-radius: 10px;
+    height: 50px;
+    border: none;
+    margin-top: 10px;
+}
+
+button.google {
+    margin-top: 0;
+    background: rgba(234, 067, 053);
+}
+
+p {
+    margin-bottom: 30px;
 }
