@@ -1,50 +1,19 @@
 <template>
-  <div class="home">
-    <div v-if="!isLogin">
-        로그인 필요합니다.
-        <button @click="login">로그인</button>
-        <br>
-        <login-component></login-component>
-    </div>
-    <div v-if="isLogin">
-        로그인 완료
-        <button @click="login">로그아웃</button>
-        <br>
-        <tag-component></tag-component>
-        <list-component></list-component>
-
-        <router-view></router-view>
-    </div>
-
+  <div class="app">
+    <home-component></home-component>
     <footer-component></footer-component>
   </div>
 </template>
 
 <script>
-import TagComponent from './components/tag/Tag'
-import ListComponent from './components/list/List'
-import LoginComponent from './components/login/Login'
+import HomeComponent from './components/home/Home'
 import FooterComponent from './components/footer/Footer'
 
 export default {
   name: 'App',
-  data () {
-    return {
-      isLogin: false
-    }
-  },
-  methods: {
-      login () {
-          console.log(this.isLogin)
-          this.isLogin = !this.isLogin
-          console.log(this.isLogin)
-      }
-  },
   components: {
-    TagComponent,
-    ListComponent,
-    LoginComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent
   }
 }
 </script>

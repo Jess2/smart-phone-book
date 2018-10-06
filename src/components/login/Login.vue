@@ -2,7 +2,8 @@
   <div class="login">
     <h1>{{ msg }}</h1>
 
-    <router-link :to="'/detail'">로그인</router-link>
+    <!-- <router-link :to="'/detail'">로그인</router-link> -->
+    <button @click="loginFunc">로그인</button>
   </div>
 </template>
 
@@ -12,6 +13,11 @@ export default {
   data () {
     return {
       msg: 'Login Page'
+    }
+  },
+  methods: {
+    loginFunc () {
+      this.$emit('login', true);
     }
   }
 }

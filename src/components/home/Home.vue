@@ -1,19 +1,14 @@
 <template>
   <div class="home">
+    <!-- 로그인 안되어 있는 경우 -->
     <div v-if="!isLogin">
-        로그인 필요합니다.
-        <button @click="login">로그인</button>
-        <br>
-        <login-component></login-component>
+      <login-component @login="login"></login-component>
     </div>
+    
+    <!-- 로그인 되어 있는 경우 -->
     <div v-if="isLogin">
-        로그인 완료
-        <button @click="login">로그아웃</button>
-        <br>
-        <tag-component></tag-component>
-        <list-component></list-component>
-
-        <router-view></router-view>
+      <tag-component></tag-component>
+      <list-component></list-component>
     </div>
   </div>
 </template>
@@ -31,10 +26,9 @@ export default {
     }
   },
   methods: {
-      login () {
-          console.log(this.isLogin)
-          this.isLogin = !this.isLogin
-          console.log(this.isLogin)
+      login (_isLogin) {
+        console.log(_isLogin);
+        this.isLogin = _isLogin;
       }
   },
   components: {
