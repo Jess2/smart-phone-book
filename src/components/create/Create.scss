@@ -1,7 +1,219 @@
 .create {
-    background: rgb(0, 225, 255);
-    width: 59%;
+    width: 100%;
     display: inline-block;
     margin: 0;
-    height: 600px;
+    // height: 600px;
+
+    .createHeader {
+        width: 100%;
+        padding: 15px 25px 10px 25px;
+        color: #FE642E;
+        font-size: 1em;
+        position: fixed;
+        text-align: center;
+        height: 60px;
+        vertical-align: middle;
+        line-height: 40px;
+        background: white;
+
+        .back {
+            float: left;
+
+            a {
+                color: #FE642E;
+                text-decoration: none;
+            }
+        }
+
+        .title {
+            color: black;
+            font-weight: 500;
+        }
+
+        .edit {
+            float: right;
+
+            a {
+                color: #FE642E;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .createBody {
+        margin-top: 60px;
+        padding: 10px 25px 150px 25px;
+
+        .addPhoto {
+            float: left;
+            width: 50px;
+            text-align: center;
+
+            i {
+                font-size: 50px;
+                color: lightgray;
+                position: absolute;
+                margin-left: -25px;
+            }
+
+            button {
+                font-size: 0.8em;
+                position: absolute;
+                text-align: center;
+                margin-left: -18px;
+                margin-top: 5px;
+                color: #FE642E;
+                background: none;
+                border: none;
+            }
+        }
+
+        .addName {
+            float: right;
+            text-align: left;
+            width: calc(100% - 70px);
+            margin-top: 7px;
+
+            input {
+                height: 40px;
+                padding-left: 10px;
+                width: calc(100% - 25px);
+                border: none;
+                border-bottom: 1px solid lightgray;
+            }
+
+            
+
+            .star {
+                width: 20px;
+                display: inline-block;
+                text-align: center;
+                color: #FE642E;
+            }
+        }
+
+        .addDetail {
+            margin-top: 70px;
+
+            .addDetailList {
+                font-size: 0.9em;
+                border-bottom: 1px solid lightgray;
+                height: 40px;
+                line-height: 40px;
+
+                i.fa-plus-circle {
+                    font-size: 1.6em;
+                    padding-right: 10px;
+                    color: rgb(108, 216, 0);
+                    height: 40px;
+                    line-height: 40px;
+                }
+
+                i.fa-minus-circle {
+                    font-size: 1.6em;
+                    padding-right: 14px;
+                    color: rgb(216, 0, 0);
+                    height: 40px;
+                    line-height: 40px;
+                }
+
+                span {
+                    vertical-align: top;
+                }
+            }
+
+            .addTitle {
+                margin-bottom: 30px;
+            }
+
+            .add {
+                span {
+                    color: #FE642E;
+                    padding-right: 10px;
+                }
+
+                .leftSection {
+                    width: 114px;
+                    display: inline-flex;
+
+                    .sort {
+                        width: 80%;
+                    }
+                }
+
+                input {
+                    border: none;
+                    width: calc(100% - 132px);
+                    vertical-align: top;
+                    height: 40px;
+                    line-height: 40px;
+                    height: 39px;
+                    line-height: 39px;
+                    padding-left: 10px;
+                    border-left: 1px solid lightgray;
+                }
+
+                .rightIcon {
+                    color: #FE642E;
+                    font-size: 1.1em;
+                    vertical-align: top;
+                    padding-right: 0;
+
+                    .dropdown {
+                        width: 20px;
+                        // z-index: 100;
+                        background: none;
+                        vertical-align: baseline;
+    
+                        a {
+                            color: black;
+                        }
+                    }
+    
+                    .btn-group > .btn:first-child {
+                        background: none;
+                        border: none;
+                        color: orangered;
+                        margin: 0;
+                        padding: 0;
+                        height: 10px;
+                    }
+    
+                    .btn-group > .btn:first-child:hover {
+                        border: none;
+                        box-shadow: none;
+                    }
+
+                    .dropdown-item {
+                        padding: 0 1.5em;
+                        font-size: 0.9em;
+                    }
+                }
+            }
+
+            .contactDelete {
+                margin-top: 50px;
+                margin-bottom: 100px;
+                color: #FE642E;
+                // border-bottom: 1px solid lightgray;
+            }
+        }
+
+        .memo {
+            font-size: 0.9em;
+        }
+
+        textarea {
+            border: 1px solid lightgray;
+            width: 100%;
+            font-size: 0.9em;
+            resize: none;
+            margin-top: 10px;
+            padding: 10px;
+        }
+    }
+}
+
+textarea:focus, input:focus, button:focus {
+    outline: none;
 }

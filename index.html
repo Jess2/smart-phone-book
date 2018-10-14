@@ -5,10 +5,63 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>smartphonebook_fe</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRZmTbfk_JtrdlPrsoBKMZEYijrJDDBN0&callback=initMap"async defer></script> -->
   </head>
   <body>
+      <!-- <div id="map" style="width:100%;height:200px;"></div> -->
     <div id="app"></div>
     <!-- built files will be auto injected -->
+
+<!-- 
+    <script>
+      function initMap() {
+          // 맵 스타일 정의
+          var styleArray = [
+          {
+              featureType: 'all',
+              stylers: [
+              { saturation: -80 }
+              ]
+          },{
+              featureType: 'road.arterial',
+              elementType: 'geometry',
+              stylers: [
+              { hue: '#00ffee' },
+              { saturation: 50 }
+              ]
+          },{
+              featureType: 'poi.business',
+              elementType: 'labels',
+              stylers: [
+              { visibility: 'off' }
+              ]
+          }
+          ];      
+          // 위치 정보 변수
+          var my_position = {
+              lat: 37.32238,
+              lng: 127.09444699999995
+          };
+
+          // var autocomplete = new google.maps.places.Autocomplete(
+          //          (수지로323),{types: ['geocode']});
+          
+          console.log(this.autocomplete);
+
+          // 맵 객체를 생성하고 id=‘map’에 지도 표시
+          var map = new google.maps.Map(document.getElementById('map'), {
+              center: my_position,
+              scrollwheel: false,
+              zoom: 17,
+              styles: styleArray
+          });
+          // 마커 객체 생성
+          var marker = new google.maps.Marker({
+              map: map,
+              position: my_position,
+              title: '여기가 내 위치입니다!'
+          });
+      }
+    </script> -->
   </body>
 </html>

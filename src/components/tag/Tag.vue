@@ -1,6 +1,11 @@
 <template>
   <div class="tag">
-    <h1>{{ msg }}</h1>
+    <div class="tagHeader">
+      <span class="title">태그</span>
+      <span class="save">
+        <router-link to="/list">완료</router-link>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -15,6 +20,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
     @import "Tag.scss"
 </style>
