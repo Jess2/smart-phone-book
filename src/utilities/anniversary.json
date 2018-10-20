@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "contact_id": 2,
+        "category": "생일",
+        "contents": "1993-07-30"
+    },
+    {
+        "id": 2,
+        "contact_id": 2,
+        "category": "기념일",
+        "contents": "2014-03-02"
+    }
+]

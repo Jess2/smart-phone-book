@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "contact_id": 2,
+        "name": "친구"
+    },
+    {
+        "id": 2,
+        "contact_id": 2,
+        "name": "대학교"
+    },
+    {
+        "id": 3,
+        "contact_id": 3,
+        "name": "친구"
+    },
+    {
+        "id": 4,
+        "contact_id": 4,
+        "name": "가족"
+    }
+]

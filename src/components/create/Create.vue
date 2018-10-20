@@ -36,6 +36,7 @@
                 <b-dropdown-item @click="phone.sort = '휴대전화'">휴대전화</b-dropdown-item>
                 <b-dropdown-item @click="phone.sort = '집'">집</b-dropdown-item>
                 <b-dropdown-item @click="phone.sort = '직장'">직장</b-dropdown-item>
+                <b-dropdown-item @click="phone.sort = '팩스'">팩스</b-dropdown-item>
                 <b-dropdown-item @click="phone.sort = '기타'">기타</b-dropdown-item>
               </b-dropdown>
             </span>
@@ -131,7 +132,7 @@
               </b-dropdown>
             </span>
           </div>
-          <input type="text" placeholder="주소" v-model="url.text">
+          <input type="text" placeholder="URL" v-model="url.text">
         </div>
 
         <div class="addDetailList addTitle">
