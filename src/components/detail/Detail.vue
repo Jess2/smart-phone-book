@@ -1,12 +1,13 @@
 <template>
-  <div class="detail">
+  <div class="detail" v-if="show">
     <div class="detailHeader">
-      <span class="back"><router-link :to="'/list'"><i class="fa fa-angle-left"></i>연락처</router-link></span>
+      <span v-if="root === 'list'" class="back" @click="backClick"><i class="fa fa-angle-left"></i>연락처</span>
+      <span v-if="root === 'favorite'" class="back" @click="backClick"><i class="fa fa-angle-left"></i>즐겨찾기</span>
       <span class="edit"><router-link :to="'/create'">편집</router-link></span>
       
       <div class="detailHeaderMain">
         <i class="fa fa-user-circle"></i>
-        <span class="name">고다경</span>
+        <span class="name">{{selectedContact.name}}</span>
         <i v-if="!onStar" @click="onStar = true" class="fa fa-star-o"></i>
         <i v-if="onStar" @click="onStar = false" class="fa fa-star"></i>
       </div>
@@ -20,7 +21,7 @@
         </li>
         <li>
           <p>휴대전화</p>
-          <a href="tel:010-1234-5678">010-1234-5678</a>
+          <a href="tel:010-1234-5678">{{selectedContact.favorite}}</a>
         </li>
         <li>
           <p>직장</p>
@@ -50,7 +51,7 @@
         <li>
           <p>메모</p>
           <div class="memo">
-            안녕하세요. 메모 공간입니다. 메모메모. 안녕하세요. 메모 공간입니다. 
+            {{selectedContact.memo}}
           </div>
         </li>
       </ul>
@@ -60,24 +61,43 @@
 </template>
 
 <script>
-import CreateComponent from '../create/Create'
-export default {
-  name: 'Detail',
-  data () {
-    return {
-      msg: 'Detail Page',
-      isCreateMode: false,
-      onStar: false
-    }
-  },
-  methods: {
-      openCreateComponent () {
-          this.isCreateMode = true;
+  import CreateComponent from '../create/Create'
+  import ContactData from '../../utilities/contact.json'
+
+  export default {
+    name: 'Detail',
+    props: ['show', 'userId', 'root'],
+    data () {
+      return {
+        msg: 'Detail Page',
+        isCreateMode: false,
+        onStar: false
       }
+    },
+    methods: {
+      openCreateComponent () {
+        this.isCreateMode = true;
+      },
+      backClick () {
+        console.log('back')
+        this.$emit('close');
+      }
+    },
+    computed: {
+      selectedContact () {
+        if (this.show) {
+          for (let i=0; i<ContactData.length; i++) {
+            if (ContactData[i].id === this.userId) {
+              console.log(ContactData[i])
+              return ContactData[i];
+            }
+          }
+        }
+      }
+    }
   }
-}
 </script>
 
 <style lang="scss">
-    @import "Detail.scss"
+  @import "Detail.scss"
 </style>

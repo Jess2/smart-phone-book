@@ -6,6 +6,7 @@ import Detail from '@/components/detail/Detail'
 import List from '@/components/list/List'
 import Tag from '@/components/tag/Tag'
 import Home from '@/components/home/Home'
+import Favorite from '@/components/favorite/Favorite'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/tag',
       name: 'Tag',
       component: Tag
+    },
+    {
+      path: '/favorite',
+      name: 'Favorite',
+      component: Favorite
     }
   ]
 })
