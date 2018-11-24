@@ -30,9 +30,7 @@
       <h2>{{ title }}</h2>
       <div class="search">
         <i class="fa fa-search"></i>
-        <!-- <input type="text" placeholder="검색"> -->
-
-          <input type="text" placeholder="검색" v-model="searchContent" @keyup="inputKeyup" id="searchId">
+        <input type="text" placeholder="검색" v-model="searchContent" @keyup="inputKeyup" id="searchId">
       </div>
     </div>
 
@@ -71,7 +69,7 @@ export default {
       return this.contactData.filter(item => {
         return item.name.toUpperCase().includes(this.searchContent.toUpperCase());
       })
-      return this.targetDatas;
+      return this.contactData;
     },
   },
   methods: {
@@ -81,11 +79,9 @@ export default {
     openDetailFunc (userId) {
       this.openDetail = true;
       this.selectedUserId = userId;
-      console.log(this.selectedUserId)
     },
     inputKeyup () {
       this.searchContent = $('#searchId').val();
-      console.log($('#searchId').val(), this.searchContent);
     },
     // 연락처 리스트 가져오기
     getContactList () {
