@@ -14,7 +14,7 @@
       </div>
 
       <div class="listBody">
-      <ul v-for="contact in favoriteFilteredList">
+      <ul v-if="contact.favorite === 1" v-for="contact in nameSortList">
         <li @click="openDetailFunc(contact.id)">
           {{ contact.name }}
         </li>
@@ -45,6 +45,12 @@
           return item.name.toUpperCase().includes(this.searchContent.toUpperCase());
         })
         return this.contactData;
+      },
+      nameSortList () {
+        /* 이름순으로 정렬 */
+        return this.favoriteFilteredList.sort((a, b) => {
+          return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+        });
       },
     },
     methods: {
