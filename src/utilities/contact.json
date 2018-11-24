@@ -9,22 +9,22 @@
     {
         "id": 2,
         "user_id": 1,
-        "name": "고다경",
-        "memo": "메모입니다.",
-        "favorite": 1
-    },
-    {
-        "id": 3,
-        "user_id": 1,
         "name": "연효경",
         "memo": "메모입니다. 메모 메모~",
         "favorite": 1
     },
     {
-        "id": 4,
+        "id": 3,
         "user_id": 1,
         "name": "홍길동",
         "memo": "메모입니다. 메모",
         "favorite": 0
+    },
+    {
+        "id": 4,
+        "user_id": 1,
+        "name": "고다경",
+        "memo": "메모입니다.",
+        "favorite": 1
     }
 ]

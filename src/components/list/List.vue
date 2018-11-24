@@ -35,7 +35,7 @@
     </div>
 
     <div class="listBody">
-      <ul :class="{ favorites: contact.favorite == 1 }" v-for="contact in contactFilteredList">
+      <ul :class="{ favorites: contact.favorite == 1 }" v-for="contact in dictionFilter">
         <li  v-if="contact.id != contact.user_id" @click="openDetailFunc(contact.id)">
           {{ contact.name }}<i class="fa fa-star" v-if="contact.favorite == 1"></i>
         </li>
@@ -71,6 +71,13 @@ export default {
       })
       return this.contactData;
     },
+    dictionFilter () {
+      /* 이름순으로 정렬 */
+      console.log('?', this.contactFilteredList)
+      return this.contactFilteredList.sort((a, b) => {
+        return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+      });
+    },
   },
   methods: {
     loginFunc () {
@@ -83,6 +90,7 @@ export default {
     inputKeyup () {
       this.searchContent = $('#searchId').val();
     },
+    
     // 연락처 리스트 가져오기
     getContactList () {
       this.$http.get(`/contacts`, {
