@@ -30,12 +30,14 @@
       <h2>{{ title }}</h2>
       <div class="search">
         <i class="fa fa-search"></i>
-        <input type="text" placeholder="검색">
+        <!-- <input type="text" placeholder="검색"> -->
+
+          <input type="text" placeholder="검색" v-model="searchContent" @keyup="inputKeyup" id="searchId">
       </div>
     </div>
 
     <div class="listBody">
-      <ul :class="{ favorites: contact.favorite == 1 }" v-for="contact in contactData">
+      <ul :class="{ favorites: contact.favorite == 1 }" v-for="contact in contactFilteredList">
         <li  v-if="contact.id != contact.user_id" @click="openDetailFunc(contact.id)">
           {{ contact.name }}<i class="fa fa-star" v-if="contact.favorite == 1"></i>
         </li>
@@ -58,10 +60,19 @@ export default {
       openDetail: false,
       contactData: ContactData,
       selectedUserId: 0,
+      searchContent: "",
     }
   },
   mounted () {
     console.log('contactData', this.contactData);
+  },
+  computed: {
+    contactFilteredList () {
+      return this.contactData.filter(item => {
+        return item.name.toUpperCase().includes(this.searchContent.toUpperCase());
+      })
+      return this.targetDatas;
+    },
   },
   methods: {
     loginFunc () {
@@ -71,7 +82,25 @@ export default {
       this.openDetail = true;
       this.selectedUserId = userId;
       console.log(this.selectedUserId)
-    }
+    },
+    inputKeyup () {
+      this.searchContent = $('#searchId').val();
+      console.log($('#searchId').val(), this.searchContent);
+    },
+    // 연락처 리스트 가져오기
+    getContactList () {
+      this.$http.get(`/contacts`, {
+      }).then((result => {
+          this.targets = result.data;
+        }))
+        .catch(error => {
+          if (error.response.status === 401 || error.response.status === 403) {
+            alert('에러')
+          } else {
+            alert('에러')
+          }
+        })
+    },
   },
   components: {
     DetailComponent

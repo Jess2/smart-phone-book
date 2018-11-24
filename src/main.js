@@ -6,6 +6,7 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import axios from 'axios'
 
 Vue.use(BootstrapVue)
 
@@ -18,3 +19,14 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+// 캐싱 방지
+axios.defaults.headers.get['Cache-Control'] = 'no-cache';
+axios.defaults.headers.get['Pragma'] = 'no-cache';
+
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.timeout = 100000;
+axios.defaults.baseURL = 'http://13.124.244.16:8085/api/'
+
+Vue.prototype.$http = axios;
