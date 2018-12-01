@@ -8,50 +8,48 @@
       <div class="detailHeaderMain">
         <i class="fa fa-user-circle"></i>
         <span class="name">{{selectedContact.name}}</span>
-        <i v-if="selectedContact.favorite === 0" @click="setFavorite" class="fa fa-star-o"></i>
-        <i v-if="selectedContact.favorite === 1" @click="setFavorite" class="fa fa-star"></i>
+        <i v-if="selectedContact.type === 'DEFAULT'" @click="setFavorite" class="fa fa-star-o"></i>
+        <i v-if="selectedContact.type === 'FAVORITED'" @click="setFavorite" class="fa fa-star"></i>
       </div>
     </div>
  
     <div class="detailBody">
       <ul>
-        <li class="tag">
-          <span>#친구</span>
-          <span>#대학교</span>
+        <li class="tag" v-if="selectedContact.tags.length !== 0">
+          <span v-for="tag in selectedContact.tags">#{{tag.name}} </span>
         </li>
-        <li>
-          <p>휴대전화</p>
-          <a href="tel:010-1234-5678">{{selectedContact.favorite}}</a>
+
+        <!-- 전화번호 -->
+        <li v-for="digit in selectedContact.digits">
+          <p>{{digit.category.name}}</p>
+          <a href="tel:">{{digit.numbers.first}}-{{digit.numbers.second}}-{{digit.numbers.third}}</a>
         </li>
-        <li>
-          <p>직장</p>
-          <a href="tel:010-1234-5678">02-1234-5678</a>
-        </li>
-        <li>
-          <p>직장 팩스</p>
-          <a href="tel:010-1234-5678">02-1234-5678</a>
-        </li>
-        <li>
-          <p>이메일</p>
-          <a href="mailto:dakyong@gmail.com">dakyong@gmail.com</a>
-        </li>
-        <li>
-          <p>주소</p>
-          경기도 성남시 불정로 6
-          <i class="fa fa-map-marker"></i>
-        </li>
-        <li>
-          <p>생일</p>
-          7월 30일
-        </li>
-        <li>
-          <p>웹사이트</p>
-          <a href="https://github.com/koda93" target="_blank">https://github.com/koda93</a>
-        </li>
-        <li>
-          <p>메모</p>
-          <div class="memo">
-            {{selectedContact.memo}}
+
+        <!-- 기타 정보 -->
+        <li v-for="info in selectedContact.infoes">
+          <!-- 카테고리 이름 -->
+          <p>{{info.category.name}}</p>
+
+          <!-- 메일 -->
+          <a v-if="info.category.type === 'EMAIL'" href="mailto:">{{info.contents}}</a>
+
+          <!-- 주소 -->
+          <div v-if="info.category.type === 'ADDRESS'">
+            {{info.contents}}
+            <i class="fa fa-map-marker"></i>
+          </div>
+
+          <!-- 생일 -->
+          <div v-if="info.category.type === 'DATE'">
+            {{info.contents}}
+          </div>
+
+          <!-- 웹사이트 -->
+          <a v-if="info.category.type === 'URL'" href="#" target="_blank">{{info.contents}}</a>
+
+          <!-- 메모 -->
+          <div v-if="info.category.type === 'MEMO'">
+            {{info.memo}}
           </div>
         </li>
       </ul>
@@ -71,7 +69,15 @@
       return {
         msg: 'Detail Page',
         isCreateMode: false,
+        selectedContact: {}
       }
+    },
+    watch: {
+      show () {
+        this.getContactDetail();
+      }
+    },
+    computed: {
     },
     methods: {
       openCreateComponent () {
@@ -83,20 +89,20 @@
       },
       setFavorite () {
         console.log('setFavorite')
-      }
+      },
+      // 연락처 세부정보 가져오기
+      getContactDetail () {
+        console.log('userid', this.userId)
+        this.$http.get(`/contacts/${this.userId}`, {
+        }).then((result => {
+            this.selectedContact = result.data;
+            console.log('api 호출', this.selectedContact)
+          }))
+          .catch(error => {
+            alert('에러가 발생했습니다.')
+          })
+      },
     },
-    computed: {
-      selectedContact () {
-        if (this.show) {
-          for (let i=0; i<ContactData.length; i++) {
-            if (ContactData[i].id === this.userId) {
-              console.log(ContactData[i])
-              return ContactData[i];
-            }
-          }
-        }
-      }
-    }
   }
 </script>
 

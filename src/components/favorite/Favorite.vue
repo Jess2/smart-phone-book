@@ -42,7 +42,6 @@
     computed: {
       favoriteFilteredList () {
         return this.contactData.filter(item => {
-          console.log(this.searchContent, typeof this.searchContent, item.memo, typeof item.memo)
           // 검색어에 memo 내용 포함 -> 추후에 번호로 변경 예정
           if (item.memo.includes(this.searchContent)) {
             return item.memo.includes(this.searchContent);

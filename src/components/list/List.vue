@@ -35,9 +35,16 @@
     </div>
 
     <div class="listBody">
-      <ul :class="{ favorites: contact.favorite == 1 }" v-for="contact in nameSortList">
-        <li  v-if="contact.id != contact.user_id" @click="openDetailFunc(contact.id)">
-          {{ contact.name }}<i class="fa fa-star" v-if="contact.favorite == 1"></i>
+      <ul v-if="contact.type === 'ME'" class="myContact" v-for="contact in nameSortList">
+        <!-- 나 -->
+        <li @click="openDetailFunc(contact.id)">
+          <i class="fa fa-user-circle"></i><h5>{{ contact.name }}</h5>
+        </li>
+      </ul>
+      <ul v-if="contact.type !== 'ME'" :class="{ favorites: contact.type === 'FAVORITED' }" v-for="contact in nameSortList">
+        <!-- 사람들 연락처 -->
+        <li @click="openDetailFunc(contact.id)">
+          {{ contact.name }}<i class="fa fa-star" v-if="contact.type === 'FAVORITED'"></i>
         </li>
       </ul>
     </div>
@@ -48,7 +55,7 @@
 
 <script>
 import DetailComponent from '../detail/Detail'
-import ContactData from '../../utilities/contact.json'
+// import ContactData from '../../utilities/contact.json'
 
 export default {
   name: 'List',
@@ -56,22 +63,23 @@ export default {
     return {
       title: '연락처',
       openDetail: false,
-      contactData: ContactData,
+      contactData: [],
       selectedUserId: 0,
       searchContent: "",
     }
   },
   mounted () {
     console.log('contactData', this.contactData);
+    this.getContactList();
   },
   computed: {
     contactFilteredList () {
       return this.contactData.filter(item => {
         console.log(this.searchContent, typeof this.searchContent, item.memo, typeof item.memo)
         // 검색어에 memo 내용 포함 -> 추후에 번호로 변경 예정
-        if (item.memo.includes(this.searchContent)) {
-          return item.memo.includes(this.searchContent);
-        }
+        // if (item.memo.includes(this.searchContent)) {
+        //   return item.memo.includes(this.searchContent);
+        // }
         // 검색어에 이름 포함
         if (item.name.toUpperCase().includes(this.searchContent.toUpperCase())) {
           return item.name.toUpperCase().includes(this.searchContent.toUpperCase());
@@ -100,16 +108,13 @@ export default {
     
     // 연락처 리스트 가져오기
     getContactList () {
-      this.$http.get(`/contacts`, {
+      this.$http.get(`/contacts/`, {
       }).then((result => {
-          this.targets = result.data;
+          this.contactData = result.data;
+          console.log('api 호출', this.contactData)
         }))
         .catch(error => {
-          if (error.response.status === 401 || error.response.status === 403) {
-            alert('에러')
-          } else {
-            alert('에러')
-          }
+          alert('에러가 발생했습니다.')
         })
     },
   },

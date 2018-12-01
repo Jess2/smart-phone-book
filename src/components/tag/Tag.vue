@@ -6,6 +6,16 @@
         <router-link to="/list">완료</router-link>
       </span>
     </div>
+    <div class="tagBody">
+      <ul>
+        <li><i class="fa fa-minus-circle"가족</li>
+        <li>친구</li>
+        <li>
+          <i class="fa fa-plus-circle" @click="addPhone"></i>
+          태그 추가
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
