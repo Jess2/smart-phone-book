@@ -8,8 +8,8 @@
       <div class="detailHeaderMain">
         <i class="fa fa-user-circle"></i>
         <span class="name">{{selectedContact.name}}</span>
-        <i v-if="!onStar" @click="onStar = true" class="fa fa-star-o"></i>
-        <i v-if="onStar" @click="onStar = false" class="fa fa-star"></i>
+        <i v-if="selectedContact.favorite === 0" @click="setFavorite" class="fa fa-star-o"></i>
+        <i v-if="selectedContact.favorite === 1" @click="setFavorite" class="fa fa-star"></i>
       </div>
     </div>
  
@@ -71,7 +71,6 @@
       return {
         msg: 'Detail Page',
         isCreateMode: false,
-        onStar: false
       }
     },
     methods: {
@@ -81,6 +80,9 @@
       backClick () {
         console.log('back')
         this.$emit('close');
+      },
+      setFavorite () {
+        console.log('setFavorite')
       }
     },
     computed: {
