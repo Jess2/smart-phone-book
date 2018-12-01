@@ -15,7 +15,7 @@
  
     <div class="detailBody">
       <ul>
-        <li class="tag" v-if="selectedContact.tags.length !== 0">
+        <li class="tag" v-if="selectedContact.tags && selectedContact.tags.length !== 0">
           <span v-for="tag in selectedContact.tags">#{{tag.name}} </span>
         </li>
 
@@ -52,6 +52,7 @@
             {{info.memo}}
           </div>
         </li>
+        <li v-if="selectedContact.type !== 'ME'" class="contactDelete" @click="contactDelete">이 연락처 삭제하기</li>
       </ul>
 
     </div>
@@ -74,7 +75,7 @@
     },
     watch: {
       show () {
-        this.getContactDetail();
+        if (this.show === true) this.getContactDetail();
       }
     },
     computed: {
@@ -92,7 +93,6 @@
       },
       // 연락처 세부정보 가져오기
       getContactDetail () {
-        console.log('userid', this.userId)
         this.$http.get(`/contacts/${this.userId}`, {
         }).then((result => {
             this.selectedContact = result.data;
@@ -102,6 +102,18 @@
             alert('에러가 발생했습니다.')
           })
       },
+      // 연락처 삭제하기
+      contactDelete () {
+        let currentThis = this;
+        this.$http.delete(`/contacts/${this.userId}`, {
+          }).then((result => {
+              console.log('연락처 삭제')
+              currentThis.backClick()
+            }))
+            .catch(error => {
+              alert('에러가 발생했습니다.')
+            })
+        }
     },
   }
 </script>

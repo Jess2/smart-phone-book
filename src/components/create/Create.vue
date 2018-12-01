@@ -145,8 +145,6 @@
           <span class="memo">메모 추가</span>
           <textarea name="" id="" cols="30" rows="10" placeholder="메모"></textarea>
         </div>
-
-        <div class="addDetailList addTitle contactDelete">이 연락처 삭제하기</div>
       </div>
     </div>
   </div>

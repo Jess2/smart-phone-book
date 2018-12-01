@@ -41,7 +41,7 @@
           <i class="fa fa-user-circle"></i><h5>{{ contact.name }}</h5>
         </li>
       </ul>
-      <ul v-if="contact.type !== 'ME'" :class="{ favorites: contact.type === 'FAVORITED' }" v-for="contact in nameSortList">
+      <ul v-if="contact.type !== 'ME'" :class="{ favorites: contact.type === 'FAVORITED' }" v-for="contact in nameSortList" :key="contact.id">
         <!-- 사람들 연락처 -->
         <li @click="openDetailFunc(contact.id)">
           {{ contact.name }}<i class="fa fa-star" v-if="contact.type === 'FAVORITED'"></i>
@@ -71,6 +71,12 @@ export default {
   mounted () {
     console.log('contactData', this.contactData);
     this.getContactList();
+  },
+  watch: {
+    openDetail () {
+      this.getContactList();
+      console.log('show opendetail')
+    }
   },
   computed: {
     contactFilteredList () {
@@ -105,7 +111,6 @@ export default {
     inputKeyup () {
       this.searchContent = $('#searchId').val();
     },
-    
     // 연락처 리스트 가져오기
     getContactList () {
       this.$http.get(`/contacts/`, {
