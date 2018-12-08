@@ -242,17 +242,27 @@ export default {
       // else if ($('#number').val().length >= 11) {
       //   $('#number').val($('#number').val().slice(0,3) + "-" + $('#number').val().slice(3,7) + "-" + $('#number').val().slice(7))
       // }
-      this.$set(this.newPhone, 'numbers', {
-        first: $('#number').val().split('-')[0],
-        second: $('#number').val().split('-')[1],
-        third: $('#number').val().split('-')[2]
-      })
+      // this.$set(this.newPhone, 'numbers', {
+      //   first: $('#number').val().split('-')[0],
+      //   second: $('#number').val().split('-')[1],
+      //   third: $('#number').val().split('-')[2]
+      // })
     },
     backFunc () {
       this.$emit('close')
     },
     // 연락처 생성하기
     createSave () {
+      if (this.phoneArray.length > 0) {
+        for (let i=0; i<this.phoneArray.length; i++) {
+          console.log(this.phoneArray[i].number)
+          this.phoneArray[i].numbers = {
+            first: this.phoneArray[i].number.split('-')[0],
+            second: this.phoneArray[i].number.split('-')[1],
+            third: this.phoneArray[i].number.split('-')[2],
+          }
+        }
+      }
       if (this.name !== "") {
         this.$http.post(`/contacts/`, {
           addresses: this.addressArray,
