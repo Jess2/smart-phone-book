@@ -6,8 +6,8 @@
     </div>
     <div class="tagBody">
       <ul>
-        <li><i class="fa fa-minus-circle"가족</li>
-        <li>친구</li>
+        <li><i class="fa fa-minus-circle"></i>가족</li>
+        <li><i class="fa fa-minus-circle"></i>친구</li>
         <li>
           <i class="fa fa-plus-circle" @click="addTag"></i>
           태그 추가

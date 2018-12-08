@@ -20,32 +20,12 @@
 - 명함 인식
 - 주소록 백업 Excel Export/Import(미정)
 
-
-## Project Schedule
-![WBS](https://user-images.githubusercontent.com/33195744/45584601-9c243000-b911-11e8-9656-2e8415095783.png)
-
 ## Stack
 - Front-end
     - Vue.js (v3.0.3)
     - JavaScript
     - Sass
     - Webpack
-    - Jest
-    - GitHub
-    
-- Back-end
-    - Spring
-    - MyBatis
-    - Apache Tomcat
-    - Maven
-    - STS
-    - MySQL
-    - GitHub
-    - AWS
-    - JUnit
-    - OAuth
-    - SSL
-    - JWT
 
 ## Members
 - [고다경](https://github.com/koda93) : 기획, DB 및 UI 설계, 서버 및 개발환경 구축, [웹 백엔드](https://github.com/koda93/SmartPhoneBook_BE) 개발

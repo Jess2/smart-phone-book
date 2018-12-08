@@ -14,9 +14,9 @@
     </div>
     <div class="detailBody">
       <ul>
-        <li class="tag" v-if="selectedContact.tags && selectedContact.tags.length !== 0">
+        <!-- <li class="tag" v-if="selectedContact.tags && selectedContact.tags.length !== 0">
           <span v-for="tag in selectedContact.tags">#{{tag.name}} </span>
-        </li>
+        </li> -->
 
         <!-- 전화번호 -->
         <li v-for="digit in selectedContact.digits">
