@@ -8,7 +8,7 @@
     <div class="favoriteBody">
       <div class="search">
         <i class="fa fa-search"></i>
-        <input type="text" placeholder="검색" v-model="searchContent" @keyup="inputKeyup" id="searchId">
+        <input type="text" placeholder="검색" v-model="searchContent" @keyup="favoriteInputKeyup" id="favoriteSearchId">
       </div>
 
       <div class="listBody">
@@ -53,6 +53,7 @@
           // if (item.memo.includes(this.searchContent)) {
           //   return item.memo.includes(this.searchContent);
           // }
+          console.log(this.searchContent, item.name);
           // 검색어에 이름 포함
           if (item.name.toUpperCase().includes(this.searchContent.toUpperCase())) {
             return item.name.toUpperCase().includes(this.searchContent.toUpperCase());
@@ -76,8 +77,9 @@
         this.selectedUserId = userId;
         console.log(this.selectedUserId)
       },
-      inputKeyup () {
-        this.searchContent = $('#searchId').val();
+      favoriteInputKeyup () {
+        this.searchContent = $('#favoriteSearchId').val();
+        console.log('검색어', this.searchContent)
       },
       getFavorites () {
         this.$http.get(`/users/${this.myId}/favorites`, {
