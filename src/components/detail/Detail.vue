@@ -61,7 +61,6 @@
 
 <script>
   import CreateComponent from '../create/Create'
-  import ContactData from '../../utilities/contact.json'
 
   export default {
     name: 'Detail',

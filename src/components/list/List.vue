@@ -51,7 +51,6 @@ import FavoriteComponent from '../favorite/Favorite'
 import TagComponent from '../tag/Tag'
 import DetailComponent from '../detail/Detail'
 import CreateComponent from '../create/Create'
-// import ContactData from '../../utilities/contact.json'
 
 export default {
   name: 'List',
