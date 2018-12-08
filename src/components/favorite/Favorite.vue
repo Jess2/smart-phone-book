@@ -12,7 +12,7 @@
       </div>
 
       <div class="listBody">
-      <ul v-if="contact.favorite === 1" v-for="contact in nameSortList">
+      <ul v-if="contact.type === 'FAVORITED'" v-for="contact in nameSortList">
         <li @click="openDetailFunc(contact.id)">
           {{ contact.name }}
         </li>
@@ -34,7 +34,7 @@
         openDetail: false,
         selectedUserId: 0,
         searchContent: "",
-        favoriteContacts: {},
+        favoriteContacts: [],
         myId: 1,
       }
     },
@@ -48,17 +48,17 @@
     },
     computed: {
       favoriteFilteredList () {
-        return this.contactData.filter(item => {
+        return this.favoriteContacts.filter(item => {
           // 검색어에 memo 내용 포함 -> 추후에 번호로 변경 예정
-          if (item.memo.includes(this.searchContent)) {
-            return item.memo.includes(this.searchContent);
-          }
+          // if (item.memo.includes(this.searchContent)) {
+          //   return item.memo.includes(this.searchContent);
+          // }
           // 검색어에 이름 포함
           if (item.name.toUpperCase().includes(this.searchContent.toUpperCase())) {
             return item.name.toUpperCase().includes(this.searchContent.toUpperCase());
           }
         })
-        return this.contactData;
+        return this.favoriteContacts;
       },
       nameSortList () {
         /* 이름순으로 정렬 */
@@ -80,7 +80,7 @@
         this.searchContent = $('#searchId').val();
       },
       getFavorites () {
-        this.$http.get(`/users/${myId}/favorites`, {
+        this.$http.get(`/users/${this.myId}/favorites`, {
         }).then((result => {
             this.favoriteContacts = result.data;
             console.log('즐겨찾기 목록', this.favoriteContacts);
