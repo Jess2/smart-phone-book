@@ -1,22 +1,12 @@
 <template>
   <div class="list">
-    <div class="listHeader">
+    <div class="listHeader" :class="{ noDisplay: openOtherPage === true }">
       <div class="headerTop">
-      <span class="tagSpan">
-        <router-link to="/tag">
-          태그
-        </router-link>
-      </span>
-      <span class="tagSpan">
-        <router-link to="/favorite">
-          즐겨찾기
-        </router-link>
-      </span>
+      <span class="tagSpan" @click="openTagFunc">태그</span>
+      <span class="tagSpan" @click="openFavoriteFunc">즐겨찾기</span>
       <span class="rightIcon">
         <b-dropdown right class="dropdown">
-          <b-dropdown-item>
-            <router-link :to="'/create'">연락처 추가</router-link>
-          </b-dropdown-item>
+          <b-dropdown-item @click="openCreateFunc">연락처 추가</b-dropdown-item>
           <b-dropdown-item>명함 추가</b-dropdown-item>
           <b-dropdown-divider></b-dropdown-divider>
           <b-dropdown-item>연락처 가져오기</b-dropdown-item>
@@ -34,7 +24,7 @@
       </div>
     </div>
 
-    <div class="listBody">
+    <div class="listBody" :class="{ noDisplay: openOtherPage === true }">
       <ul v-if="contact.type === 'ME'" class="myContact" v-for="contact in nameSortList">
         <!-- 나 -->
         <li @click="openDetailFunc(contact.id)">
@@ -49,12 +39,18 @@
       </ul>
     </div>
 
+    <favorite-component :show="openFavorite" @close="openFavorite = false"></favorite-component>
+    <tag-component :show="openTag" @close="openTag = false"></tag-component>
     <detail-component :show="openDetail" :userId="selectedUserId" :root="'list'" @close="openDetail = false"></detail-component>
+    <create-component :show="openCreate" @close="openCreate = false"></create-component>
   </div>
 </template>
 
 <script>
+import FavoriteComponent from '../favorite/Favorite'
+import TagComponent from '../tag/Tag'
 import DetailComponent from '../detail/Detail'
+import CreateComponent from '../create/Create'
 // import ContactData from '../../utilities/contact.json'
 
 export default {
@@ -63,6 +59,9 @@ export default {
     return {
       title: '연락처',
       openDetail: false,
+      openCreate: false,
+      openTag: false,
+      openFavorite: false,
       contactData: [],
       selectedUserId: 0,
       searchContent: "",
@@ -76,12 +75,22 @@ export default {
     openDetail () {
       this.getContactList();
       console.log('show opendetail')
+    },
+    openCreate () {
+      this.getContactList();
+      console.log('show openCreate')
     }
   },
   computed: {
+    openOtherPage () {
+      if (this.openDetail === true || this.openCreate === true) {
+        return true;
+      }
+      return false;
+    },
     contactFilteredList () {
       return this.contactData.filter(item => {
-        console.log(this.searchContent, typeof this.searchContent, item.memo, typeof item.memo)
+        // console.log(this.searchContent, typeof this.searchContent, item.memo, typeof item.memo)
         // 검색어에 memo 내용 포함 -> 추후에 번호로 변경 예정
         // if (item.memo.includes(this.searchContent)) {
         //   return item.memo.includes(this.searchContent);
@@ -104,9 +113,19 @@ export default {
     loginFunc () {
       this.$emit('login', false);
     },
+    openTagFunc () {
+      this.openTag = true;
+    },
+    openFavoriteFunc () {
+      console.log('즐겨찾기 열기')
+      this.openFavorite = true;
+    },
     openDetailFunc (userId) {
       this.openDetail = true;
       this.selectedUserId = userId;
+    },
+    openCreateFunc () {
+      this.openCreate = true;
     },
     inputKeyup () {
       this.searchContent = $('#searchId').val();
@@ -124,7 +143,10 @@ export default {
     },
   },
   components: {
-    DetailComponent
+    DetailComponent,
+    CreateComponent,
+    TagComponent,
+    FavoriteComponent
   }
 }
 </script>

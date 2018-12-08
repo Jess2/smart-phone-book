@@ -1,10 +1,8 @@
 <template>
-  <div class="favorite">
+  <div class="favorite" v-if="show">
     <div class="favoriteHeader">
       <span class="title">즐겨찾기</span>
-      <span class="save">
-        <router-link to="/list">완료</router-link>
-      </span>
+      <span class="save" @click="backFunc">완료</span>
     </div>
 
     <div class="favoriteBody">
@@ -27,16 +25,25 @@
 
 <script>
   import DetailComponent from '../detail/Detail'
-  import ContactData from '../../utilities/contact.json'
 
   export default {
     name: 'Favorite',
+    props: ['show'],
     data () {
       return {
-        contactData: ContactData,
         openDetail: false,
         selectedUserId: 0,
         searchContent: "",
+        favoriteContacts: {},
+        myId: 1,
+      }
+    },
+    watch: {
+      show () {
+        if (this.show === true) {
+          console.log('즐겨찾기 열기 성공');
+          this.getFavorites();
+        }
       }
     },
     computed: {
@@ -61,6 +68,9 @@
       },
     },
     methods: {
+      backFunc () {
+        this.$emit('close')
+      },
       openDetailFunc (userId) {
         this.openDetail = true;
         this.selectedUserId = userId;
@@ -69,6 +79,16 @@
       inputKeyup () {
         this.searchContent = $('#searchId').val();
       },
+      getFavorites () {
+        this.$http.get(`/users/${myId}/favorites`, {
+        }).then((result => {
+            this.favoriteContacts = result.data;
+            console.log('즐겨찾기 목록', this.favoriteContacts);
+          }))
+          .catch(error => {
+            alert('에러가 발생했습니다.')
+          })
+      }
     },
     components: {
       DetailComponent

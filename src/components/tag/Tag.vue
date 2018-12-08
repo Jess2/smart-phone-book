@@ -1,17 +1,15 @@
 <template>
-  <div class="tag">
+  <div class="tag" v-if="show">
     <div class="tagHeader">
       <span class="title">태그</span>
-      <span class="save">
-        <router-link to="/list">완료</router-link>
-      </span>
+      <span class="save" @click="backFunc">완료</span>
     </div>
     <div class="tagBody">
       <ul>
         <li><i class="fa fa-minus-circle"가족</li>
         <li>친구</li>
         <li>
-          <i class="fa fa-plus-circle" @click="addPhone"></i>
+          <i class="fa fa-plus-circle" @click="addTag"></i>
           태그 추가
         </li>
       </ul>
@@ -22,10 +20,19 @@
 <script>
 export default {
   name: 'Tag',
+  props: ['show'],
   data () {
     return {
       msg: 'Tag Page'
     }
+  },
+  methods: {
+    backFunc () {
+      this.$emit('close')
+    },
+    addTag () {
+      console.log('태그 추가')
+    },
   }
 }
 </script>

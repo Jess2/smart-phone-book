@@ -127,7 +127,7 @@
 			calculatedDate() {
 				const day = this.selectedDay >= 10 ? this.selectedDay : `0${this.selectedDay}`
 				const month = this.selectedMonth + 1 >= 10 ? this.selectedMonth + 1 : `0${this.selectedMonth + 1}`
-				return `${day}.${month}.${this.selectedYear}`
+				return `${this.selectedYear}-${month}-${day}`
 			},
 			// The alternative names of months
 			dividedNamesOfMonths() {

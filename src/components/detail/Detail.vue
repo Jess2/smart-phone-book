@@ -12,7 +12,6 @@
         <i v-if="selectedContact.type === 'FAVORITED'" @click="setFavorite" class="fa fa-star"></i>
       </div>
     </div>
- 
     <div class="detailBody">
       <ul>
         <li class="tag" v-if="selectedContact.tags && selectedContact.tags.length !== 0">
@@ -93,6 +92,7 @@
       },
       // 연락처 세부정보 가져오기
       getContactDetail () {
+        console.log('연락처 세부 정보 가져오기')
         this.$http.get(`/contacts/${this.userId}`, {
         }).then((result => {
             this.selectedContact = result.data;

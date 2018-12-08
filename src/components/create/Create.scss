@@ -1,8 +1,13 @@
 .create {
-    width: 100%;
     display: inline-block;
     margin: 0;
-    // height: 600px;
+    font-size: 1em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* z-index: 999; */
+    background: white;
 
     .createHeader {
         z-index: 999;
