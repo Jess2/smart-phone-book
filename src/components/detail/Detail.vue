@@ -8,8 +8,8 @@
       <div class="detailHeaderMain">
         <i class="fa fa-user-circle"></i>
         <span class="name">{{selectedContact.name}}</span>
-        <i v-if="selectedContact.type === 'DEFAULT'" @click="setFavorite" class="fa fa-star-o"></i>
-        <i v-if="selectedContact.type === 'FAVORITED'" @click="setFavorite" class="fa fa-star"></i>
+        <i v-if="selectedContact.type === 'DEFAULT'" @click="selectedContact.type = 'FAVORITED'" class="fa fa-star-o"></i>
+        <i v-if="selectedContact.type === 'FAVORITED'" @click="selectedContact.type = 'DEFAULT'" class="fa fa-star"></i>
       </div>
     </div>
     <div class="detailBody">
@@ -46,10 +46,11 @@
           <!-- 웹사이트 -->
           <a v-if="info.category.type === 'URL'" href="#" target="_blank">{{info.contents}}</a>
 
-          <!-- 메모 -->
-          <div v-if="info.category.type === 'MEMO'">
-            {{info.memo}}
-          </div>
+        </li>
+        <!-- 메모 -->
+        <li v-if="selectedContact.memo !== ''">
+          <p>메모</p>
+          {{selectedContact.memo}}
         </li>
         <li v-if="selectedContact.type !== 'ME'" class="contactDelete" @click="contactDelete">이 연락처 삭제하기</li>
       </ul>
@@ -87,9 +88,6 @@
         console.log('back')
         this.$emit('close');
       },
-      setFavorite () {
-        console.log('setFavorite')
-      },
       // 연락처 세부정보 가져오기
       getContactDetail () {
         console.log('연락처 세부 정보 가져오기')
@@ -104,11 +102,10 @@
       },
       // 연락처 삭제하기
       contactDelete () {
-        let currentThis = this;
         this.$http.delete(`/contacts/${this.userId}`, {
           }).then((result => {
               console.log('연락처 삭제')
-              currentThis.backClick()
+              this.backClick()
             }))
             .catch(error => {
               alert('에러가 발생했습니다.')

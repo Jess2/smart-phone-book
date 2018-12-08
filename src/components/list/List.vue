@@ -83,7 +83,7 @@ export default {
   },
   computed: {
     openOtherPage () {
-      if (this.openDetail === true || this.openCreate === true) {
+      if (this.openDetail === true || this.openCreate === true || this.openTag === true || this.openFavorite === true) {
         return true;
       }
       return false;
