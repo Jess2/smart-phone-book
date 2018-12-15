@@ -3,21 +3,26 @@
     <div class="tagHeader">
       <span class="title">태그</span>
       <span class="save" @click="backFunc"><i class="fa fa-angle-left"></i>연락처</span>
-      <span class="edit" @click="backFunc">편집</span>
+      <span v-if="!editMode" class="edit" @click="editMode = true">편집</span>
+      <span v-if="editMode" class="edit" @click="editTagSave">완료</span>
     </div>
     <div class="tagBody">
       <ul>
-        <li v-for="tag in tagNameSort" @click="tagSelect(tag.id, tag.name)">
-          <i class="fa fa-minus-circle" @click="alertDeleteTag('tagDelete', tag.id, tag.name)"></i>
+        <!-- 일반모드 -->
+        <li v-if="!editMode" v-for="tag in tagNameSort" @click="tagSelect(tag.id, tag.name)">
           {{ tag.name }}
-          <i class="fa fa-edit"></i>
         </li>
-        <li v-if="addTagTogle">
+        <!-- 편집모드 -->
+        <li v-if="editMode" v-for="editTag in editTagNameSort">
+          <i class="fa fa-minus-circle" @click="alertDeleteTag('tagDelete', editTag.id, editTag.name)"></i>
+          <input type="text" v-model="editTag.name">
+        </li>
+        <li v-if="editMode && addTagTogle">
           <i class="fa fa-minus-circle" @click="cancelAddTagTogleFunc"></i>
-          <input id="tag" type="text" placeholder="태그명을 입력하세요." v-model="tagName">
+          <input id="tag" type="text" placeholder="태그명을 입력하세요." v-model="newTagName">
           <button class="addClass" @click="addTag">추가</button>
         </li>
-        <li>
+        <li v-if="editMode">
           <i class="fa fa-plus-circle" @click="addTagTogleFunc"></i>
           태그 추가
         </li>
@@ -44,21 +49,32 @@ export default {
       confirmContent: {},
       deleteTagId: 0,
       deleteTagName: '',
-      tagName: '',
+      newTagName: '',
+      editTagData: [],
       addTagTogle: false,
       selectedTagId: 0,
       selectedTagName: '',
       openTagContact: false,
+      editMode: false,
     }
   },
   mounted () {
     this.getTag();
   },
   watch: {
+    // tagData () {
+      // // this.editTagData = this.tagData;
+      // this.editTagData = this.tagData.slice();
+    // }
   },
   computed: {
     tagNameSort () {
       return this.tagData.sort((a, b) => {
+        return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+      });
+    },
+    editTagNameSort () {
+      return this.editTagData.sort((a, b) => {
         return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
       });
     }
@@ -70,11 +86,11 @@ export default {
       this.openTagContact = true;
     },
     cancelAddTagTogleFunc () {
-      this.tagName = '';
+      this.newTagName = '';
       this.addTagTogle = false;
     },
     addTagTogleFunc () {
-      this.tagName = '';
+      this.newTagName = '';
       this.addTagTogle = true;
     },
     backFunc () {
@@ -84,6 +100,7 @@ export default {
       this.$http.get(`/tags/`, {
       }).then((result => {
           this.tagData = result.data;
+          this.editTagData = this.tagData.slice();
           console.log('tag api 호출', this.tagData)
         }))
         .catch(error => {
@@ -91,10 +108,10 @@ export default {
         })
     },
     addTag () {
-      if (this.tagName !== "") {
+      if (this.newTagName !== "") {
         console.log('태그 추가')
         this.$http.post(`/tags/`, {
-          name: this.tagName
+          name: this.newTagName
         }).then((result => {
             console.log('태그 생성 성공')
             this.getTag();
@@ -116,8 +133,23 @@ export default {
         this.$http.delete(`/tags/${this.deleteTagId}`, {
         }).then((result => {
           console.log('태그 삭제')
-
-      this.getTag();
+          this.getTag();
+        }))
+        .catch(error => {
+          alert('에러가 발생했습니다.')
+        })
+      }
+    },
+    editTagSave () {
+      this.editMode = false;
+      console.log('length', this.tagData.length)
+      console.log(this.tagData)
+      console.log(this.editTagData)
+      for (let i=0; i<this.tagData.length; i++) {
+        this.$http.put(`/tags/${this.tagData[i].id}`, {
+          name: this.editTagData[i].name
+        }).then((result => {
+          console.log('태그 수정 성공');
         }))
         .catch(error => {
           alert('에러가 발생했습니다.')
