@@ -6,7 +6,7 @@
     </div>
     <div class="tagBody">
       <ul>
-        <li v-for="tag in tagData">
+        <li v-for="tag in tagNameSort">
           <i class="fa fa-minus-circle" @click="alertDeleteTag('tagDelete', tag.id)"></i>
           {{ tag.name }}
           <i class="fa fa-edit"></i>
@@ -47,6 +47,13 @@ export default {
     this.getTag();
   },
   watch: {
+  },
+  computed: {
+    tagNameSort () {
+      return this.tagData.sort((a, b) => {
+        return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+      });
+    }
   },
   methods: {
     addTagTogleFunc () {
