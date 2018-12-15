@@ -251,8 +251,21 @@ export default {
     backFunc () {
       this.$emit('close')
     },
+
+
     // 연락처 생성하기
     createSave () {
+      // let form = new FormData()
+      // form.append('id', this.userID)
+      // form.append('pwd',this.userPass)
+      // this.$http.post(`http://localhost:8000/api/auth`, form)
+      // .then( response => {
+      //   console.log('response : ', JSON.stringify(response, null, 2))
+      // })
+      // .catch( error => {
+      //   console.log('failed', error)
+      // })
+
       if (this.phoneArray.length > 0) {
         for (let i=0; i<this.phoneArray.length; i++) {
           console.log(this.phoneArray[i].number)
