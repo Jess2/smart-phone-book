@@ -2,16 +2,18 @@
   <div class="tag" v-if="show">
     <div class="tagHeader">
       <span class="title">태그</span>
-      <span class="save" @click="backFunc">완료</span>
+      <span class="save" @click="backFunc"><i class="fa fa-angle-left"></i>연락처</span>
+      <span class="edit" @click="backFunc">편집</span>
     </div>
     <div class="tagBody">
       <ul>
-        <li v-for="tag in tagNameSort">
-          <i class="fa fa-minus-circle" @click="alertDeleteTag('tagDelete', tag.id)"></i>
+        <li v-for="tag in tagNameSort" @click="tagSelect(tag.id, tag.name)">
+          <i class="fa fa-minus-circle" @click="alertDeleteTag('tagDelete', tag.id, tag.name)"></i>
           {{ tag.name }}
           <i class="fa fa-edit"></i>
         </li>
         <li v-if="addTagTogle">
+          <i class="fa fa-minus-circle" @click="cancelAddTagTogleFunc"></i>
           <input id="tag" type="text" placeholder="태그명을 입력하세요." v-model="tagName">
           <button class="addClass" @click="addTag">추가</button>
         </li>
@@ -21,11 +23,13 @@
         </li>
       </ul>
     </div>
-    <confirm-modal :show="openConfirmModal" :content="confirmContent" @onDelete="onDelete" @close="openConfirmModal = false"></confirm-modal>
+    <tag-contact :show="openTagContact" :tagId="selectedTagId" :tagName="selectedTagName" @close="openTagContact = false"></tag-contact>
+    <confirm-modal :show="openConfirmModal" :content="confirmContent" :tagName="deleteTagName" @onDelete="onDelete" @close="openConfirmModal = false"></confirm-modal>
   </div>
 </template>
 
 <script>
+import tagContact from '../tagContact/TagContact'
 import ConfirmModal from '../../utilities/confirmModal/ConfirmModal'
 import ConfirmData from '../../utilities/confirmModal/ConfirmData.json'
 
@@ -39,8 +43,12 @@ export default {
       openConfirmModal: false,
       confirmContent: {},
       deleteTagId: 0,
+      deleteTagName: '',
       tagName: '',
-      addTagTogle: false
+      addTagTogle: false,
+      selectedTagId: 0,
+      selectedTagName: '',
+      openTagContact: false,
     }
   },
   mounted () {
@@ -56,6 +64,15 @@ export default {
     }
   },
   methods: {
+    tagSelect (id, name) {
+      this.selectedTagId = id;
+      this.selectedTagName = name;
+      this.openTagContact = true;
+    },
+    cancelAddTagTogleFunc () {
+      this.tagName = '';
+      this.addTagTogle = false;
+    },
     addTagTogleFunc () {
       this.tagName = '';
       this.addTagTogle = true;
@@ -88,8 +105,9 @@ export default {
           })
       }
     },
-    alertDeleteTag (name, id) {
+    alertDeleteTag (name, id, tagName) {
       this.deleteTagId = id;
+      this.deleteTagName = tagName;
       this.openConfirmModal = true;
       this.confirmContent = ConfirmData[name];
     },
@@ -108,7 +126,8 @@ export default {
     },
   },
   components: {
-    ConfirmModal
+    ConfirmModal,
+    tagContact
   }
 }
 </script>

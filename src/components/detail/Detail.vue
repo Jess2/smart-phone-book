@@ -1,6 +1,7 @@
 <template>
   <div class="detail" v-if="show">
     <div class="detailHeader">
+      <span v-if="root === 'tag'" class="back" @click="backClick"><i class="fa fa-angle-left"></i>{{tagName}} 연락처</span>
       <span v-if="root === 'list'" class="back" @click="backClick"><i class="fa fa-angle-left"></i>연락처</span>
       <span v-if="root === 'favorite'" class="back" @click="backClick"><i class="fa fa-angle-left"></i>즐겨찾기</span>
       <span class="edit"><router-link :to="'/create'">편집</router-link></span>
@@ -48,7 +49,7 @@
 
         </li>
         <!-- 메모 -->
-        <li v-if="selectedContact.memo !== ''">
+        <li v-if="selectedContact.memo">
           <p>메모</p>
           {{selectedContact.memo}}
         </li>
@@ -64,7 +65,7 @@
 
   export default {
     name: 'Detail',
-    props: ['show', 'userId', 'root'],
+    props: ['show', 'userId', 'root', 'tagName'],
     data () {
       return {
         msg: 'Detail Page',
@@ -74,7 +75,14 @@
     },
     watch: {
       show () {
-        if (this.show === true) this.getContactDetail();
+        if (this.show === true) {
+          console.log('show true')
+          this.getContactDetail();
+        }
+        if (this.show === false) {
+          console.log('show false')
+          this.selectedContact = {};
+        }
       }
     },
     computed: {

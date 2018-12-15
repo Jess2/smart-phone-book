@@ -15,15 +15,26 @@
         font-size: 1em;
         font-weight: 500;
         color: #FE642E;
+
+        i {
+            font-size: 1.8em;
+            vertical-align: sub;
+            margin-right: 5px;
+            font-weight: bold;
+        }
         
         .title {
             font-weight: 600;
-            margin: 0 0 0 24px;
+            margin: 0 22px 0 0;
             padding: 0;
             color: black;
         }
 
         .save {
+            float: left;
+        }
+
+        .edit {
             float: right;
         }
 
@@ -33,7 +44,7 @@
     }
 
     .tagBody {
-        padding: 15px 0px 5px 25px;
+        padding: 15px 0px 150px 25px;
 
         ul {
             list-style-type : none;
@@ -72,7 +83,7 @@
         }
 
         input {
-            width: 70%;
+            width: 60%;
         }
 
         .addClass {
@@ -81,6 +92,7 @@
             margin: 0;
             height: 30px;
             font-size: 0.8em;
+            background: #6cd800;
         }
     }
 }

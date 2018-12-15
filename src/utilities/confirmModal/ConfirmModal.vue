@@ -2,7 +2,7 @@
   <div class="confirmModal" v-if="show">
     <div class="popUpGridWrapepr">
       <div class="title">
-        <span v-html="content.title"></span>
+        <span><b>"{{tagName}}"</b> {{content.title}}</span>
       </div>
 
       <!-- 태그 삭제 -->
@@ -19,7 +19,7 @@
 <script>
 export default {
   name: 'confirmModal',
-  props: ['show', 'content'],
+  props: ['show', 'content', 'tagName'],
   data () {
     return {
       msg: 'confirmModal Page',
