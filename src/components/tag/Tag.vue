@@ -2,15 +2,18 @@
   <div class="tag" v-if="show">
     <div class="tagHeader">
       <span class="title">태그</span>
-      <span class="save" @click="backFunc">완료</span>
+      <span class="save" @click="addTag">완료</span>
     </div>
     <div class="tagBody">
       <ul>
         <li v-for="tag in tagData">
           <i class="fa fa-minus-circle" @click="alertDeleteTag('tagDelete', tag.id)"></i>{{ tag.name }}
         </li>
+        <li v-if="addTagTogle">
+          <input id="tag" type="text" placeholder="태그명을 입력하세요." v-model="tagName">
+        </li>
         <li>
-          <i class="fa fa-plus-circle" @click="addTag"></i>
+          <i class="fa fa-plus-circle" @click="addTagTogle = true"></i>
           태그 추가
         </li>
       </ul>
@@ -34,12 +37,19 @@ export default {
       confirmContent: {},
       deleteTagId: 0,
       tagName: '',
+      addTagTogle: false
     }
   },
   mounted () {
     this.getTag();
   },
   watch: {
+    show () {
+      console.log('show')
+      this.getTag();
+      this.tagName = '';
+      this.addTagTogle = false;
+    }
     // openConfirmModal () {
     //   this.getTag();
     //   console.log('getTag')
@@ -60,15 +70,18 @@ export default {
         })
     },
     addTag () {
-      console.log('태그 추가')
-      this.$http.post(`/tags/`, {
-        name: this.tagName
-      }).then((result => {
-          console.log('태그 생성 성공')
-        }))
-        .catch(error => {
-          alert('에러가 발생했습니다.')
-        })
+      if (this.tagName !== "") {
+        console.log('태그 추가')
+        this.$http.post(`/tags/`, {
+          name: this.tagName
+        }).then((result => {
+            console.log('태그 생성 성공')
+          }))
+          .catch(error => {
+            alert('에러가 발생했습니다.')
+          })
+      }
+      this.backFunc();
     },
     alertDeleteTag (name, id) {
       this.deleteTagId = id;
