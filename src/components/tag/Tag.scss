@@ -42,7 +42,7 @@
 
             li {
                 border-bottom: 1px solid #eeeeee;
-                padding: 10px 0 10px 5px;
+                padding: 10px 10px 10px 5px;
 
                 i.fa-plus-circle {
                     font-size: 1.6em;
@@ -57,12 +57,30 @@
                     color: rgb(216, 0, 0);
                     vertical-align: middle;
                 }
+
+                i.fa-edit {
+                    float: right;
+                    color: gray;
+                    font-size: 1.6em;
+                }
             }
 
             a {
                 color: black;
                 text-decoration: none;
             }
+        }
+
+        input {
+            width: 70%;
+        }
+
+        .addClass {
+            float: right;
+            width: 20%;
+            margin: 0;
+            height: 30px;
+            font-size: 0.8em;
         }
     }
 }

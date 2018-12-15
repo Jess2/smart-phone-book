@@ -2,18 +2,21 @@
   <div class="tag" v-if="show">
     <div class="tagHeader">
       <span class="title">태그</span>
-      <span class="save" @click="addTag">완료</span>
+      <span class="save" @click="backFunc">완료</span>
     </div>
     <div class="tagBody">
       <ul>
         <li v-for="tag in tagData">
-          <i class="fa fa-minus-circle" @click="alertDeleteTag('tagDelete', tag.id)"></i>{{ tag.name }}
+          <i class="fa fa-minus-circle" @click="alertDeleteTag('tagDelete', tag.id)"></i>
+          {{ tag.name }}
+          <i class="fa fa-edit"></i>
         </li>
         <li v-if="addTagTogle">
           <input id="tag" type="text" placeholder="태그명을 입력하세요." v-model="tagName">
+          <button class="addClass" @click="addTag">추가</button>
         </li>
         <li>
-          <i class="fa fa-plus-circle" @click="addTagTogle = true"></i>
+          <i class="fa fa-plus-circle" @click="addTagTogleFunc"></i>
           태그 추가
         </li>
       </ul>
@@ -44,18 +47,12 @@ export default {
     this.getTag();
   },
   watch: {
-    show () {
-      console.log('show')
-      this.getTag();
-      this.tagName = '';
-      this.addTagTogle = false;
-    }
-    // openConfirmModal () {
-    //   this.getTag();
-    //   console.log('getTag')
-    // }
   },
   methods: {
+    addTagTogleFunc () {
+      this.tagName = '';
+      this.addTagTogle = true;
+    },
     backFunc () {
       this.$emit('close');
     },
@@ -76,12 +73,13 @@ export default {
           name: this.tagName
         }).then((result => {
             console.log('태그 생성 성공')
+            this.getTag();
+            this.addTagTogle = false;
           }))
           .catch(error => {
             alert('에러가 발생했습니다.')
           })
       }
-      this.backFunc();
     },
     alertDeleteTag (name, id) {
       this.deleteTagId = id;
