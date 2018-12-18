@@ -15,9 +15,9 @@
     </div>
     <div class="detailBody">
       <ul>
-        <!-- <li class="tag" v-if="selectedContact.tags && selectedContact.tags.length !== 0">
-          <span v-for="tag in selectedContact.tags">#{{tag.name}} </span>
-        </li> -->
+        <li class="tagList" v-if="selectedContact.tags && selectedContact.tags.length !== 0">
+          <span v-for="tag in selectedContact.tags">#{{tag.name}}&nbsp;&nbsp;</span>
+        </li>
 
         <!-- 전화번호 -->
         <li v-for="digit in selectedContact.digits">
@@ -81,14 +81,11 @@
     },
     watch: {
       show () {
-        if (this.show === true) {
-          console.log('show true')
-          this.getContactDetail();
-        }
-        if (this.show === false) {
-          console.log('show false')
-          this.selectedContact = {};
-        }
+        this.selectedContact = {};
+        this.getContactDetail();
+      },
+      openEdit () {
+        this.getContactDetail();
       }
     },
     computed: {

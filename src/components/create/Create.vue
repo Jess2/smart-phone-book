@@ -165,7 +165,6 @@ export default {
       photoArray: [],
       newPhone: {
         id: 0,
-        // sort: "휴대전화",
         number: "",
         category: { id: 1, name: "휴대전화" },
         numbers: {
@@ -176,25 +175,21 @@ export default {
       },
       newEmail: {
         id: 0,
-        // sort: "개인",
         category: { id: 9, name: "개인" },
         contents: ""
       },
       newAddress: {
         id: 0,
-        // sort: "집",
         category: { id: 15, name: "집" },
         contents: ""
       },
       newDate: {
         id: 0,
-        // sort: "생일",
         category: { id: 12, name: "생일" },
         contents: ""
       },
       newUrl: {
         id: 0,
-        // sort: "개인",
         category: { id: 6, name: "개인" },
         contents: ""
       }
@@ -215,28 +210,32 @@ export default {
 
       if (this.show && this.selectedContact) {
         this.name = this.selectedContact.name;
-        this.phoneArray = this.selectedContact.digits;
-        for (let i=0; i<this.phoneArray.length; i++) {
-          this.phoneArray[i].number = this.phoneArray[i].numbers.first + '-';
-          this.phoneArray[i].number += this.phoneArray[i].numbers.second + '-';
-          this.phoneArray[i].number += this.phoneArray[i].numbers.third;
-        }
-        for (let i=0; i<this.selectedContact.infoes.length; i++) {
-          if (this.selectedContact.infoes[i].category.type === 'EMAIL') {
-            this.emailArray.push(this.selectedContact.infoes[i]);
-          }
-          if (this.selectedContact.infoes[i].category.type === 'ADDRESS') {
-            this.addressArray.push(this.selectedContact.infoes[i]);
-          }
-          if (this.selectedContact.infoes[i].category.type === 'DATE') {
-            this.dateArray.push(this.selectedContact.infoes[i]);
-            console.log(this.dateArray)
-          }
-          if (this.selectedContact.infoes[i].category.type === 'URL') {
-            this.urlArray.push(this.selectedContact.infoes[i]);
+        if (this.selectedContact.digits.length !== 0) {
+          this.phoneArray = this.selectedContact.digits;
+          for (let i=0; i<this.phoneArray.length; i++) {
+            this.phoneArray[i].number = this.phoneArray[i].numbers.first + '-';
+            this.phoneArray[i].number += this.phoneArray[i].numbers.second + '-';
+            this.phoneArray[i].number += this.phoneArray[i].numbers.third;
           }
         }
-        this.memoContents = this.selectedContact.memo;
+        if (this.selectedContact.infoes.length !== 0) {
+          for (let i=0; i<this.selectedContact.infoes.length; i++) {
+            if (this.selectedContact.infoes[i].category.type === 'EMAIL') {
+              this.emailArray.push(this.selectedContact.infoes[i]);
+            }
+            if (this.selectedContact.infoes[i].category.type === 'ADDRESS') {
+              this.addressArray.push(this.selectedContact.infoes[i]);
+            }
+            if (this.selectedContact.infoes[i].category.type === 'DATE') {
+              this.dateArray.push(this.selectedContact.infoes[i]);
+              console.log(this.dateArray)
+            }
+            if (this.selectedContact.infoes[i].category.type === 'URL') {
+              this.urlArray.push(this.selectedContact.infoes[i]);
+            }
+          }
+        }
+        if (this.selectedContact.memo) this.memoContents = this.selectedContact.memo;
         this.type = this.selectedContact.type;
         // 태그 추가해야함
       }
@@ -288,6 +287,7 @@ export default {
             })
         } else {
           this.$http.put(`/contacts/${this.selectedContact.id}`, {
+            id: this.selectedContact.id,
             addresses: this.addressArray,
             dates: this.dateArray,
             digits: this.phoneArray,
@@ -303,6 +303,15 @@ export default {
             }))
             .catch(error => {
               alert('에러가 발생했습니다.')
+              console.log('addressArray', this.addressArray)
+              console.log('dateArray', this.dateArray)
+              console.log('phoneArray', this.phoneArray)
+              console.log('emailArray', this.emailArray)
+              console.log('memoContents', this.memoContents)
+              console.log('name', this.name)
+              console.log('photoArray', this.photoArray)
+              console.log('type', this.type)
+              console.log('urlArray', this.urlArray)
             })
         }
       } else {
