@@ -24,13 +24,18 @@
         
         .title {
             padding: 0;
-            margin: 0 24px 0 0;
+            margin: 0 12px 0 0;
             font-weight: 600;
         }
 
         .back {
             color: #FE642E;
             float: left;
+        }
+
+        .edit {
+            float: right;
+            color: #FE642E;
         }
 
         a {
@@ -89,6 +94,13 @@
                 li {
                     border-bottom: 1px solid #eeeeee;
                     padding: 10px 0 10px 5px;
+
+                    i.fa-minus-circle {
+                        font-size: 1.6em;
+                        padding-right: 10px;
+                        color: rgb(216, 0, 0);
+                        vertical-align: middle;
+                    }
                 }
     
                 a {

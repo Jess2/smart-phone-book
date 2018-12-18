@@ -5,7 +5,6 @@
       <span class="title">새로운 연락처</span>
       <span class="edit" @click="createSave">완료</span>
     </div>
-
     <div class="createBody">
       <div class="addPhoto">
           <i class="fa fa-user-circle"></i>
@@ -26,14 +25,14 @@
         <div class="addDetailList add" v-for="(phone, index) in phoneArray" :key="phone.id">
           <div class="leftSection">
             <i class="fa fa-minus-circle" @click="subPhone(index)"></i>
-            <span class="sort">{{ phone.sort }}</span>
+            <span class="sort">{{ phone.category.name }}</span>
             <span class="rightIcon">
               <b-dropdown right class="dropdown">
-                <b-dropdown-item @click="phone.sort = '휴대전화'; phone.category = { id: 1 }">휴대전화</b-dropdown-item>
-                <b-dropdown-item @click="phone.sort = '집'; phone.category = { id: 2 }">집</b-dropdown-item>
-                <b-dropdown-item @click="phone.sort = '직장'; phone.category = { id: 3 }">직장</b-dropdown-item>
-                <b-dropdown-item @click="phone.sort = '팩스'; phone.category = { id: 4 }">팩스</b-dropdown-item>
-                <b-dropdown-item @click="phone.sort = '기타'; phone.category = { id: 5 }">기타</b-dropdown-item>
+                <b-dropdown-item @click="phone.category = { id: 1, name: '휴대전화' }">휴대전화</b-dropdown-item>
+                <b-dropdown-item @click="phone.category = { id: 2, name: '집' }">집</b-dropdown-item>
+                <b-dropdown-item @click="phone.category = { id: 3, name: '직장' }">직장</b-dropdown-item>
+                <b-dropdown-item @click="phone.category = { id: 4, name: '팩스' }">팩스</b-dropdown-item>
+                <b-dropdown-item @click="phone.category = { id: 5, name: '기타' }">기타</b-dropdown-item>
               </b-dropdown>
             </span>
           </div>
@@ -49,12 +48,12 @@
         <div class="addDetailList add" v-for="(email, index) in emailArray" :key="email.id">
           <div class="leftSection">
             <i class="fa fa-minus-circle" @click="subEmail(index)"></i>
-            <span class="sort">{{ email.sort }}</span>
+            <span class="sort">{{ email.category.name }}</span>
             <span class="rightIcon">
               <b-dropdown right class="dropdown">
-                <b-dropdown-item @click="email.sort = '개인'; email.category = { id: 9 }">개인</b-dropdown-item>
-                <b-dropdown-item @click="email.sort = '직장'; email.category = { id: 10 }">직장</b-dropdown-item>
-                <b-dropdown-item @click="email.sort = '기타'; email.category = { id: 11 }">기타</b-dropdown-item>
+                <b-dropdown-item @click="email.category = { id: 9, name: '개인' }">개인</b-dropdown-item>
+                <b-dropdown-item @click="email.category = { id: 10, name: '직장' }">직장</b-dropdown-item>
+                <b-dropdown-item @click="email.category = { id: 11, name: '기타' }">기타</b-dropdown-item>
               </b-dropdown>
             </span>
           </div>
@@ -70,12 +69,12 @@
         <div class="addDetailList add" v-for="(address, index) in addressArray" :key="address.id">
           <div class="leftSection">
             <i class="fa fa-minus-circle" @click="subAddress(index)"></i>
-            <span class="sort">{{ address.sort }}</span>
+            <span class="sort">{{ address.category.name }}</span>
             <span class="rightIcon">
               <b-dropdown right class="dropdown">
-                <b-dropdown-item @click="address.sort = '집'; address.category = { id: 15 }">집</b-dropdown-item>
-                <b-dropdown-item @click="address.sort = '직장'; address.category = { id: 16}">직장</b-dropdown-item>
-                <b-dropdown-item @click="address.sort = '기타'; address.category = { id: 17}">기타</b-dropdown-item>
+                <b-dropdown-item @click="address.category = { id: 15, name: '집' }">집</b-dropdown-item>
+                <b-dropdown-item @click="address.category = { id: 16, name: '직장' }">직장</b-dropdown-item>
+                <b-dropdown-item @click="address.category = { id: 17, name: '기타' }">기타</b-dropdown-item>
               </b-dropdown>
             </span>
           </div>
@@ -91,12 +90,12 @@
         <div class="addDetailList add" v-for="(date, index) in dateArray" :key="date.id">
           <div class="leftSection">
             <i class="fa fa-minus-circle" @click="subDate(index)"></i>
-            <span class="sort">{{ date.sort }}</span>
+            <span class="sort">{{ date.category.name }}</span>
             <span class="rightIcon">
               <b-dropdown right class="dropdown">
-                <b-dropdown-item @click="date.sort = '생일'; date.category = { id: 12 }">생일</b-dropdown-item>
-                <b-dropdown-item @click="date.sort = '기념일'; date.category = { id: 13 }">기념일</b-dropdown-item>
-                <b-dropdown-item @click="date.sort = '기타'; date.category = { id: 14 }">기타</b-dropdown-item>
+                <b-dropdown-item @click="date.category = { id: 12, name: '생일' }">생일</b-dropdown-item>
+                <b-dropdown-item @click="date.category = { id: 13, name: '기념일' }">기념일</b-dropdown-item>
+                <b-dropdown-item @click="date.category = { id: 14, name: '기타' }">기타</b-dropdown-item>
               </b-dropdown>
             </span>
           </div>
@@ -119,12 +118,12 @@
         <div class="addDetailList add" v-for="(url, index) in urlArray" :key="url.id">
           <div class="leftSection">
             <i class="fa fa-minus-circle" @click="subUrl(index)"></i>
-            <span class="sort">{{ url.sort }}</span>
+            <span class="sort">{{ url.category.name }}</span>
             <span class="rightIcon">
               <b-dropdown right class="dropdown">
-                <b-dropdown-item @click="url.sort = '개인'; url.category = { id: 6 }">개인</b-dropdown-item>
-                <b-dropdown-item @click="url.sort = '직장'; url.category = { id: 7 }">직장</b-dropdown-item>
-                <b-dropdown-item @click="url.sort = '기타'; url.category = { id: 8 }">기타</b-dropdown-item>
+                <b-dropdown-item @click="url.category = { id: 6, name: '개인' }">개인</b-dropdown-item>
+                <b-dropdown-item @click="url.category = { id: 7, name: '직장' }">직장</b-dropdown-item>
+                <b-dropdown-item @click="url.category = { id: 8, name: '기타' }">기타</b-dropdown-item>
               </b-dropdown>
             </span>
           </div>
@@ -141,6 +140,7 @@
           <span class="memo">메모 추가</span>
           <textarea name="" id="" cols="30" rows="10" placeholder="메모" v-model="memoContents"></textarea>
         </div>
+        <!-- {{selectedContact.id}} -->
       </div>
     </div>
   </div>
@@ -151,7 +151,7 @@ import DateDropdown from './Dropdown.vue'
 
 export default {
   name: 'Create',
-  props: ['show'],
+  props: ['show', 'selectedContact'],
   data () {
     return {
       phoneArray: [],
@@ -165,9 +165,9 @@ export default {
       photoArray: [],
       newPhone: {
         id: 0,
-        sort: "휴대전화",
+        // sort: "휴대전화",
         number: "",
-        category: { id: 1 },
+        category: { id: 1, name: "휴대전화" },
         numbers: {
           first: "",
           second: "",
@@ -176,26 +176,26 @@ export default {
       },
       newEmail: {
         id: 0,
-        sort: "개인",
-        category: { id: 9 },
+        // sort: "개인",
+        category: { id: 9, name: "개인" },
         contents: ""
       },
       newAddress: {
         id: 0,
-        sort: "집",
-        category: { id: 15 },
+        // sort: "집",
+        category: { id: 15, name: "집" },
         contents: ""
       },
       newDate: {
         id: 0,
-        sort: "생일",
-        category: { id: 12 },
+        // sort: "생일",
+        category: { id: 12, name: "생일" },
         contents: ""
       },
       newUrl: {
         id: 0,
-        sort: "개인",
-        category: { id: 6 },
+        // sort: "개인",
+        category: { id: 6, name: "개인" },
         contents: ""
       }
     }
@@ -212,6 +212,34 @@ export default {
       this.name = "";
       this.type = "DEFAULT"; // DEFAULT, FAVORITED, ME
       this.photoArray = [];
+
+      if (this.show && this.selectedContact) {
+        this.name = this.selectedContact.name;
+        this.phoneArray = this.selectedContact.digits;
+        for (let i=0; i<this.phoneArray.length; i++) {
+          this.phoneArray[i].number = this.phoneArray[i].numbers.first + '-';
+          this.phoneArray[i].number += this.phoneArray[i].numbers.second + '-';
+          this.phoneArray[i].number += this.phoneArray[i].numbers.third;
+        }
+        for (let i=0; i<this.selectedContact.infoes.length; i++) {
+          if (this.selectedContact.infoes[i].category.type === 'EMAIL') {
+            this.emailArray.push(this.selectedContact.infoes[i]);
+          }
+          if (this.selectedContact.infoes[i].category.type === 'ADDRESS') {
+            this.addressArray.push(this.selectedContact.infoes[i]);
+          }
+          if (this.selectedContact.infoes[i].category.type === 'DATE') {
+            this.dateArray.push(this.selectedContact.infoes[i]);
+            console.log(this.dateArray)
+          }
+          if (this.selectedContact.infoes[i].category.type === 'URL') {
+            this.urlArray.push(this.selectedContact.infoes[i]);
+          }
+        }
+        this.memoContents = this.selectedContact.memo;
+        this.type = this.selectedContact.type;
+        // 태그 추가해야함
+      }
     }
   },
   computed: {
@@ -223,30 +251,6 @@ export default {
   },
   methods: {
     phoneNumberChange () {
-      // this.newPhone.numbers = {}
-      // console.log($('#number').val().length)
-      // $('#number').val($('#number').val().replace(/-/gi, ""));
-      // if ($('#number').val().length === 8) {
-      //   $('#number').val($('#number').val().slice(0,4) + "-" + $('#number').val().slice(4))
-      // }
-      // else if ($('#number').val().length === 9) {
-      //   $('#number').val($('#number').val().slice(0,2) + "-" + $('#number').val().slice(2,5) + "-" + $('#number').val().slice(5))
-      // }
-      // else if ($('#number').val().length === 10) {
-      //   if ($('#number').val().slice(0,2) === "02") {
-      //     $('#number').val($('#number').val().slice(0,2) + "-" + $('#number').val().slice(2,6) + "-" + $('#number').val().slice(6))
-      //   } else {
-      //     $('#number').val($('#number').val().slice(0,3) + "-" + $('#number').val().slice(3,6) + "-" + $('#number').val().slice(6))
-      //   }
-      // }
-      // else if ($('#number').val().length >= 11) {
-      //   $('#number').val($('#number').val().slice(0,3) + "-" + $('#number').val().slice(3,7) + "-" + $('#number').val().slice(7))
-      // }
-      // this.$set(this.newPhone, 'numbers', {
-      //   first: $('#number').val().split('-')[0],
-      //   second: $('#number').val().split('-')[1],
-      //   third: $('#number').val().split('-')[2]
-      // })
     },
     backFunc () {
       this.$emit('close')
@@ -264,23 +268,43 @@ export default {
         }
       }
       if (this.name !== "") {
-        this.$http.post(`/contacts/`, {
-          addresses: this.addressArray,
-          dates: this.dateArray,
-          digits: this.phoneArray,
-          emails: this.emailArray,
-          memo: this.memoContents,
-          name: this.name,
-          photo: this.photoArray,
-          type: this.type,
-          urls: this.urlArray
-        }).then((result => {
-            console.log('연락처 생성 성공')
-            this.$emit('close');
-          }))
-          .catch(error => {
-            alert('에러가 발생했습니다.')
-          })
+        if (!this.selectedContact) {
+          this.$http.post(`/contacts/`, {
+            addresses: this.addressArray,
+            dates: this.dateArray,
+            digits: this.phoneArray,
+            emails: this.emailArray,
+            memo: this.memoContents,
+            name: this.name,
+            photo: this.photoArray,
+            type: this.type,
+            urls: this.urlArray
+          }).then((result => {
+              console.log('연락처 생성 성공')
+              this.$emit('close');
+            }))
+            .catch(error => {
+              alert('에러가 발생했습니다.')
+            })
+        } else {
+          this.$http.put(`/contacts/${this.selectedContact.id}`, {
+            addresses: this.addressArray,
+            dates: this.dateArray,
+            digits: this.phoneArray,
+            emails: this.emailArray,
+            memo: this.memoContents,
+            name: this.name,
+            photo: this.photoArray,
+            type: this.type,
+            urls: this.urlArray
+          }).then((result => {
+              console.log('연락처 생성 성공')
+              this.$emit('close');
+            }))
+            .catch(error => {
+              alert('에러가 발생했습니다.')
+            })
+        }
       } else {
         alert('이름을 입력해주세요.')
       }

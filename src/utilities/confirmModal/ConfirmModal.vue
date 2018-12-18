@@ -3,6 +3,7 @@
     <div class="popUpGridWrapepr">
       <div class="title">
         <span><b>"{{tagName}}"</b> {{content.title}}</span>
+        <span v-if="content.type === 2"><b>"{{contactName}}"</b> {{content.title2}}</span>
       </div>
 
       <!-- 태그 삭제 -->
@@ -12,6 +13,23 @@
         <!-- 삭제하기 -->
         <button class="btn btn-danger" @click="deleteTag">{{ content.button2 }}</button>
       </div>
+
+      <!-- 태그에서 연락처 삭제 -->
+      <div class="buttons" v-if="content.type === 2">
+        <!-- 취소 -->
+        <button class="btn btn-secondary" @click="$emit('close')">{{ content.button1 }}</button>
+        <!-- 삭제하기 -->
+        <button class="btn btn-danger" @click="deleteTagContact">{{ content.button2 }}</button>
+      </div>
+
+      <!-- 연락처 삭제하기 -->
+      <div class="buttons" v-if="content.type === 3">
+        <!-- 취소 -->
+        <button class="btn btn-secondary" @click="$emit('close')">{{ content.button1 }}</button>
+        <!-- 삭제하기 -->
+        <button class="btn btn-danger" @click="deleteContact">{{ content.button2 }}</button>
+      </div>
+
     </div>
   </div>
 </template>
@@ -19,7 +37,7 @@
 <script>
 export default {
   name: 'confirmModal',
-  props: ['show', 'content', 'tagName'],
+  props: ['show', 'content', 'tagName', 'contactName'],
   data () {
     return {
       msg: 'confirmModal Page',
@@ -32,8 +50,15 @@ export default {
     deleteTag () {
       this.$emit('onDelete', true);
       this.$emit('close');
+    },
+    deleteTagContact () {
+      this.$emit('onDelete', true);
+      this.$emit('close');
+    },
+    deleteContact () {
+      this.$emit('onDelete', true);
+      this.$emit('close');
     }
-    
   }
 }
 </script>

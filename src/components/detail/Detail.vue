@@ -4,7 +4,7 @@
       <span v-if="root === 'tag'" class="back" @click="backClick"><i class="fa fa-angle-left"></i>{{tagName}} 연락처</span>
       <span v-if="root === 'list'" class="back" @click="backClick"><i class="fa fa-angle-left"></i>연락처</span>
       <span v-if="root === 'favorite'" class="back" @click="backClick"><i class="fa fa-angle-left"></i>즐겨찾기</span>
-      <span class="edit"><router-link :to="'/create'">편집</router-link></span>
+      <span class="edit" @click="openEditFunc">편집</span>
       
       <div class="detailHeaderMain">
         <i class="fa fa-user-circle"></i>
@@ -55,13 +55,16 @@
         </li>
         <li v-if="selectedContact.type !== 'ME'" class="contactDelete" @click="contactDelete">이 연락처 삭제하기</li>
       </ul>
-
     </div>
+    <create-component :show="openEdit" :selectedContact="selectedContact" @close="openEdit = false"></create-component>
+    <confirm-modal :show="openConfirmModal" :content="confirmContent" @onDelete="onDelete" @close="openConfirmModal = false"></confirm-modal>
   </div>
 </template>
 
 <script>
   import CreateComponent from '../create/Create'
+  import ConfirmModal from '../../utilities/confirmModal/ConfirmModal'
+  import ConfirmData from '../../utilities/confirmModal/ConfirmData.json'
 
   export default {
     name: 'Detail',
@@ -70,7 +73,10 @@
       return {
         msg: 'Detail Page',
         isCreateMode: false,
-        selectedContact: {}
+        selectedContact: {},
+        openEdit: false,
+        openConfirmModal: false,
+        confirmContent: {},
       }
     },
     watch: {
@@ -88,6 +94,10 @@
     computed: {
     },
     methods: {
+      openEditFunc () {
+        this.openEdit = true;
+        console.log('selectedContact', this.selectedContact);
+      },
       openCreateComponent () {
         this.isCreateMode = true;
       },
@@ -107,18 +117,27 @@
             alert('에러가 발생했습니다.')
           })
       },
-      // 연락처 삭제하기
+      // 연락처 삭제 버튼 클릭
       contactDelete () {
+        this.openConfirmModal = true;
+        this.confirmContent = ConfirmData['contactDelete'];
+      },
+      // 연락처 삭제하기
+      onDelete (isDelete) {
         this.$http.delete(`/contacts/${this.userId}`, {
-          }).then((result => {
-              console.log('연락처 삭제')
-              this.backClick()
-            }))
-            .catch(error => {
-              alert('에러가 발생했습니다.')
-            })
-        }
+        }).then((result => {
+            console.log('연락처 삭제')
+            this.backClick()
+          }))
+          .catch(error => {
+            alert('에러가 발생했습니다.')
+          })
+      }
     },
+    components: { 
+      CreateComponent,
+      ConfirmModal
+    }
   }
 </script>
 

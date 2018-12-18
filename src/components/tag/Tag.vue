@@ -10,6 +10,7 @@
       <ul>
         <!-- 일반모드 -->
         <li v-if="!editMode" v-for="tag in tagNameSort" @click="tagSelect(tag.id, tag.name)">
+          <i class="fa fa-slack"></i>
           {{ tag.name }}
         </li>
         <!-- 편집모드 -->
@@ -62,6 +63,9 @@ export default {
     this.getTag();
   },
   watch: {
+    show () {
+      this.editMode = false;
+    }
     // tagData () {
       // // this.editTagData = this.tagData;
       // this.editTagData = this.tagData.slice();

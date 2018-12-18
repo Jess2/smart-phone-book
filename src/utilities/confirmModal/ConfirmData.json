@@ -4,5 +4,18 @@
         "title": "태그를 삭제하시겠습니까?",
         "button1": "취소",
         "button2": "삭제하기"
+    },
+    "tagContactDelete": {
+        "type": 2,
+        "title": "태그에서",
+        "title2": "을/를 제거하시겠습니까?",
+        "button1": "취소",
+        "button2": "제거하기"
+    },
+    "contactDelete": {
+        "type": 3,
+        "title": "연락처를 삭제하시겠습니까?",
+        "button1": "취소",
+        "button2": "삭제하기"
     }
 }
