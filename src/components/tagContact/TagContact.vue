@@ -2,6 +2,9 @@
   <div class="tagContact" v-if="show">
     <div class="tagContactHeader">
       <span class="back" @click="backFunc"><i class="fa fa-angle-left"></i>태그</span>
+
+      <!-- <span v-if="root === 'detail'" class="back" @click="backFunc"><i class="fa fa-angle-left"></i>연락처</span>
+      <span v-if="root === 'tag'" class="back" @click="backFunc"><i class="fa fa-angle-left"></i>태그</span> -->
       <span class="title">{{ tagName }} 연락처</span>
       <span v-if="!editMode" class="edit" @click="editMode = true">편집</span>
       <span v-if="editMode" class="edit" @click="editTagSave">완료</span>

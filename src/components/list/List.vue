@@ -133,7 +133,7 @@ export default {
     },
     // 연락처 리스트 가져오기
     getContactList () {
-      this.$http.get(`/contacts/`, {
+      this.$http.get(`/contacts`, {
       }).then((result => {
           this.contactData = result.data;
           console.log('api 호출', this.contactData)

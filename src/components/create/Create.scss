@@ -205,6 +205,27 @@
                 color: #FE642E;
                 // border-bottom: 1px solid lightgray;
             }
+
+            .addTagButton {
+                display: inline-block;
+                font-size: 0.9em;
+                background: white;
+                color: rgb(108, 216, 0);
+                border: 2px solid rgb(108, 216, 0);
+                width: 70px;
+                height: 100%;
+                margin: 10px 0 20px 0;
+                font-weight: bold;
+            }
+
+            .addTagButton:hover {
+                color: white;
+                background: rgb(108, 216, 0);
+            }
+
+            .tagSpan {
+                // color: rgb(119, 28, 28);
+            }
         }
 
         .memo {

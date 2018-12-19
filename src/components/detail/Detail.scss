@@ -84,6 +84,11 @@
         .tagList {
             color: rgb(119, 28, 28);
             font-weight: 600;
+
+            .fa-plus-circle {
+                color: rgb(108, 216, 0);
+                font-size: 1em;
+            }
         }
 
         ul {

@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import tagContact from '../tagContact/TagContact'
+import TagContact from '../tagContact/TagContact'
 import ConfirmModal from '../../utilities/confirmModal/ConfirmModal'
 import ConfirmData from '../../utilities/confirmModal/ConfirmData.json'
 
@@ -163,7 +163,7 @@ export default {
   },
   components: {
     ConfirmModal,
-    tagContact
+    TagContact
   }
 }
 </script>

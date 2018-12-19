@@ -17,6 +17,7 @@
       <ul>
         <li class="tagList" v-if="selectedContact.tags && selectedContact.tags.length !== 0">
           <span v-for="tag in selectedContact.tags">#{{tag.name}}&nbsp;&nbsp;</span>
+          <!-- <i class="fa fa-plus-circle" @click=""></i> -->
         </li>
 
         <!-- 전화번호 -->

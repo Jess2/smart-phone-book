@@ -21,8 +21,11 @@
       </div>
 
       <div class="addDetail">
+        <!-- 태그 -->
+        <span class="tagSpan" v-for="(tag, index) in tagArray">#{{ tag.name }}&nbsp;&nbsp;</span>
+        <button class="addTagButton" @click="addTagButton">태그 추가</button>
         <!-- 전화번호 -->
-        <div class="addDetailList add" v-for="(phone, index) in phoneArray" :key="phone.id">
+        <div class="addDetailList add" v-for="(phone, index) in phoneArray">
           <div class="leftSection">
             <i class="fa fa-minus-circle" @click="subPhone(index)"></i>
             <span class="sort">{{ phone.category.name }}</span>
@@ -45,7 +48,7 @@
         </div>
 
         <!-- 이메일 -->
-        <div class="addDetailList add" v-for="(email, index) in emailArray" :key="email.id">
+        <div class="addDetailList add" v-for="(email, index) in emailArray">
           <div class="leftSection">
             <i class="fa fa-minus-circle" @click="subEmail(index)"></i>
             <span class="sort">{{ email.category.name }}</span>
@@ -66,7 +69,7 @@
         </div>
 
         <!-- 주소 -->
-        <div class="addDetailList add" v-for="(address, index) in addressArray" :key="address.id">
+        <div class="addDetailList add" v-for="(address, index) in addressArray">
           <div class="leftSection">
             <i class="fa fa-minus-circle" @click="subAddress(index)"></i>
             <span class="sort">{{ address.category.name }}</span>
@@ -87,7 +90,7 @@
         </div>
 
         <!-- 생일 -->
-        <div class="addDetailList add" v-for="(date, index) in dateArray" :key="date.id">
+        <div class="addDetailList add" v-for="(date, index) in dateArray">
           <div class="leftSection">
             <i class="fa fa-minus-circle" @click="subDate(index)"></i>
             <span class="sort">{{ date.category.name }}</span>
@@ -115,7 +118,7 @@
         </div>
 
         <!-- URL -->
-        <div class="addDetailList add" v-for="(url, index) in urlArray" :key="url.id">
+        <div class="addDetailList add" v-for="(url, index) in urlArray">
           <div class="leftSection">
             <i class="fa fa-minus-circle" @click="subUrl(index)"></i>
             <span class="sort">{{ url.category.name }}</span>
@@ -143,22 +146,26 @@
         <!-- {{selectedContact.id}} -->
       </div>
     </div>
+    <tag-select :show="openTagSelect" :tagArray="tagArray"@close="openTagSelect = false"></tag-select>
   </div>
 </template>
 
 <script>
 import DateDropdown from './Dropdown.vue'
+import TagSelect from '../tagSelect/TagSelect'
 
 export default {
   name: 'Create',
   props: ['show', 'selectedContact'],
   data () {
     return {
+      openTagSelect: false,
       phoneArray: [],
       emailArray: [],
       addressArray: [],
       dateArray: [],
       urlArray: [],
+      tagArray: [],
       memoContents: "",
       name: "",
       type: "DEFAULT", // DEFAULT, FAVORITED, ME
@@ -207,6 +214,7 @@ export default {
       this.name = "";
       this.type = "DEFAULT"; // DEFAULT, FAVORITED, ME
       this.photoArray = [];
+      this.tagArray = [];
 
       if (this.show && this.selectedContact) {
         this.name = this.selectedContact.name;
@@ -237,7 +245,9 @@ export default {
         }
         if (this.selectedContact.memo) this.memoContents = this.selectedContact.memo;
         this.type = this.selectedContact.type;
-        // 태그 추가해야함
+        if (this.selectedContact.tags.length !== 0) {
+          this.tagArray = this.selectedContact.tags;
+        }
       }
     }
   },
@@ -249,6 +259,9 @@ export default {
     }
   },
   methods: {
+    addTagButton () {
+      this.openTagSelect = true;
+    },
     phoneNumberChange () {
     },
     backFunc () {
@@ -268,7 +281,7 @@ export default {
       }
       if (this.name !== "") {
         if (!this.selectedContact) {
-          this.$http.post(`/contacts/`, {
+          this.$http.post(`/contacts`, {
             addresses: this.addressArray,
             dates: this.dateArray,
             digits: this.phoneArray,
@@ -277,7 +290,8 @@ export default {
             name: this.name,
             photo: this.photoArray,
             type: this.type,
-            urls: this.urlArray
+            urls: this.urlArray,
+            tags: this.tagArray
           }).then((result => {
               console.log('연락처 생성 성공')
               this.$emit('close');
@@ -296,22 +310,14 @@ export default {
             name: this.name,
             photo: this.photoArray,
             type: this.type,
-            urls: this.urlArray
+            urls: this.urlArray,
+            tags: this.tagArray
           }).then((result => {
               console.log('연락처 생성 성공')
               this.$emit('close');
             }))
             .catch(error => {
               alert('에러가 발생했습니다.')
-              console.log('addressArray', this.addressArray)
-              console.log('dateArray', this.dateArray)
-              console.log('phoneArray', this.phoneArray)
-              console.log('emailArray', this.emailArray)
-              console.log('memoContents', this.memoContents)
-              console.log('name', this.name)
-              console.log('photoArray', this.photoArray)
-              console.log('type', this.type)
-              console.log('urlArray', this.urlArray)
             })
         }
       } else {
@@ -372,7 +378,8 @@ export default {
     }
   },
   components: {
-    DateDropdown
+    DateDropdown,
+    TagSelect
   },
 }
 </script>
