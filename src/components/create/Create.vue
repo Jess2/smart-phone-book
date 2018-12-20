@@ -169,7 +169,7 @@ export default {
       memoContents: "",
       name: "",
       type: "DEFAULT", // DEFAULT, FAVORITED, ME
-      photoArray: [],
+      photoArray: "",
       newPhone: {
         id: 0,
         number: "",
@@ -213,7 +213,7 @@ export default {
       this.memoContents = "";
       this.name = "";
       this.type = "DEFAULT"; // DEFAULT, FAVORITED, ME
-      this.photoArray = [];
+      this.photoArray = "";
       this.tagArray = [];
 
       if (this.show && this.selectedContact) {
