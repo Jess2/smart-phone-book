@@ -7,14 +7,19 @@
     </div>
     <div class="createBody">
       <div class="addPhoto">
-        <i class="fa fa-user-circle"></i>
-        <button class="replace"><span>사진 추가</span></button>
+        <i v-if="!hasPhoto" class="fa fa-user-circle"></i>
+        <button v-if="!hasPhoto" class="replace"><span>사진<br/>추가</span></button>
+
+        <div v-show="hasPhoto" class="thumb important">
+          <img id="preview" src="">
+        </div>
+
+        <div v-if="photoArray" class="thumb">
+          <img :src="photoArray"/>
+        </div>
         <form id="FILE_FORM" method="post" enctype="multipart/form-data" action="">
           <input type="file" name="upFile" id="upFile" @change="fileSelect" class="upload">
         </form>
-        <div class="thumb">
-          <img id="preview" src="">
-        </div>
       </div>
       <div class="addName">
         <input type="text" placeholder="이름" v-model="name">
@@ -24,16 +29,13 @@
         </div>
       </div>
 
-      <!-- 사진업로드 -->
-      <!-- <form id="FILE_FORM" method="post" enctype="multipart/form-data" action="">
-        <input type="file" name="upFile" id="upFile" @change="fileSelect">
-      </form>
-      <img id="preview" src="" width="100"> -->
-
       <div class="addDetail">
         <!-- 태그 -->
-        <span class="tagSpan" v-for="(tag, index) in tagArray">#{{ tag.name }}&nbsp;&nbsp;</span>
-        <button class="addTagButton" @click="addTagButton">태그 추가</button>
+        <span class="tagSpan" v-for="(tag, index) in tagArray">#{{ tag.name }}</span>
+        <div class="addDetailList addTitle">
+          <i class="fa fa-plus-circle" @click="addTagButton"></i>
+          <span>태그 추가/변경</span>
+        </div>
         <!-- 전화번호 -->
         <div class="addDetailList add" v-for="(phone, index) in phoneArray">
           <div class="leftSection">
@@ -169,6 +171,7 @@ export default {
   props: ['show', 'selectedContact'],
   data () {
     return {
+      hasPhoto: false,
       fileObj: "",
       pathHeader: "",
       pathMiddle: "",
@@ -235,6 +238,7 @@ export default {
       this.type = "DEFAULT"; // DEFAULT, FAVORITED, ME
       this.photoArray = "";
       this.tagArray = [];
+      this.hasPhoto = false;
 
       if (this.show && this.selectedContact) {
         this.name = this.selectedContact.name;
@@ -267,6 +271,9 @@ export default {
         this.type = this.selectedContact.type;
         if (this.selectedContact.tags.length !== 0) {
           this.tagArray = this.selectedContact.tags;
+        }
+        if (this.selectedContact.photoPath) {
+          this.photoArray = this.selectedContact.photoPath;
         }
       }
     }
@@ -316,6 +323,8 @@ export default {
           reader.onload = function  () {
             document.querySelector('#preview').src = reader.result;
             currentThis.fileBase64 = reader.result.split(',')[1];
+            currentThis.hasPhoto = true;
+            console.log('photo upload')
           };
         }
       }
@@ -324,6 +333,7 @@ export default {
       this.file = "";
       document.getElementById("upFile").value = ""
       document.querySelector('#preview').src = "";
+      this.hasPhoto = false;
     },
     editTagsFunc (updatedTagArray) {
       this.tagArray = updatedTagArray;

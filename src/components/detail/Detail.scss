@@ -80,12 +80,12 @@
                 width: 80px;
                 text-align: center;
                 display: inline-block;
+                border-radius: 50%;
             }
             
             .thumb img {
                 display: block;
-                min-width: 100%;
-                min-height: 100%;
+                width: 100%;
                 -ms-interpolation-mode: bicubic;
             }
         }

@@ -69,6 +69,7 @@ export default {
     },
     tagSave () {
       this.$emit('close');
+      this.emitTagArray = [];
       for (let i=0; i<this.tagData.length; i++) {
         if (this.tagData[i].checked === true) {
           this.emitTagArray.push(this.tagData[i]);

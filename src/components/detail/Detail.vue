@@ -88,10 +88,12 @@
     },
     watch: {
       show () {
+        console.log('============detail show change')
         this.selectedContact = {};
         this.getContactDetail();
       },
       openEdit () {
+        console.log('sssssssss')
         this.getContactDetail();
       }
     },
