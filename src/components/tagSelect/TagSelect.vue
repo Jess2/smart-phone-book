@@ -31,11 +31,7 @@ export default {
   watch: {
     show () {
       if (this.show == true) {
-        console.log('show')
         this.getTag()
-          
-        
-        console.log('tagArray', this.tagArray)
       }
     }
   },
