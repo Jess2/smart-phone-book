@@ -61,6 +61,7 @@
             .name {
                 color: black;
                 font-size: 1.3em;
+                display: block;
             }
 
             i.fa.fa-star-o, i.fa.fa-star {
@@ -70,6 +71,22 @@
                 line-height: 27px;
                 vertical-align: middle;
                 color: #FE642E;
+            }
+
+            .thumb {
+                display: block;
+                overflow: hidden;
+                height: 80px;
+                width: 80px;
+                text-align: center;
+                display: inline-block;
+            }
+            
+            .thumb img {
+                display: block;
+                min-width: 100%;
+                min-height: 100%;
+                -ms-interpolation-mode: bicubic;
             }
         }
     }

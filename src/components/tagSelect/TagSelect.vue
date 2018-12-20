@@ -23,6 +23,7 @@ export default {
   data () {
     return {
       tagData: [],
+      emitTagArray: [],
     }
   },
   mounted () {
@@ -43,7 +44,7 @@ export default {
     },
   },
   methods: {
-    test () {
+    originTagCheck () {
       for (let i=0; i<this.tagData.length; i++) {
         this.tagData[i].checked = false;
       }
@@ -60,7 +61,7 @@ export default {
       }).then((result => {
           this.tagData = result.data;
           console.log('tag api 호출', this.tagData)
-          this.test()
+          this.originTagCheck()
         }))
         .catch(error => {
           alert('에러가 발생했습니다.')
@@ -68,6 +69,13 @@ export default {
     },
     tagSave () {
       this.$emit('close');
+      for (let i=0; i<this.tagData.length; i++) {
+        if (this.tagData[i].checked === true) {
+          this.emitTagArray.push(this.tagData[i]);
+        }
+      }
+      console.log('?', this.emitTagArray);
+      this.$emit('editTags', this.emitTagArray);
     }
   },
   components: {

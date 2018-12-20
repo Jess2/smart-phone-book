@@ -7,10 +7,16 @@
       <span class="edit" @click="openEditFunc">편집</span>
       
       <div class="detailHeaderMain">
-        <i class="fa fa-user-circle"></i>
-        <span class="name">{{selectedContact.name}}</span>
-        <i v-if="selectedContact.type === 'DEFAULT'" @click="selectedContact.type = 'FAVORITED'" class="fa fa-star-o"></i>
-        <i v-if="selectedContact.type === 'FAVORITED'" @click="selectedContact.type = 'DEFAULT'" class="fa fa-star"></i>
+        <div v-if="selectedContact.photoPath" class="thumb">
+          <img :src="selectedContact.photoPath"/>
+        </div>
+        <i v-if="!selectedContact.photoPath" class="fa fa-user-circle"></i>
+        <span class="name">{{selectedContact.name}}
+        <i v-if="selectedContact.type === 'DEFAULT'" class="fa fa-star-o"></i>
+        <i v-if="selectedContact.type === 'FAVORITED'" class="fa fa-star"></i>
+        </span>
+        <!-- <i v-if="selectedContact.type === 'DEFAULT'" @click="selectedContact.type = 'FAVORITED'" class="fa fa-star-o"></i>
+        <i v-if="selectedContact.type === 'FAVORITED'" @click="selectedContact.type = 'DEFAULT'" class="fa fa-star"></i> -->
       </div>
     </div>
     <div class="detailBody">

@@ -7,18 +7,28 @@
     </div>
     <div class="createBody">
       <div class="addPhoto">
-          <i class="fa fa-user-circle"></i>
-          <button>사진<br/>추가</button>
+        <i class="fa fa-user-circle"></i>
+        <button class="replace"><span>사진 추가</span></button>
+        <form id="FILE_FORM" method="post" enctype="multipart/form-data" action="">
+          <input type="file" name="upFile" id="upFile" @change="fileSelect" class="upload">
+        </form>
+        <div class="thumb">
+          <img id="preview" src="">
+        </div>
       </div>
-
       <div class="addName">
         <input type="text" placeholder="이름" v-model="name">
-
         <div class="star">
           <i v-if="type === 'DEFAULT'" @click="type = 'FAVORITED'" class="fa fa-star-o"></i>
           <i v-if="type === 'FAVORITED'" @click="type = 'DEFAULT'" class="fa fa-star"></i>
         </div>
       </div>
+
+      <!-- 사진업로드 -->
+      <!-- <form id="FILE_FORM" method="post" enctype="multipart/form-data" action="">
+        <input type="file" name="upFile" id="upFile" @change="fileSelect">
+      </form>
+      <img id="preview" src="" width="100"> -->
 
       <div class="addDetail">
         <!-- 태그 -->
@@ -146,7 +156,7 @@
         <!-- {{selectedContact.id}} -->
       </div>
     </div>
-    <tag-select :show="openTagSelect" :tagArray="tagArray"@close="openTagSelect = false"></tag-select>
+    <tag-select :show="openTagSelect" :tagArray="tagArray" @close="openTagSelect = false" @editTags="editTagsFunc"></tag-select>
   </div>
 </template>
 
@@ -159,6 +169,16 @@ export default {
   props: ['show', 'selectedContact'],
   data () {
     return {
+      fileObj: "",
+      pathHeader: "",
+      pathMiddle: "",
+      pathEnd: "",
+      fileName: "",
+      extName: "",
+      allFilename: "",
+      customData: "",
+      file: "",
+      fileBase64: "",
       openTagSelect: false,
       phoneArray: [],
       emailArray: [],
@@ -259,6 +279,56 @@ export default {
     }
   },
   methods: {
+    fileSelect () {
+      this.fileObj = document.getElementById("upFile").value;
+      this.pathHeader = this.fileObj.lastIndexOf("\\");
+      this.pathMiddle = this.fileObj.lastIndexOf(".");
+      this.pathEnd = this.fileObj.length;
+      // 영문, 숫자, _만 허용
+      this.fileName = this.fileObj.substring(this.pathHeader+1, this.pathMiddle).replace(/[^a-zA-Z0-9_]/g, '');
+      this.extName = this.fileObj.substring(this.pathMiddle+1, this.pathEnd);
+
+      // 파일형식 제한
+      if (this.extName.toUpperCase() != 'PNG' && this.extName.toUpperCase() != 'JPG') {
+        alert('지원하지 않는 파일형식입니다.');
+        this.initialize();
+      } else {
+        // 파일명 20자 제한
+        if (this.fileName.length > 20) {
+          this.fileName = this.fileName.substring(0, 20);
+        }
+
+        this.allFilename = this.fileName+"."+this.extName;
+        this.file = document.getElementById('upFile').files[0];
+
+        var fileSize = this.file.size / 1024 / 1024;
+
+        // 용량 제한
+        if (fileSize > 3) {
+          alert('파일 용량은 3MB를 넘지 않아야합니다.');
+          this.initialize();
+        } else {
+          var reader = new FileReader();
+          reader.readAsDataURL(this.file);
+
+          var currentThis = this;
+          //로드 한 후
+          reader.onload = function  () {
+            document.querySelector('#preview').src = reader.result;
+            currentThis.fileBase64 = reader.result.split(',')[1];
+          };
+        }
+      }
+    },
+    initialize () {
+      this.file = "";
+      document.getElementById("upFile").value = ""
+      document.querySelector('#preview').src = "";
+    },
+    editTagsFunc (updatedTagArray) {
+      this.tagArray = updatedTagArray;
+      console.log('tagtagtag=====', this.tagArray)
+    },
     addTagButton () {
       this.openTagSelect = true;
     },
@@ -288,16 +358,19 @@ export default {
             emails: this.emailArray,
             memo: this.memoContents,
             name: this.name,
-            photo: this.photoArray,
+            photo: this.fileBase64,
             type: this.type,
             urls: this.urlArray,
-            tags: this.tagArray
+            // tags: this.tagArray
           }).then((result => {
               console.log('연락처 생성 성공')
+              console.log('tag', this.tagArray)
               this.$emit('close');
+              this.initialize();
             }))
             .catch(error => {
               alert('에러가 발생했습니다.')
+              this.initialize();
             })
         } else {
           this.$http.put(`/contacts/${this.selectedContact.id}`, {
@@ -308,16 +381,19 @@ export default {
             emails: this.emailArray,
             memo: this.memoContents,
             name: this.name,
-            photo: this.photoArray,
+            photo: this.fileBase64,
             type: this.type,
             urls: this.urlArray,
-            tags: this.tagArray
+            // tags: this.tagArray
           }).then((result => {
-              console.log('연락처 생성 성공')
+              console.log('연락처 수정 성공')
+              console.log('tag==========', this.tagArray)
               this.$emit('close');
+              this.initialize();
             }))
             .catch(error => {
               alert('에러가 발생했습니다.')
+              this.initialize();
             })
         }
       } else {

@@ -74,6 +74,63 @@
                 width: 50px;
                 height: 50px;
             }
+
+            input {             /*input tag 공통 스타일*/
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                font-weight: 600;
+                border-color: transparent;
+                background: lightgray;
+                color: #fff;
+                cursor: pointer;
+                font-size: 0.8em;
+                position: absolute;
+                margin-left: -25px;
+            }
+
+            input.upload {  
+                opacity: 0;       /*input type="file" tag 투명하게 처리*/
+                position: relative;
+            }
+
+            button.replace {    /*button tag 에 원하는 스타일 적용*/
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                font-weight: 600;
+                border-color: transparent;
+                font-size: 0.8em;
+                background: none;
+                color: #FE642E;
+                cursor: pointer;
+                position: absolute;
+                margin-left: -25px;
+                line-height: 15px;
+
+                span {
+                    text-align: center;
+                    display: inline-block;
+                }
+            }
+
+            .thumb {
+                display: block;
+                overflow: hidden;
+                height: 50px;
+                width: 50px;
+                text-align: center;
+                display: inline-block;
+                border-radius: 50%;
+            }
+            
+            .thumb img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                -ms-interpolation-mode: bicubic;
+            }
         }
 
         .addName {
@@ -212,7 +269,7 @@
                 background: white;
                 color: rgb(108, 216, 0);
                 border: 2px solid rgb(108, 216, 0);
-                width: 70px;
+                width: 80px;
                 height: 100%;
                 margin: 10px 0 20px 0;
                 font-weight: bold;
