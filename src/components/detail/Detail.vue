@@ -15,15 +15,12 @@
         <i v-if="selectedContact.type === 'DEFAULT'" class="fa fa-star-o"></i>
         <i v-if="selectedContact.type === 'FAVORITED'" class="fa fa-star"></i>
         </span>
-        <!-- <i v-if="selectedContact.type === 'DEFAULT'" @click="selectedContact.type = 'FAVORITED'" class="fa fa-star-o"></i>
-        <i v-if="selectedContact.type === 'FAVORITED'" @click="selectedContact.type = 'DEFAULT'" class="fa fa-star"></i> -->
       </div>
     </div>
     <div class="detailBody">
       <ul>
         <li class="tagList" v-if="selectedContact.tags && selectedContact.tags.length !== 0">
           <span v-for="tag in selectedContact.tags">#{{tag.name}}&nbsp;&nbsp;</span>
-          <!-- <i class="fa fa-plus-circle" @click=""></i> -->
         </li>
 
         <!-- 전화번호 -->
@@ -38,7 +35,7 @@
           <p>{{info.category.name}}</p>
 
           <!-- 메일 -->
-          <a v-if="info.category.type === 'EMAIL'" href="mailto:">{{info.contents}}</a>
+          <a v-if="info.category.type === 'EMAIL'" :href="`mailto:${info.contents}`">{{info.contents}}</a>
 
           <!-- 주소 -->
           <div v-if="info.category.type === 'ADDRESS'">
@@ -52,7 +49,10 @@
           </div>
 
           <!-- 웹사이트 -->
-          <a v-if="info.category.type === 'URL'" href="#" target="_blank">{{info.contents}}</a>
+          <div v-if="info.category.type === 'URL'">
+            <a v-if="info.contents.indexOf('http') !== -1" :href="`${info.contents}`" target="_blank">{{info.contents}}</a>
+            <a v-if="info.contents.indexOf('http') === -1" :href="'http://' + `${info.contents}`" target="_blank">{{info.contents}}</a>
+          </div>
 
         </li>
         <!-- 메모 -->
