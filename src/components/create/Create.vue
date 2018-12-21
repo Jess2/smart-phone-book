@@ -44,12 +44,7 @@
             <span class="sort">{{ phone.category.name }}</span>
             <span class="rightIcon">
               <b-dropdown right class="dropdown">
-                <b-dropdown-item @click="phone.category = { id: 1, name: '휴대전화' }">휴대전화</b-dropdown-item>
-                <b-dropdown-item @click="phone.category = { id: 1, name: '휴대전화' }">휴대전화</b-dropdown-item>
-                <b-dropdown-item @click="phone.category = { id: 2, name: '집' }">집</b-dropdown-item>
-                <b-dropdown-item @click="phone.category = { id: 3, name: '직장' }">직장</b-dropdown-item>
-                <b-dropdown-item @click="phone.category = { id: 4, name: '팩스' }">팩스</b-dropdown-item>
-                <b-dropdown-item @click="phone.category = { id: 5, name: '기타' }">기타</b-dropdown-item>
+                <b-dropdown-item v-for="category in digitCategories" :key="category.id" @click="setCategory(phone, category.id, category.name)">{{category.name}}</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item @click="addCategory('전화번호')" class="editCategory">
                   <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
@@ -72,9 +67,7 @@
             <span class="sort">{{ email.category.name }}</span>
             <span class="rightIcon">
               <b-dropdown right class="dropdown">
-                <b-dropdown-item @click="email.category = { id: 9, name: '개인' }">개인</b-dropdown-item>
-                <b-dropdown-item @click="email.category = { id: 10, name: '직장' }">직장</b-dropdown-item>
-                <b-dropdown-item @click="email.category = { id: 11, name: '기타' }">기타</b-dropdown-item>
+                <b-dropdown-item v-for="category in emailCategories" :key="category.id" @click="setCategory(email, category.id, category.name)">{{category.name}}</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item @click="addCategory('이메일')" class="editCategory">
                   <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
@@ -97,9 +90,7 @@
             <span class="sort">{{ address.category.name }}</span>
             <span class="rightIcon">
               <b-dropdown right class="dropdown">
-                <b-dropdown-item @click="address.category = { id: 15, name: '집' }">집</b-dropdown-item>
-                <b-dropdown-item @click="address.category = { id: 16, name: '직장' }">직장</b-dropdown-item>
-                <b-dropdown-item @click="address.category = { id: 17, name: '기타' }">기타</b-dropdown-item>
+                <b-dropdown-item v-for="category in addressCategories" :key="category.id" @click="setCategory(address, category.id, category.name)">{{category.name}}</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item @click="addCategory('주소')" class="editCategory">
                   <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
@@ -122,9 +113,7 @@
             <span class="sort">{{ date.category.name }}</span>
             <span class="rightIcon">
               <b-dropdown right class="dropdown">
-                <b-dropdown-item @click="date.category = { id: 12, name: '생일' }">생일</b-dropdown-item>
-                <b-dropdown-item @click="date.category = { id: 13, name: '기념일' }">기념일</b-dropdown-item>
-                <b-dropdown-item @click="date.category = { id: 14, name: '기타' }">기타</b-dropdown-item>
+                <b-dropdown-item v-for="category in dateCategories" :key="category.id" @click="setCategory(date, category.id, category.name)">{{category.name}}</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item @click="addCategory('기념일')" class="editCategory">
                   <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
@@ -154,9 +143,7 @@
             <span class="sort">{{ url.category.name }}</span>
             <span class="rightIcon">
               <b-dropdown right class="dropdown">
-                <b-dropdown-item @click="url.category = { id: 6, name: '개인' }">개인</b-dropdown-item>
-                <b-dropdown-item @click="url.category = { id: 7, name: '직장' }">직장</b-dropdown-item>
-                <b-dropdown-item @click="url.category = { id: 8, name: '기타' }">기타</b-dropdown-item>
+                <b-dropdown-item v-for="category in urlCategories" :key="category.id" @click="setCategory(url, category.id, category.name)">{{category.name}}</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item @click="addCategory('URL')" class="editCategory">
                   <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
@@ -195,6 +182,11 @@ export default {
   props: ['show', 'selectedContact', 'mode'],
   data () {
     return {
+      digitCategories: [],
+      emailCategories: [],
+      addressCategories: [],
+      dateCategories: [],
+      urlCategoreis: [],
       showAddCategory: false,
       categoryName: "",
       hasPhoto: false,
@@ -267,6 +259,13 @@ export default {
       this.tagArray = [];
       this.hasPhoto = false;
 
+      if (this.show) {
+        this.getCategory('DIGIT');
+        this.getCategory('EMAIL');
+        this.getCategory('ADDRESS');
+        this.getCategory('DATE');
+        this.getCategory('URL');
+      }
       if (this.show && this.selectedContact) {
         this.name = this.selectedContact.name;
         if (this.selectedContact.digits.length !== 0) {
@@ -311,6 +310,13 @@ export default {
           this.photoArray = this.selectedContact.photoPath;
         }
       }
+    },
+    showAddCategory () {
+      this.getCategory('DIGIT');
+      this.getCategory('EMAIL');
+      this.getCategory('ADDRESS');
+      this.getCategory('DATE');
+      this.getCategory('URL');
     }
   },
   computed: {
@@ -321,6 +327,34 @@ export default {
     }
   },
   methods: {
+    setCategory (object, _categoryId, _categoryName) {
+      object.category = {
+        id: _categoryId,
+        name: _categoryName
+      }
+      console.log('&&&&&&&&&&&&&', object);
+    },
+    getCategory (_categoryName) {
+      // this.setCategoryType();
+      this.$http.get(`/categories/${_categoryName}`, {
+      }).then((result => {
+          if (_categoryName === 'DIGIT') {
+            this.digitCategories = result.data;
+          } else if (_categoryName === 'EMAIL') {
+            this.emailCategories = result.data;
+          } else if (_categoryName === 'ADDRESS') {
+            this.addressCategories = result.data;
+          } else if (_categoryName === 'DATE') {
+            this.dateCategories = result.data;
+          } else if (_categoryName === 'URL') {
+            this.urlCategoreis = result.data;
+          }
+          console.log('category----------------------', result.data);
+        }))
+        .catch(error => {
+          alert('오류가 발생했습니다.')
+        })
+    },
     addCategory(_categoryName) {
       this.showAddCategory = true;
       this.categoryName = _categoryName;

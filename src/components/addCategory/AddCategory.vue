@@ -41,6 +41,7 @@ export default {
   },
   watch: {
     show () {
+      this.addCategoryTogle = false;
       if (this.show) {
         this.getCategory();
       }
@@ -106,6 +107,7 @@ export default {
     },
     cancelAddCategoryTogleFunc () {
       this.addCategoryTogle = false;
+      this.newCategory = "";
     },
     addCategory () {
       console.log('add Category')

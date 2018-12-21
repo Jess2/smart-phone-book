@@ -210,17 +210,21 @@
                 }
 
                 .leftSection {
-                    width: 114px;
+                    width: 130px;
                     display: inline-flex;
 
                     .sort {
                         width: 80%;
+                        display: inline-block;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
                 }
 
                 input {
                     border: none;
-                    width: calc(100% - 132px);
+                    width: calc(100% - 140px);
                     vertical-align: top;
                     height: 40px;
                     line-height: 40px;
