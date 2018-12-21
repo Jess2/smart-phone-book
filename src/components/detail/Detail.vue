@@ -26,7 +26,9 @@
         <!-- 전화번호 -->
         <li v-for="digit in selectedContact.digits">
           <p>{{digit.category.name}}</p>
-          <a href="tel:">{{digit.numbers.first}}-{{digit.numbers.second}}-{{digit.numbers.third}}</a>
+          <a v-if="digit.numbers.third" :href="`tel:${digit.numbers.first}${digit.numbers.second}${digit.numbers.third}`">{{digit.numbers.first}}-{{digit.numbers.second}}-{{digit.numbers.third}}</a>
+          <a v-if="digit.numbers.second && !digit.numbers.third" :href="`tel:${digit.numbers.first}${digit.numbers.second}`">{{digit.numbers.first}}-{{digit.numbers.second}}</a>
+          <a v-if="!digit.numbers.second" :href="`tel:${digit.numbers.first}`">{{digit.numbers.first}}</a>
         </li>
 
         <!-- 기타 정보 -->

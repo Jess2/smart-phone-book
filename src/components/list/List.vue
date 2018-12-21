@@ -94,7 +94,7 @@ export default {
         // 검색어에 번호 포함
         for (let i=0; i<item.digits.length; i++) {
           let number = item.digits[i].numbers.first + item.digits[i].numbers.second + item.digits[i].numbers.third
-          if (number.includes(this.searchContent)) {
+          if (number.includes(this.searchContent.replace(/-/gi, ""))) {
             return true;
           }
         }
