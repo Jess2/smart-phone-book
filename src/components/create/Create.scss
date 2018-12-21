@@ -219,7 +219,11 @@
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
+                        padding: 0;
                     }
+                }
+                .date {
+                    width: 110px;
                 }
 
                 input {

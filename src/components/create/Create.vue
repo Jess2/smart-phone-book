@@ -121,11 +121,10 @@
               </b-dropdown>
             </span>
           </div>
-          <!-- <input type="text" placeholder="주소" v-model="date.text"> -->
           <date-dropdown
             min="1930"
             max="2018"
-            :default="nowDate"
+            :default="date.contents"
             v-model="date.contents"
           >
           </date-dropdown>
@@ -164,7 +163,6 @@
           <span class="memo">메모 추가</span>
           <textarea name="" id="" cols="30" rows="10" placeholder="메모" v-model="memoContents"></textarea>
         </div>
-        <!-- {{selectedContact.id}} -->
       </div>
     </div>
     <tag-select :show="openTagSelect" :tagArray="tagArray" @close="openTagSelect = false" @editTags="editTagsFunc"></tag-select>
@@ -186,7 +184,7 @@ export default {
       emailCategories: [],
       addressCategories: [],
       dateCategories: [],
-      urlCategoreis: [],
+      urlCategories: [],
       showAddCategory: false,
       categoryName: "",
       hasPhoto: false,
@@ -270,7 +268,6 @@ export default {
         this.name = this.selectedContact.name;
         if (this.selectedContact.digits.length !== 0) {
           this.phoneArray = this.selectedContact.digits;
-          console.log('**********************', this.phoneArray)
           for (let i=0; i<this.phoneArray.length; i++) {
             if (this.phoneArray[i].numbers.third !== null) {
               this.phoneArray[i].number = this.phoneArray[i].numbers.first + '-';
@@ -294,7 +291,8 @@ export default {
             }
             if (this.selectedContact.infoes[i].category.type === 'DATE') {
               this.dateArray.push(this.selectedContact.infoes[i]);
-              console.log(this.dateArray)
+              // this.$set(this.isTitleDbl, 'activated', false);
+              console.log('**********************', this.dateArray)
             }
             if (this.selectedContact.infoes[i].category.type === 'URL') {
               this.urlArray.push(this.selectedContact.infoes[i]);
@@ -332,7 +330,6 @@ export default {
         id: _categoryId,
         name: _categoryName
       }
-      console.log('&&&&&&&&&&&&&', object);
     },
     getCategory (_categoryName) {
       // this.setCategoryType();
@@ -347,7 +344,7 @@ export default {
           } else if (_categoryName === 'DATE') {
             this.dateCategories = result.data;
           } else if (_categoryName === 'URL') {
-            this.urlCategoreis = result.data;
+            this.urlCategories = result.data;
           }
           console.log('category----------------------', result.data);
         }))

@@ -224,14 +224,20 @@
 
 <style scoped>
 	.date-dropdown-container {
-        display: inline-flex;
-        width: calc(100% - 132px);
+		display: inline-flex;
+		float: right;
+        /* width: calc(100% - 132px); */
 	}
 	.date-dropdown-select {
 		display: inline-block;
 		border: 1px solid #e0e0e0;
+		background: white;
 		border-radius: 3px;
         margin-right: 10px;
-        padding: 4px 0px 4px 4px;
+		padding: 4px 0px 4px 4px;
+		font-size: 0.7em;
+	}
+	select.date-dropdown-select.day {
+		margin-right: 0;
 	}
 </style>
