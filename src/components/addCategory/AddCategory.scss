@@ -90,9 +90,20 @@
 
             i.fa-minus-circle {
                 font-size: 1.6em;
-                padding-right: 10px;
+                padding-right: 5px;
                 color: rgb(216, 0, 0);
                 vertical-align: middle;
+            }
+
+            .addClass {
+                float: right;
+                width: 20%;
+                margin: 0;
+                height: 30px;
+                font-size: 0.8em;
+                background: #6cd800;
+                box-shadow: 1px 1px 1px lightgrey;
+                margin-right: 10px;
             }
         }
     }

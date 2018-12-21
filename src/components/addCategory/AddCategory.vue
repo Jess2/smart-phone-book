@@ -11,6 +11,14 @@
             <i v-if="category.isDefault === 'N'" class="fa fa-minus-circle" @click="deleteCategory(category.id)"></i>
             {{ category.name }}
           </li>
+          <li v-if="addCategoryTogle">
+            <i class="fa fa-minus-circle" @click="cancelAddCategoryTogleFunc"></i>
+            <input id="tag" type="text" placeholder="태그명을 입력하세요." v-model="newCategory">
+            <button class="addClass" @click="addCategory">추가하기</button>
+          </li>
+          <li @click="addCategoryToggleFunc">
+            <i class="fa fa-plus-circle"></i>카테고리 추가
+          </li>
         </ul>
       </div>
     </div>
@@ -25,6 +33,8 @@ export default {
     return {
       categoryType: "",
       categoryArray: [],
+      addCategoryTogle: false,
+      newCategory: "",
     }
   },
   mounted () {
@@ -89,6 +99,29 @@ export default {
           } else {
             alert('오류가 발생했습니다.')
           }
+        })
+    },
+    addCategoryToggleFunc () {
+      this.addCategoryTogle = true;
+    },
+    cancelAddCategoryTogleFunc () {
+      this.addCategoryTogle = false;
+    },
+    addCategory () {
+      console.log('add Category')
+      this.$http.post(`/categories/${this.categoryType}`, {
+        name: this.newCategory,
+        type: this.categoryType
+      }).then((result => {
+          this.categoryArray = result.data;
+          this.newCategory = "";
+          this.cancelAddCategoryTogleFunc();
+          console.log(this.categoryArray);
+          this.getCategory();
+        }))
+        .catch(error => {
+          alert('오류가 발생했습니다.')
+          console.log(this.categoryType)
         })
     }
   },

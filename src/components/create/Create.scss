@@ -245,12 +245,16 @@
                         a {
                             color: black;
                         }
+
+                        .editCategory {
+                            color: #FE642E;
+                        }
                     }
     
                     .btn-group > .btn:first-child {
                         background: none;
                         border: none;
-                        color: orangered;
+                        color: #FE642E;
                         margin: 0;
                         padding: 0;
                         // height: 10px;
@@ -266,6 +270,8 @@
                         padding: 0 1.5em;
                         font-size: 0.9em;
                     }
+
+                    
                 }
             }
 
@@ -316,6 +322,10 @@
             margin-top: 10px;
             padding: 10px;
         }
+    }
+
+    .dropdown-menu.dropdown-menu-right.show {
+        box-shadow: 1px 1px 1px lightgray;
     }
 }
 

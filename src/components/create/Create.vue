@@ -45,12 +45,13 @@
             <span class="rightIcon">
               <b-dropdown right class="dropdown">
                 <b-dropdown-item @click="phone.category = { id: 1, name: '휴대전화' }">휴대전화</b-dropdown-item>
+                <b-dropdown-item @click="phone.category = { id: 1, name: '휴대전화' }">휴대전화</b-dropdown-item>
                 <b-dropdown-item @click="phone.category = { id: 2, name: '집' }">집</b-dropdown-item>
                 <b-dropdown-item @click="phone.category = { id: 3, name: '직장' }">직장</b-dropdown-item>
                 <b-dropdown-item @click="phone.category = { id: 4, name: '팩스' }">팩스</b-dropdown-item>
                 <b-dropdown-item @click="phone.category = { id: 5, name: '기타' }">기타</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-item @click="addCategory('전화번호')">
+                <b-dropdown-item @click="addCategory('전화번호')" class="editCategory">
                   <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
                 </b-dropdown-item>
               </b-dropdown>
@@ -75,7 +76,7 @@
                 <b-dropdown-item @click="email.category = { id: 10, name: '직장' }">직장</b-dropdown-item>
                 <b-dropdown-item @click="email.category = { id: 11, name: '기타' }">기타</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-item @click="addCategory('이메일')">
+                <b-dropdown-item @click="addCategory('이메일')" class="editCategory">
                   <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
                 </b-dropdown-item>
               </b-dropdown>
@@ -100,7 +101,7 @@
                 <b-dropdown-item @click="address.category = { id: 16, name: '직장' }">직장</b-dropdown-item>
                 <b-dropdown-item @click="address.category = { id: 17, name: '기타' }">기타</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-item @click="addCategory('주소')">
+                <b-dropdown-item @click="addCategory('주소')" class="editCategory">
                   <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
                 </b-dropdown-item>
               </b-dropdown>
@@ -125,7 +126,7 @@
                 <b-dropdown-item @click="date.category = { id: 13, name: '기념일' }">기념일</b-dropdown-item>
                 <b-dropdown-item @click="date.category = { id: 14, name: '기타' }">기타</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-item @click="addCategory('기념일')">
+                <b-dropdown-item @click="addCategory('기념일')" class="editCategory">
                   <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
                 </b-dropdown-item>
               </b-dropdown>
@@ -157,7 +158,7 @@
                 <b-dropdown-item @click="url.category = { id: 7, name: '직장' }">직장</b-dropdown-item>
                 <b-dropdown-item @click="url.category = { id: 8, name: '기타' }">기타</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-item @click="addCategory('URL')">
+                <b-dropdown-item @click="addCategory('URL')" class="editCategory">
                   <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
                 </b-dropdown-item>
               </b-dropdown>
