@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import DetailComponent from '../detail/Detail'
+  // import DetailComponent from '../detail/Detail'
   import ConfirmModal from '../../utilities/confirmModal/ConfirmModal'
   import ConfirmData from '../../utilities/confirmModal/ConfirmData.json'
 
@@ -121,7 +121,7 @@
       }
     },
     components: {
-      DetailComponent,
+      DetailComponent : () => import ('../detail/Detail.vue'),
       ConfirmModal
     },
   }

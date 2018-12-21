@@ -74,7 +74,7 @@
     </div>
     <create-component :show="openEdit" :mode="'edit'" :selectedContact="selectedContact" @close="openEdit = false"></create-component>
     <confirm-modal :show="openConfirmModal" :content="confirmContent" :contactName="selectedContact.name" @onDelete="onDelete" @close="openConfirmModal = false"></confirm-modal>
-    <detail-tag-contact :show="showDetailTagContact" :tagId="selectedTagId" :tagName="selectedTagName" @close="showDetailTagContact = false"></detail-tag-contact>
+    <tag-contact :show="openTagContact" :tagId="selectedTagId" :tagName="selectedTagName" @close="openTagContact = false"></tag-contact>
   </div>
 </template>
 
@@ -82,7 +82,7 @@
   import CreateComponent from '../create/Create'
   import ConfirmModal from '../../utilities/confirmModal/ConfirmModal'
   import ConfirmData from '../../utilities/confirmModal/ConfirmData.json'
-  import DetailTagContact from '../detailTagContact/DetailTagContact'
+  import TagContact from '../tagContact/TagContact'
 
   export default {
     name: 'Detail',
@@ -93,9 +93,9 @@
         isCreateMode: false,
         selectedContact: {},
         openEdit: false,
+        openTagContact: false,
         openConfirmModal: false,
         confirmContent: {},
-        showDetailTagContact: false,
         selectedTagId: 0,
         selectedTagName: "",
       }
@@ -119,7 +119,7 @@
     },
     methods: {
       openDetailTagContact (_tagId, _tagName) {
-        this.showDetailTagContact = true;
+        this.openTagContact = true;
         this.selectedTagId = _tagId;
         this.selectedTagName = _tagName;
       },
@@ -166,7 +166,7 @@
     components: { 
       CreateComponent,
       ConfirmModal,
-      DetailTagContact,
+      TagContact,
     }
   }
 </script>
