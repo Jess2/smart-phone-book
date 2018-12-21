@@ -227,6 +227,7 @@ export default {
   },
   watch: {
     show () {
+      window.scrollTo(0,0);
       this.name = "";
       this.phoneArray = [];
       this.emailArray = [];

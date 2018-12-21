@@ -73,10 +73,12 @@ export default {
   watch: {
     openDetail () {
       this.getContactList();
+      window.scrollTo(0,0);
       console.log('show opendetail')
     },
     openCreate () {
       this.getContactList();
+      window.scrollTo(0,0);
       console.log('show openCreate')
     }
   },

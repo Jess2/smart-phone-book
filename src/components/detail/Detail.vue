@@ -20,7 +20,7 @@
     <div class="detailBody">
       <ul>
         <li class="tagList" v-if="selectedContact.tags && selectedContact.tags.length !== 0">
-          <span class="tagSpan" v-for="tag in selectedContact.tags">#{{tag.name}}</span>
+          <span class="tagSpan" v-for="tag in selectedContact.tags" @click="openDetailTagContact(tag.id, tag.name)">#{{tag.name}}</span>
         </li>
 
         <!-- 전화번호 -->
@@ -74,6 +74,7 @@
     </div>
     <create-component :show="openEdit" :selectedContact="selectedContact" @close="openEdit = false"></create-component>
     <confirm-modal :show="openConfirmModal" :content="confirmContent" :contactName="selectedContact.name" @onDelete="onDelete" @close="openConfirmModal = false"></confirm-modal>
+    <detail-tag-contact :show="showDetailTagContact" :tagId="selectedTagId" :tagName="selectedTagName" @close="showDetailTagContact = false"></detail-tag-contact>
   </div>
 </template>
 
@@ -81,6 +82,7 @@
   import CreateComponent from '../create/Create'
   import ConfirmModal from '../../utilities/confirmModal/ConfirmModal'
   import ConfirmData from '../../utilities/confirmModal/ConfirmData.json'
+  import DetailTagContact from '../detailTagContact/DetailTagContact'
 
   export default {
     name: 'Detail',
@@ -93,6 +95,9 @@
         openEdit: false,
         openConfirmModal: false,
         confirmContent: {},
+        showDetailTagContact: false,
+        selectedTagId: 0,
+        selectedTagName: "",
       }
     },
     watch: {
@@ -100,15 +105,22 @@
         console.log('============detail show change')
         this.selectedContact = {};
         this.getContactDetail();
+        window.scrollTo(0,0);
       },
       openEdit () {
         console.log('sssssssss')
         this.getContactDetail();
+        window.scrollTo(0,0);
       }
     },
     computed: {
     },
     methods: {
+      openDetailTagContact (_tagId, _tagName) {
+        this.showDetailTagContact = true;
+        this.selectedTagId = _tagId;
+        this.selectedTagName = _tagName;
+      },
       openEditFunc () {
         this.openEdit = true;
         console.log('selectedContact', this.selectedContact);
@@ -151,7 +163,8 @@
     },
     components: { 
       CreateComponent,
-      ConfirmModal
+      ConfirmModal,
+      DetailTagContact,
     }
   }
 </script>

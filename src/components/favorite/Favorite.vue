@@ -35,6 +35,7 @@
     },
     watch: {
       show () {
+        window.scrollTo(0,0);
         if (this.show === true) {
           this.getFavorites();
         }

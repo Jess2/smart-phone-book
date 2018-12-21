@@ -7,6 +7,7 @@
     left: 0;
     width: 100%;
     // z-index: 999;
+    height: 100vh;
     color: black;
     background: white;
 
@@ -99,13 +100,7 @@
         color: black;
 
         .tagList {
-            // color: rgb(119, 28, 28);
-            // font-weight: 600;
-
-            // .fa-plus-circle {
-            //     color: rgb(108, 216, 0);
-            //     font-size: 1em;
-            // }
+            padding-right: 20px;
 
             .tagSpan {
                 color: white;

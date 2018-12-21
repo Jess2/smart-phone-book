@@ -21,7 +21,7 @@
         <li v-if="editMode && addTagTogle">
           <i class="fa fa-minus-circle" @click="cancelAddTagTogleFunc"></i>
           <input id="tag" type="text" placeholder="태그명을 입력하세요." v-model="newTagName">
-          <button class="addClass" @click="addTag">추가</button>
+          <button class="addClass" @click="addTag">추가하기</button>
         </li>
         <li v-if="editMode">
           <i class="fa fa-plus-circle" @click="addTagTogleFunc"></i>
@@ -66,6 +66,7 @@ export default {
     show () {
       this.editMode = false;
       this.getTag();
+      window.scrollTo(0,0);
     }
     // tagData () {
       // // this.editTagData = this.tagData;
@@ -123,7 +124,7 @@ export default {
         this.$http.post(`/tags/`, {
           name: this.newTagName
         }).then((result => {
-            console.log('태그 생성 성공')
+            console.log('태그 생성 성공', this.newTagName)
             this.getTag();
             this.addTagTogle = false;
           }))
@@ -152,9 +153,6 @@ export default {
     },
     editTagSave () {
       this.editMode = false;
-      console.log('length', this.tagData.length)
-      console.log(this.tagData)
-      console.log(this.editTagData)
       for (let i=0; i<this.tagData.length; i++) {
         this.$http.put(`/tags/${this.tagData[i].id}`, {
           name: this.editTagData[i].name

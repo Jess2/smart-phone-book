@@ -2,7 +2,6 @@
   <div class="tagContact" v-if="show">
     <div class="tagContactHeader">
       <span class="back" @click="backFunc"><i class="fa fa-angle-left"></i>태그</span>
-
       <!-- <span v-if="root === 'detail'" class="back" @click="backFunc"><i class="fa fa-angle-left"></i>연락처</span>
       <span v-if="root === 'tag'" class="back" @click="backFunc"><i class="fa fa-angle-left"></i>태그</span> -->
       <span class="title">{{ tagName }} 연락처</span>
@@ -56,6 +55,7 @@
     watch: {
       show () {
         this.editMode = false;
+        window.scrollTo(0,0);
         if (this.show === true) {
           console.log('tagContact show')
           this.getTagContacts();
