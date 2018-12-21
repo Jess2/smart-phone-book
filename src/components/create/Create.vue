@@ -271,10 +271,18 @@ export default {
         this.name = this.selectedContact.name;
         if (this.selectedContact.digits.length !== 0) {
           this.phoneArray = this.selectedContact.digits;
+          console.log('**********************', this.phoneArray)
           for (let i=0; i<this.phoneArray.length; i++) {
-            this.phoneArray[i].number = this.phoneArray[i].numbers.first + '-';
-            this.phoneArray[i].number += this.phoneArray[i].numbers.second + '-';
-            this.phoneArray[i].number += this.phoneArray[i].numbers.third;
+            if (this.phoneArray[i].numbers.third !== null) {
+              this.phoneArray[i].number = this.phoneArray[i].numbers.first + '-';
+              this.phoneArray[i].number += this.phoneArray[i].numbers.second + '-';
+              this.phoneArray[i].number += this.phoneArray[i].numbers.third;
+            } else if (this.phoneArray[i].numbers.third === null && this.phoneArray[i].numbers.second !== null) {
+              this.phoneArray[i].number = this.phoneArray[i].numbers.first + '-';
+              this.phoneArray[i].number += this.phoneArray[i].numbers.second
+            } else if (this.phoneArray[i].numbers.second === null) {
+              this.phoneArray[i].number = this.phoneArray[i].numbers.first
+            }
           }
         }
         if (this.selectedContact.infoes.length !== 0) {
