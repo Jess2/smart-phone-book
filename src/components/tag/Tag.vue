@@ -9,12 +9,12 @@
     <div class="tagBody">
       <ul>
         <!-- 일반모드 -->
-        <li v-if="!editMode" v-for="tag in tagNameSort" @click="tagSelect(tag.id, tag.name)">
+        <li v-if="!editMode" v-for="tag in tagDataSort" @click="tagSelect(tag.id, tag.name)">
           <i class="fa fa-slack"></i>
           {{ tag.name }}
         </li>
         <!-- 편집모드 -->
-        <li v-if="editMode" v-for="editTag in editTagNameSort">
+        <li v-if="editMode" v-for="editTag in tagDataSort">
           <i class="fa fa-minus-circle" @click="alertDeleteTag('tagDelete', editTag.id, editTag.name)"></i>
           <input type="text" v-model="editTag.name">
         </li>
@@ -60,11 +60,12 @@ export default {
     }
   },
   mounted () {
-    this.getTag();
+    // this.getTag();
   },
   watch: {
     show () {
       this.editMode = false;
+      this.getTag();
     }
     // tagData () {
       // // this.editTagData = this.tagData;
@@ -80,6 +81,11 @@ export default {
     editTagNameSort () {
       return this.editTagData.sort((a, b) => {
         return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+      });
+    },
+    tagDataSort () {
+      return this.tagData.sort((a, b) => {
+        return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
       });
     }
   },

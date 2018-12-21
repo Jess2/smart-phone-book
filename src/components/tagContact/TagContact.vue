@@ -57,9 +57,11 @@
       show () {
         this.editMode = false;
         if (this.show === true) {
+          console.log('tagContact show')
           this.getTagContacts();
         }
         if (this.show === false) {
+          console.log('tagContact show false')
           this.tagContacts = [];
         }
       }
@@ -91,6 +93,7 @@
         this.$http.delete(`/contacts/${this.deleteContactId}/tags/${this.deleteTagId}`, {
           }).then((result => {
             console.log('해당 태그에서 해당 연락처 삭제 성공')
+            this.getTagContacts();
           }))
           .catch(error => {
             alert('에러가 발생했습니다.')

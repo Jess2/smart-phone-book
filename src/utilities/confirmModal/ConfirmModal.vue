@@ -2,8 +2,9 @@
   <div class="confirmModal" v-if="show">
     <div class="popUpGridWrapepr">
       <div class="title">
-        <span><b>"{{tagName}}"</b> {{content.title}}</span>
+        <span v-if="content.type !== 3"><b>"{{tagName}}"</b> {{content.title}}</span>
         <span v-if="content.type === 2"><b>"{{contactName}}"</b> {{content.title2}}</span>
+        <span v-if="content.type === 3"><b>"{{contactName}}"</b> {{content.title}}</span>
       </div>
 
       <!-- 태그 삭제 -->
@@ -44,7 +45,7 @@ export default {
     }
   },
   mounted () {
-
+    console.log(this.contactName)
   },
   methods: {
     deleteTag () {

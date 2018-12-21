@@ -73,7 +73,7 @@
       </ul>
     </div>
     <create-component :show="openEdit" :selectedContact="selectedContact" @close="openEdit = false"></create-component>
-    <confirm-modal :show="openConfirmModal" :content="confirmContent" @onDelete="onDelete" @close="openConfirmModal = false"></confirm-modal>
+    <confirm-modal :show="openConfirmModal" :content="confirmContent" :contactName="selectedContact.name" @onDelete="onDelete" @close="openConfirmModal = false"></confirm-modal>
   </div>
 </template>
 
