@@ -111,7 +111,7 @@ export default {
       this.$http.get(`/tags/`, {
       }).then((result => {
           this.tagData = result.data;
-          this.editTagData = this.tagData.slice();
+          this.editTagData = this.tagData;
           console.log('tag api 호출', this.tagData)
         }))
         .catch(error => {
@@ -119,7 +119,6 @@ export default {
         })
     },
     addTag () {
-      
       if (this.newTagName !== "" && this.newTagName.length <= 10) {
         console.log('태그 추가')
         this.$http.post(`/tags/`, {

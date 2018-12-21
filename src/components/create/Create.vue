@@ -336,6 +336,7 @@ export default {
       document.getElementById("upFile").value = ""
       document.querySelector('#preview').src = "";
       this.hasPhoto = false;
+      this.fileBase64 = "";
     },
     editTagsFunc (updatedTagArray) {
       this.tagArray = updatedTagArray;
