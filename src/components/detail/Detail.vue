@@ -20,7 +20,7 @@
     <div class="detailBody">
       <ul>
         <li class="tagList" v-if="selectedContact.tags && selectedContact.tags.length !== 0">
-          <span v-for="tag in selectedContact.tags">#{{tag.name}}&nbsp;&nbsp;</span>
+          <span class="tagSpan" v-for="tag in selectedContact.tags">#{{tag.name}}</span>
         </li>
 
         <!-- 전화번호 -->
@@ -30,24 +30,33 @@
         </li>
 
         <!-- 기타 정보 -->
-        <li v-for="info in selectedContact.infoes">
+        <li v-for="info in selectedContact.infoes" v-if="info.category.type === 'EMAIL'">
           <!-- 카테고리 이름 -->
-          <p>{{info.category.name}}</p>
+          <p>{{info.category.name}} 이메일</p>
 
           <!-- 메일 -->
-          <a v-if="info.category.type === 'EMAIL'" :href="`mailto:${info.contents}`">{{info.contents}}</a>
+          <a :href="`mailto:${info.contents}`">{{info.contents}}</a>
+        </li>
 
+        <li v-for="info in selectedContact.infoes" v-if="info.category.type === 'ADDRESS'">
+          <p>{{info.category.name}} 주소</p>
           <!-- 주소 -->
-          <div v-if="info.category.type === 'ADDRESS'">
+          <div>
             {{info.contents}}
             <i class="fa fa-map-marker"></i>
           </div>
+        </li>
 
+        <li v-for="info in selectedContact.infoes" v-if="info.category.type === 'DATE'">
+          <p>{{info.category.name}}</p>
           <!-- 생일 -->
-          <div v-if="info.category.type === 'DATE'">
+          <div>
             {{info.contents}}
           </div>
 
+
+        <li v-for="info in selectedContact.infoes" v-if="info.category.type === 'URL'">
+          <p>{{info.category.name}} URL</p>
           <!-- 웹사이트 -->
           <div v-if="info.category.type === 'URL'">
             <a v-if="info.contents.indexOf('http') !== -1" :href="`${info.contents}`" target="_blank">{{info.contents}}</a>
@@ -58,7 +67,7 @@
         <!-- 메모 -->
         <li v-if="selectedContact.memo">
           <p>메모</p>
-          {{selectedContact.memo}}
+          <div class="memoSection">{{selectedContact.memo}}</div>
         </li>
         <li v-if="selectedContact.type !== 'ME'" class="contactDelete" @click="contactDelete">이 연락처 삭제하기</li>
       </ul>

@@ -5,9 +5,13 @@
         <span class="title">태그</span>
       </div>
       <div class="tagSelectBody">
-        <div v-for="tag in tagNameSort">
-          <input type="checkbox" id="checkbox" v-model="tag.checked"> {{ tag.name }}
-        </div>
+        <!-- <div v-for="tag in tagNameSort"> -->
+          <!-- <input type="checkbox" id="checkbox" v-model="tag.checked"> {{ tag.name }} -->
+          <div class="checks etrans" v-for="tag in tagNameSort">
+            <input type="checkbox" :id="`${tag.id}`" v-model="tag.checked"> 
+            <label :for="`${tag.id}`">{{ tag.name }}</label> 
+          </div>
+        <!-- </div> -->
       </div>
       <div class="tagSelectFooter">
         <button @click="tagSave">확인</button>
