@@ -151,7 +151,7 @@
             console.log('api 호출', this.selectedContact)
           }))
           .catch(error => {
-            alert('에러가 발생했습니다.')
+            alert('오류가 발생했습니다.')
           })
       },
       // 연락처 삭제 버튼 클릭
@@ -167,7 +167,7 @@
             this.backClick()
           }))
           .catch(error => {
-            alert('에러가 발생했습니다.')
+            alert('오류가 발생했습니다.')
           })
       }
     },

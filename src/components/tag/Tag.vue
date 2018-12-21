@@ -115,7 +115,7 @@ export default {
           console.log('tag api 호출', this.tagData)
         }))
         .catch(error => {
-          alert('에러가 발생했습니다.')
+          alert('오류가 발생했습니다.')
         })
     },
     addTag () {
@@ -129,7 +129,7 @@ export default {
             this.addTagTogle = false;
           }))
           .catch(error => {
-            alert('에러가 발생했습니다.')
+            alert('오류가 발생했습니다.')
           })
       } else if (this.newTagName.length > 10) {
         alert('태그 이름은 10 글자를 초과할 수 없습니다.');
@@ -149,7 +149,7 @@ export default {
           this.getTag();
         }))
         .catch(error => {
-          alert('에러가 발생했습니다.')
+          alert('오류가 발생했습니다.')
         })
       }
     },
@@ -162,7 +162,7 @@ export default {
           console.log('태그 수정 성공');
         }))
         .catch(error => {
-          alert('에러가 발생했습니다.')
+          alert('오류가 발생했습니다.')
         })
       }
     },

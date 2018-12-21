@@ -49,6 +49,10 @@
                 <b-dropdown-item @click="phone.category = { id: 3, name: '직장' }">직장</b-dropdown-item>
                 <b-dropdown-item @click="phone.category = { id: 4, name: '팩스' }">팩스</b-dropdown-item>
                 <b-dropdown-item @click="phone.category = { id: 5, name: '기타' }">기타</b-dropdown-item>
+                <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item @click="addCategory('전화번호')">
+                  <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
+                </b-dropdown-item>
               </b-dropdown>
             </span>
           </div>
@@ -70,6 +74,10 @@
                 <b-dropdown-item @click="email.category = { id: 9, name: '개인' }">개인</b-dropdown-item>
                 <b-dropdown-item @click="email.category = { id: 10, name: '직장' }">직장</b-dropdown-item>
                 <b-dropdown-item @click="email.category = { id: 11, name: '기타' }">기타</b-dropdown-item>
+                <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item @click="addCategory('이메일')">
+                  <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
+                </b-dropdown-item>
               </b-dropdown>
             </span>
           </div>
@@ -91,6 +99,10 @@
                 <b-dropdown-item @click="address.category = { id: 15, name: '집' }">집</b-dropdown-item>
                 <b-dropdown-item @click="address.category = { id: 16, name: '직장' }">직장</b-dropdown-item>
                 <b-dropdown-item @click="address.category = { id: 17, name: '기타' }">기타</b-dropdown-item>
+                <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item @click="addCategory('주소')">
+                  <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
+                </b-dropdown-item>
               </b-dropdown>
             </span>
           </div>
@@ -102,7 +114,7 @@
           <span>주소 추가</span>
         </div>
 
-        <!-- 생일 -->
+        <!-- 기념일 -->
         <div class="addDetailList add" v-for="(date, index) in dateArray">
           <div class="leftSection">
             <i class="fa fa-minus-circle" @click="subDate(index)"></i>
@@ -112,6 +124,10 @@
                 <b-dropdown-item @click="date.category = { id: 12, name: '생일' }">생일</b-dropdown-item>
                 <b-dropdown-item @click="date.category = { id: 13, name: '기념일' }">기념일</b-dropdown-item>
                 <b-dropdown-item @click="date.category = { id: 14, name: '기타' }">기타</b-dropdown-item>
+                <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item @click="addCategory('기념일')">
+                  <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
+                </b-dropdown-item>
               </b-dropdown>
             </span>
           </div>
@@ -127,7 +143,7 @@
 
         <div class="addDetailList addTitle">
           <i class="fa fa-plus-circle" @click="addDate"></i>
-          <span>생일/기념일 추가</span>
+          <span>기념일 추가</span>
         </div>
 
         <!-- URL -->
@@ -140,6 +156,10 @@
                 <b-dropdown-item @click="url.category = { id: 6, name: '개인' }">개인</b-dropdown-item>
                 <b-dropdown-item @click="url.category = { id: 7, name: '직장' }">직장</b-dropdown-item>
                 <b-dropdown-item @click="url.category = { id: 8, name: '기타' }">기타</b-dropdown-item>
+                <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item @click="addCategory('URL')">
+                  <i class="fa fa-plus"></i>&nbsp;&nbsp;카테고리 편집
+                </b-dropdown-item>
               </b-dropdown>
             </span>
           </div>
@@ -160,18 +180,22 @@
       </div>
     </div>
     <tag-select :show="openTagSelect" :tagArray="tagArray" @close="openTagSelect = false" @editTags="editTagsFunc"></tag-select>
+    <add-category :show="showAddCategory" :categoryName="categoryName" @close="showAddCategory = false"></add-category>
   </div>
 </template>
 
 <script>
 import DateDropdown from './Dropdown.vue'
 import TagSelect from '../tagSelect/TagSelect'
+import AddCategory from '../addCategory/AddCategory'
 
 export default {
   name: 'Create',
   props: ['show', 'selectedContact', 'mode'],
   data () {
     return {
+      showAddCategory: false,
+      categoryName: "",
       hasPhoto: false,
       fileObj: "",
       pathHeader: "",
@@ -288,6 +312,10 @@ export default {
     }
   },
   methods: {
+    addCategory(_categoryName) {
+      this.showAddCategory = true;
+      this.categoryName = _categoryName;
+    },
     fileSelect () {
       this.fileObj = document.getElementById("upFile").value;
       this.pathHeader = this.fileObj.lastIndexOf("\\");
@@ -382,7 +410,7 @@ export default {
               console.log('ddddddddd', this.name.length)
             }))
             .catch(error => {
-              alert('에러가 발생했습니다.')
+              alert('오류가 발생했습니다.')
               this.initialize();
             })
         } else {
@@ -404,7 +432,7 @@ export default {
               this.initialize();
             }))
             .catch(error => {
-              alert('에러가 발생했습니다.')
+              alert('오류가 발생했습니다.')
               this.initialize();
             })
         }
@@ -469,7 +497,8 @@ export default {
   },
   components: {
     DateDropdown,
-    TagSelect
+    TagSelect,
+    AddCategory,
   },
 }
 </script>
