@@ -14,7 +14,9 @@
         padding: 10px 25px;
         text-align: center;
         font-size: 1em;
-        font-weight: 500;
+        height: 50px;
+        padding: 0 25px;
+        line-height: 50px;
 
         i {
             font-size: 1.8em;
@@ -43,7 +45,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            font-weight: 600;
+            // font-weight: 600;
         }
 
         .edit {

@@ -74,7 +74,7 @@
     </div>
     <create-component :show="openEdit" :mode="'edit'" :selectedContact="selectedContact" @close="openEdit = false"></create-component>
     <confirm-modal :show="openConfirmModal" :content="confirmContent" :contactName="selectedContact.name" @onDelete="onDelete" @close="openConfirmModal = false"></confirm-modal>
-    <tag-contact :show="openTagContact" :tagId="selectedTagId" :tagName="selectedTagName" :detailName="selectedContact.name" :root="'detail'" @close="openTagContact = false"></tag-contact>
+    <tag-contact :show="openTagContact" :tagId="selectedTagId" :tagName="selectedTagName" :detailId="selectedContact.id" :detailName="selectedContact.name" :root="'detail'" @close="openTagContact = false"></tag-contact>
   </div>
 </template>
 
@@ -124,6 +124,7 @@
     },
     methods: {
       openDetailTagContact (_tagId, _tagName) {
+        console.log('sdfsdfdfsdf', _tagId, this.selectedContact.id)
         this.openTagContact = true;
         this.selectedTagId = _tagId;
         this.selectedTagName = _tagName;

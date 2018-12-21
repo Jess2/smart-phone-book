@@ -37,7 +37,7 @@
 
   export default {
     name: 'TagContact',
-    props: ['show', 'tagId', 'tagName', 'root', 'detailName'],
+    props: ['show', 'tagId', 'tagName', 'root', 'detailName', 'detailId'],
     data () {
       return {
         openDetail: false,
@@ -104,8 +104,12 @@
         this.$emit('close')
       },
       openDetailFunc (userId) {
-        this.openDetail = true;
-        this.selectedUserId = userId;
+        if (this.detailId !== userId) {
+          this.openDetail = true;
+          this.selectedUserId = userId;
+        } else {
+          this.backFunc();
+        }
       },
       getTagContacts () {
         this.$http.get(`/tags/${this.tagId}`, {
