@@ -23,6 +23,13 @@
         .back {
             height: 51px;
             line-height: 43px;
+            padding: 0;
+            display: inline-block;
+            max-width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 600;
 
             i {
                 font-size: 1.8em;

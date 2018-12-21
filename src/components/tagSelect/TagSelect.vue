@@ -42,7 +42,7 @@ export default {
   computed: {
     tagNameSort () {
       return this.tagData.sort((a, b) => {
-        return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+        return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
       });
     },
   },

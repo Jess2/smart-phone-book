@@ -25,13 +25,25 @@
         
         .title {
             padding: 0;
+            display: inline-block;
             margin: 0 12px 0 0;
+            width: 50%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             font-weight: 600;
         }
 
         .back {
             color: #FE642E;
             float: left;
+            padding: 0;
+            display: inline-block;
+            max-width: 80px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 600;
         }
 
         .edit {

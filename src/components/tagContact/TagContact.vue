@@ -1,7 +1,8 @@
 <template>
   <div class="tagContact" v-if="show">
     <div class="tagContactHeader">
-      <span class="back" @click="backFunc"><i class="fa fa-angle-left"></i>태그</span>
+      <span v-if="root !== 'detail'" class="back" @click="backFunc"><i class="fa fa-angle-left"></i>태그</span>
+      <span v-if="root === 'detail'" class="back" @click="backFunc"><i class="fa fa-angle-left"></i>{{detailName}}</span>
       <!-- <span v-if="root === 'detail'" class="back" @click="backFunc"><i class="fa fa-angle-left"></i>연락처</span>
       <span v-if="root === 'tag'" class="back" @click="backFunc"><i class="fa fa-angle-left"></i>태그</span> -->
       <span class="title">{{ tagName }} 연락처</span>
@@ -36,7 +37,7 @@
 
   export default {
     name: 'TagContact',
-    props: ['show', 'tagId', 'tagName'],
+    props: ['show', 'tagId', 'tagName', 'root', 'detailName'],
     data () {
       return {
         openDetail: false,

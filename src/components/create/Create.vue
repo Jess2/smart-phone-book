@@ -361,7 +361,7 @@ export default {
           }
         }
       }
-      if (this.name !== "") {
+      if (this.name !== "" && this.name.length <= 10) {
         if (!this.selectedContact) {
           this.$http.post(`/contacts`, {
             addresses: this.addressArray,
@@ -378,6 +378,7 @@ export default {
               console.log('연락처 생성 성공')
               this.$emit('close');
               this.initialize();
+              console.log('ddddddddd', this.name.length)
             }))
             .catch(error => {
               alert('에러가 발생했습니다.')
@@ -406,8 +407,10 @@ export default {
               this.initialize();
             })
         }
-      } else {
+      } else if (this.name === "") {
         alert('이름을 입력해주세요.')
+      } else if (this.name.length > 10) {
+        alert('이름 길이는 10 글자를 초과할 수 없습니다.')
       }
     },
     // 번호 추가

@@ -119,7 +119,8 @@ export default {
         })
     },
     addTag () {
-      if (this.newTagName !== "") {
+      
+      if (this.newTagName !== "" && this.newTagName.length <= 10) {
         console.log('태그 추가')
         this.$http.post(`/tags/`, {
           name: this.newTagName
@@ -131,6 +132,8 @@ export default {
           .catch(error => {
             alert('에러가 발생했습니다.')
           })
+      } else if (this.newTagName.length > 10) {
+        alert('태그 이름은 10 글자를 초과할 수 없습니다.');
       }
     },
     alertDeleteTag (name, id, tagName) {

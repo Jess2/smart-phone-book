@@ -20,7 +20,7 @@
     <div class="detailBody">
       <ul>
         <li class="tagList" v-if="selectedContact.tags && selectedContact.tags.length !== 0">
-          <span class="tagSpan" v-for="tag in selectedContact.tags" @click="openDetailTagContact(tag.id, tag.name)">#{{tag.name}}</span>
+          <span class="tagSpan" v-for="tag in tagSort" @click="openDetailTagContact(tag.id, tag.name)">#{{tag.name}}</span>
         </li>
 
         <!-- 전화번호 -->
@@ -74,7 +74,7 @@
     </div>
     <create-component :show="openEdit" :mode="'edit'" :selectedContact="selectedContact" @close="openEdit = false"></create-component>
     <confirm-modal :show="openConfirmModal" :content="confirmContent" :contactName="selectedContact.name" @onDelete="onDelete" @close="openConfirmModal = false"></confirm-modal>
-    <tag-contact :show="openTagContact" :tagId="selectedTagId" :tagName="selectedTagName" @close="openTagContact = false"></tag-contact>
+    <tag-contact :show="openTagContact" :tagId="selectedTagId" :tagName="selectedTagName" :detailName="selectedContact.name" :root="'detail'" @close="openTagContact = false"></tag-contact>
   </div>
 </template>
 
@@ -116,6 +116,11 @@
       }
     },
     computed: {
+      tagSort () {
+        return this.selectedContact.tags.sort((a, b) => {
+          return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+        });
+      },
     },
     methods: {
       openDetailTagContact (_tagId, _tagName) {
