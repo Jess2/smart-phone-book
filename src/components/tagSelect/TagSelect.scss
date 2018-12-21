@@ -1,5 +1,5 @@
 .tagSelect {
-    z-index: 999;
+    z-index: 998;
     display: inline-block;
     margin: 0;
     position: absolute;
@@ -20,14 +20,14 @@
     background: rgba(0,0,0,0.8);
     display: table;
     transition: opacity .3s ease;
-    z-index: 999;
+    z-index: 998;
     color: white;
     display: table;
 
     // 팝업창
     .tagSelectWrapper {
         width: 90%;
-        height: 90%;
+        height: 500px;
         border-radius: 10px;
         background: #ffffff;
         text-align: center;
@@ -46,16 +46,23 @@
 
             .title {
                 line-height: 50px;
+                margin-right: -58px;
+            }
+
+            .save {
+                float: right;
+                margin-right: 20px;
+                line-height: 50px;
             }
         }
 
         .tagSelectBody {
             color: black;
-            height: 400px;
+            height: 430px;
             padding: 10px 30px;
             overflow-y: scroll;
             text-align: left;
-            font-size: 1.1em;
+            font-size: 1em;
 
             div {
                 margin: 5px 0;
@@ -104,7 +111,7 @@
             }
 
             .checks input[type="checkbox"]:checked + label:before { /* 체크박스를 체크했을때 */
-                z-index: 999;
+                z-index: 998;
                 content: '\2714'; /* 체크표시 유니코드 사용 */
                 color: #99a1a7;
                 text-shadow: 1px 1px #fff;

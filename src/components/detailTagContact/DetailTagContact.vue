@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import DetailComponent from '../detail/Detail'
 export default {
   name: 'DetailTagContact',
   props: ['show', 'tagId', 'tagName'],
@@ -27,6 +26,7 @@ export default {
     return {
       tagContacts: [],
       openDetail: false,
+      selectedUserId: 0,
     }
   },
   mounted () {
@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     backFunc () {
-    this.$emit('close');
+      this.$emit('close');
     },
     getTagContacts () {
     this.$http.get(`/tags/${this.tagId}`, {
@@ -61,12 +61,15 @@ export default {
         })
     },
     openDetailFunc (userId) {
-    this.openDetail = true;
-    this.selectedUserId = userId;
+    //   this.backFunc();
+      console.log('openDetailFunc', userId)
+      this.openDetail = true;
+      this.selectedUserId = userId;
     },
   },
   components: {
-    DetailComponent,
+    DetailComponent : () => import ('../detail/Detail.vue'),
+    // TreeFolderContents : () =>  import ( './tree-folder-contents.vue' )
   }
 }
 </script>

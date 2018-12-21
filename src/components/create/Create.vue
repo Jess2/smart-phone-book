@@ -2,7 +2,8 @@
   <div class="create" v-if="show">
     <div class="createHeader">
       <span class="back" @click="backFunc">취소</span>
-      <span class="title">새로운 연락처</span>
+      <span v-if="mode !== 'edit'" class="title">새로운 연락처</span>
+      <span v-if="mode === 'edit'" class="title">연락처 편집</span>
       <span class="edit" @click="createSave">완료</span>
     </div>
     <div class="createBody">
@@ -168,7 +169,7 @@ import TagSelect from '../tagSelect/TagSelect'
 
 export default {
   name: 'Create',
-  props: ['show', 'selectedContact'],
+  props: ['show', 'selectedContact', 'mode'],
   data () {
     return {
       hasPhoto: false,
@@ -375,7 +376,6 @@ export default {
             tags: this.tagArray
           }).then((result => {
               console.log('연락처 생성 성공')
-              console.log('tag', this.tagArray)
               this.$emit('close');
               this.initialize();
             }))
@@ -398,7 +398,6 @@ export default {
             tags: this.tagArray
           }).then((result => {
               console.log('연락처 수정 성공')
-              console.log('tag==========', this.tagArray)
               this.$emit('close');
               this.initialize();
             }))

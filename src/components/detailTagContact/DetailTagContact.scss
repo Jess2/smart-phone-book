@@ -1,5 +1,5 @@
 .detailTagContact {
-    z-index: 999;
+    z-index: 998;
     display: inline-block;
     margin: 0;
     position: absolute;
@@ -20,14 +20,14 @@
     background: rgba(0,0,0,0.8);
     display: table;
     transition: opacity .3s ease;
-    z-index: 999;
+    z-index: 998;
     color: white;
     display: table;
 
     // 팝업창
     .detailTagContactWrapper {
         width: 90%;
-        height: 90%;
+        height: 500px;
         border-radius: 10px;
         background: #ffffff;
         text-align: center;
@@ -59,7 +59,7 @@
 
         .detailTagContactBody {
             color: black;
-            height: 400px;
+            height: 430px;
             padding: 10px 0 10px 20px;
             overflow-y: scroll;
             text-align: left;

@@ -3,6 +3,7 @@
     <div class="tagSelectWrapper">
       <div class="tagSelectHeader">
         <span class="title">태그</span>
+        <span class="save" @click="tagSave">완료</span>
       </div>
       <div class="tagSelectBody">
         <!-- <div v-for="tag in tagNameSort"> -->
@@ -12,9 +13,6 @@
             <label :for="`${tag.id}`">{{ tag.name }}</label> 
           </div>
         <!-- </div> -->
-      </div>
-      <div class="tagSelectFooter">
-        <button @click="tagSave">확인</button>
       </div>
     </div>
   </div>

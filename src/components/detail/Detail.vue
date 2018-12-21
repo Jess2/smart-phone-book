@@ -72,7 +72,7 @@
         <li v-if="selectedContact.type !== 'ME'" class="contactDelete" @click="contactDelete">이 연락처 삭제하기</li>
       </ul>
     </div>
-    <create-component :show="openEdit" :selectedContact="selectedContact" @close="openEdit = false"></create-component>
+    <create-component :show="openEdit" :mode="'edit'" :selectedContact="selectedContact" @close="openEdit = false"></create-component>
     <confirm-modal :show="openConfirmModal" :content="confirmContent" :contactName="selectedContact.name" @onDelete="onDelete" @close="openConfirmModal = false"></confirm-modal>
     <detail-tag-contact :show="showDetailTagContact" :tagId="selectedTagId" :tagName="selectedTagName" @close="showDetailTagContact = false"></detail-tag-contact>
   </div>
@@ -103,8 +103,10 @@
     watch: {
       show () {
         console.log('============detail show change')
-        this.selectedContact = {};
-        this.getContactDetail();
+        if (this.show) {
+          this.getContactDetail();
+          this.selectedContact = {};
+        }
         window.scrollTo(0,0);
       },
       openEdit () {
