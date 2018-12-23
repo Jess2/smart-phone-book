@@ -4,7 +4,6 @@
     <div v-if="!isLogin">
       <login-component @login="login"></login-component>
     </div>
-    
     <!-- 로그인 되어 있는 경우 리스트 컴포넌트 -->
     <div v-if="isLogin">
       <!-- <tag-component></tag-component> -->
