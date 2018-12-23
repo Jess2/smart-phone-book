@@ -436,11 +436,32 @@ export default {
             third: this.phoneArray[i].number.split('-')[2],
           }
           delete this.phoneArray[i].number;
+          delete this.phoneArray[i].category.isDefault;
         }
       }
       if (this.tagArray.length > 0) {
         for (let i=0; i<this.tagArray.length; i++) {
           delete this.tagArray[i].checked;
+        }
+      }
+      if (this.emailArray.length > 0) {
+        for (let i=0; i<this.emailArray.length; i++) {
+          delete this.emailArray[i].category.isDefault;
+        }
+      }
+      if (this.addressArray.length > 0) {
+        for (let i=0; i<this.addressArray.length; i++) {
+          delete this.addressArray[i].category.isDefault;
+        }
+      }
+      if (this.dateArray.length > 0) {
+        for (let i=0; i<this.dateArray.length; i++) {
+          delete this.dateArray[i].category.isDefault;
+        }
+      }
+      if (this.urlArray.length > 0) {
+        for (let i=0; i<this.urlArray.length; i++) {
+          delete this.urlArray[i].category.isDefault;
         }
       }
       if (this.name !== "" && this.name.length <= 10) {
@@ -465,7 +486,7 @@ export default {
             .catch(error => {
               alert('오류가 발생했습니다.')
               this.initialize();
-              console.log(this.tagArray);
+              console.log('emailArray', this.emailArray)
             })
         } else {
           this.$http.put(`/contacts/${this.selectedContact.id}`, {
@@ -484,11 +505,12 @@ export default {
               console.log('연락처 수정 성공')
               this.$emit('close');
               this.initialize();
-              console.log('phtoo', this.photoArray)
             }))
             .catch(error => {
               alert('오류가 발생했습니다.')
               this.initialize();
+              console.log('---------')
+              console.log(this.selectedContact.id, this.addressArray, this.dateArray, this.phoneArray, this.emailArray, this.memoContents, this.name, this.fileBase64, this.type, this.urlArray, this.tagArray)
             })
         }
       } else if (this.name === "") {
