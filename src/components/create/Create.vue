@@ -11,11 +11,13 @@
         <i v-if="!hasPhoto" class="fa fa-user-circle"></i>
         <button v-if="!hasPhoto" class="replace"><span>사진<br/>추가</span></button>
 
+        <i v-if="hasPhoto" class="fa fa-minus-circle" @click="deletePhoto"></i>
         <div v-show="hasPhoto" class="thumb important">
           <img id="preview" src="">
         </div>
 
-        <div v-if="photoArray" class="thumb">
+        <i v-if="photoArray.length > 0" class="fa fa-minus-circle" @click="deletePhotoArray"></i>
+        <div v-if="photoArray.length > 0" class="thumb">
           <img :src="photoArray"/>
         </div>
         <form id="FILE_FORM" method="post" enctype="multipart/form-data" action="">
@@ -323,6 +325,13 @@ export default {
     }
   },
   methods: {
+    deletePhotoArray () {
+      this.photoArray = [];
+    },
+    deletePhoto () {
+      console.log('deletePhoto');
+      this.initialize();
+    },
     setCategory (object, _categoryId, _categoryName) {
       object.category = {
         id: _categoryId,
@@ -475,6 +484,7 @@ export default {
               console.log('연락처 수정 성공')
               this.$emit('close');
               this.initialize();
+              console.log('phtoo', this.photoArray)
             }))
             .catch(error => {
               alert('오류가 발생했습니다.')

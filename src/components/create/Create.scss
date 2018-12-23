@@ -62,6 +62,17 @@
                 margin-left: -25px;
             }
 
+            i.fa-minus-circle {
+                font-size: 1.4em;
+                padding-right: 14px;
+                color: #d80000;
+                height: 40px;
+                z-index: 991;
+                margin-left: 13px;
+                margin-top: -13px;
+                line-height: 40px;
+            }
+
             button {
                 font-size: 0.8em;
                 position: absolute;
@@ -131,11 +142,11 @@
             }
 
             .important {
-                z-index: 998;
+                z-index: 990;
             }
 
             .FILE_FORM {
-                z-index: 998;
+                z-index: 990;
             }
             
             .thumb img {
