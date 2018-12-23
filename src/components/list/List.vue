@@ -7,13 +7,13 @@
       <span class="rightIcon">
         <b-dropdown right class="dropdown">
           <b-dropdown-item @click="openCreateFunc">연락처 추가</b-dropdown-item>
-          <b-dropdown-item>명함 추가</b-dropdown-item>
+          <!-- <b-dropdown-item>명함 추가</b-dropdown-item> -->
+          <!-- <b-dropdown-divider></b-dropdown-divider> -->
+          <!-- <b-dropdown-item>연락처 가져오기</b-dropdown-item> -->
+          <!-- <b-dropdown-item>연락처 내보내기</b-dropdown-item> -->
           <b-dropdown-divider></b-dropdown-divider>
-          <b-dropdown-item>연락처 가져오기</b-dropdown-item>
-          <b-dropdown-item>연락처 내보내기</b-dropdown-item>
-          <b-dropdown-divider></b-dropdown-divider>
-          <b-dropdown-item>마이페이지</b-dropdown-item>
-          <b-dropdown-item @click="loginFunc">로그아웃</b-dropdown-item>
+          <!-- <b-dropdown-item>마이페이지</b-dropdown-item> -->
+          <a href="https://soda-phonebook.ga/api/logout_processing"><b-dropdown-item>로그아웃</b-dropdown-item></a>
         </b-dropdown>
       </span>
       </div>
