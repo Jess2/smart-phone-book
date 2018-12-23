@@ -13,7 +13,7 @@
           </li>
           <li v-if="addCategoryTogle">
             <i class="fa fa-minus-circle" @click="cancelAddCategoryTogleFunc"></i>
-            <input id="tag" type="text" placeholder="태그명을 입력하세요." v-model="newCategory">
+            <input id="tag" type="text" placeholder="카테고리명을 입력하세요." v-model="newCategory">
             <button class="addClass" @click="addCategory">추가하기</button>
           </li>
           <li @click="addCategoryToggleFunc">

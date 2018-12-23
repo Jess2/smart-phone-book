@@ -27,6 +27,9 @@
     - Sass
     - Webpack
 
+## Test
+- [Test 항목](https://drive.google.com/open?id=1MsyDsbw34JtYGuw0_umfXNCS9jLhSHqUWUEhHiLzmGE)
+
 ## Members
 - [고다경](https://github.com/koda93) : 기획, DB 및 UI 설계, 서버 및 개발환경 구축, [웹 백엔드](https://github.com/koda93/SmartPhoneBook_BE) 개발
 - [정소연](https://github.com/JESS2) : 기획, DB 및 UI 설계, 웹 프론트 엔드 개발

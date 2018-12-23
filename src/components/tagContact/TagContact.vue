@@ -65,6 +65,11 @@
           console.log('tagContact show false')
           this.tagContacts = [];
         }
+      },
+      openDetail () {
+        if (this.openDetail === false) {
+          this.getTagContacts();
+        }
       }
     },
     computed: {
