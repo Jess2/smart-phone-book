@@ -45,7 +45,7 @@
           <!-- 주소 -->
           <div>
             {{info.contents}}
-            <i class="fa fa-map-marker"></i>
+            <a :href="`https://www.google.co.kr/maps/search/${info.contents}`" target="_blanck"><i class="fa fa-map-marker"></i></a>
           </div>
         </li>
 

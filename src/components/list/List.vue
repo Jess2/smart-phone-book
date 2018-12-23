@@ -67,7 +67,7 @@ export default {
     }
   },
   mounted () {
-    console.log('contactData', this.contactData);
+    // console.log('contactData', this.contactData);
     this.getContactList();
   },
   watch: {
@@ -135,6 +135,7 @@ export default {
     },
     // 연락처 리스트 가져오기
     getContactList () {
+      console.log('getContactList')
       this.$http.get(`/contacts`, {
       }).then((result => {
           this.contactData = result.data;
