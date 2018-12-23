@@ -291,8 +291,6 @@ export default {
             }
             if (this.selectedContact.infoes[i].category.type === 'DATE') {
               this.dateArray.push(this.selectedContact.infoes[i]);
-              // this.$set(this.isTitleDbl, 'activated', false);
-              console.log('**********************', this.dateArray)
             }
             if (this.selectedContact.infoes[i].category.type === 'URL') {
               this.urlArray.push(this.selectedContact.infoes[i]);
@@ -366,7 +364,7 @@ export default {
       this.extName = this.fileObj.substring(this.pathMiddle+1, this.pathEnd);
 
       // 파일형식 제한
-      if (this.extName.toUpperCase() != 'PNG' && this.extName.toUpperCase() != 'JPG') {
+      if (this.extName.toUpperCase() != 'PNG' && this.extName.toUpperCase() != 'JPG' && this.extName.toUpperCase() != 'JPEG') {
         alert('지원하지 않는 파일형식입니다.');
         this.initialize();
       } else {
