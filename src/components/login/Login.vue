@@ -5,7 +5,7 @@
       <a href="https://soda-phonebook.ga/api/login"><button class="google">Google로 로그인</button></a>
       <!-- <button @click="loginFunc">Facebook으로 로그인</button> -->
       <!-- <button @click="loginTry">test</button> -->
-      <!-- <button class="google" @click="loginFunc">Google로 로그인</button> -->
+      <!-- <router-link to="/list"><button class="google">Google로 로그인</button></router-link> -->
     </div>
   </div>
 </template>

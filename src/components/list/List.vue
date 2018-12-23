@@ -13,7 +13,7 @@
           <!-- <b-dropdown-item>연락처 내보내기</b-dropdown-item> -->
           <b-dropdown-divider></b-dropdown-divider>
           <!-- <b-dropdown-item>마이페이지</b-dropdown-item> -->
-          <a href="https://soda-phonebook.ga/api/logout_processing"><b-dropdown-item>로그아웃</b-dropdown-item></a>
+          <b-dropdown-item href="https://soda-phonebook.ga/api/logout_processing">로그아웃</b-dropdown-item>
         </b-dropdown>
       </span>
       </div>
@@ -64,13 +64,21 @@ export default {
       contactData: [],
       selectedUserId: 0,
       searchContent: "",
+      currentUrl: window.location.href,
     }
   },
   mounted () {
+    console.log('mounted!!!!!!!!!!!', new Date())
     // console.log('contactData', this.contactData);
-    this.getContactList();
+    setTimeout(() => {
+      this.getContactList();
+    }, 500)
+    console.log(this.currentUrl)
   },
   watch: {
+    currentUrl () {
+      console.log('current Url ---')
+    },
     openDetail () {
       this.getContactList();
       window.scrollTo(0,0);
