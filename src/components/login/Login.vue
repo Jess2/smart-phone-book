@@ -3,7 +3,7 @@
     <div class="loginWrapper">
       <!-- <p>{{ msg }}</p> -->
       <button class="google" @click="loginFunc">Google로 로그인</button><br>
-      <button @click="loginFunc">Facebook으로 로그인</button>
+      <!-- <button @click="loginFunc">Facebook으로 로그인</button> -->
     </div>
   </div>
 </template>

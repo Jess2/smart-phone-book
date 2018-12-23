@@ -27,5 +27,6 @@ axios.defaults.headers.get['Pragma'] = 'no-cache';
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.timeout = 100000;
+axios.defaults.baseURL = 'https://soda-phonebook.ga/api/'
 
 Vue.prototype.$http = axios;
