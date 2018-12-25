@@ -11,24 +11,44 @@
     text-align: center;
     display: table-cell;
     vertical-align: middle;
-}
 
-button {
-    font-size: 1em;
-    width: 300px;
-    background: #3b5998;
-    color: white;
-    border-radius: 10px;
-    height: 50px;
-    border: none;
-    margin-top: 10px;
-}
+    img {
+        width: 20%;
+        margin-top: -50px;
+        max-width: 120px;
+        min-width: 90px;
+    }
 
-button.google {
-    margin-top: 0;
-    background: rgba(234, 067, 053);
-}
-
-p {
-    margin-bottom: 30px;
+    span {
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 50px;
+        color: black;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+    
+    button.facebook {
+        font-size: 1em;
+        width: 300px;
+        background: #3b5998;
+        color: white;
+        border-radius: 10px;
+        height: 50px;
+        border: none;
+        margin-top: 10px;
+    }
+    
+    button.google {
+        font-size: 1em;
+        width: 300px;
+        background: #3b5998;
+        color: white;
+        border-radius: 10px;
+        height: 50px;
+        border: none;
+        margin-top: 10px;
+        margin-top: 0;
+        background: rgb(234, 067, 053);
+    }
 }

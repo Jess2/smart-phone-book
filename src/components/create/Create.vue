@@ -21,7 +21,7 @@
           <img :src="photoArray"/>
         </div>
         <form id="FILE_FORM" method="post" enctype="multipart/form-data" action="">
-          <input type="file" name="upFile" id="upFile" @change="fileSelect" class="upload">
+          <input type="file" name="upFile" id="upFile" @change="fileSelect" class="upload" value="">
         </form>
       </div>
       <div class="addName">
@@ -407,11 +407,13 @@ export default {
       }
     },
     initialize () {
-      this.file = "";
-      document.getElementById("upFile").value = ""
-      document.querySelector('#preview').src = "";
       this.hasPhoto = false;
-      this.fileBase64 = "";
+      if (document.getElementById("upFile") !== null) {
+        this.file = "";
+        document.getElementById("upFile").value = ""
+        document.querySelector('#preview').src = "";
+        this.fileBase64 = "";
+      }
     },
     editTagsFunc (updatedTagArray) {
       this.tagArray = updatedTagArray;
@@ -510,6 +512,7 @@ export default {
               console.log('연락처 수정 성공')
               this.$emit('close');
               this.initialize();
+              console.log('photoPath', this.selectedContact.photoPath)
             }))
             .catch(error => {
               alert('오류가 발생했습니다.')

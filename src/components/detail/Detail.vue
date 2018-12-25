@@ -1,5 +1,5 @@
 <template>
-  <div class="detail" v-if="show">
+  <div class="detail" v-if="pageShow">
     <div class="detailHeader">
       <span v-if="root === 'tag'" class="back" @click="backClick"><i class="fa fa-angle-left"></i>{{tagName}} 연락처</span>
       <span v-if="root === 'list'" class="back" @click="backClick"><i class="fa fa-angle-left"></i>연락처</span>
@@ -100,6 +100,7 @@
         confirmContent: {},
         selectedTagId: 0,
         selectedTagName: "",
+        pageShow: false,
       }
     },
     watch: {
@@ -108,6 +109,7 @@
         if (this.show) {
           this.getContactDetail();
           this.selectedContact = {};
+          // this.pageShow = true;
         }
         window.scrollTo(0,0);
       },
@@ -141,6 +143,7 @@
       backClick () {
         console.log('back')
         this.$emit('close');
+        this.pageShow = false;
       },
       // 연락처 세부정보 가져오기
       getContactDetail () {
@@ -149,6 +152,7 @@
         }).then((result => {
             this.selectedContact = result.data;
             console.log('api 호출', this.selectedContact)
+            this.pageShow = true;
           }))
           .catch(error => {
             alert('오류가 발생했습니다.')

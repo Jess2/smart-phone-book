@@ -1,12 +1,13 @@
 <template>
   <div class="login">
     <div class="loginWrapper">
-      <!-- <button class="google" @click="loginTry">Google로 로그인</button><br> -->
+      <img src="../../../static/favicon.png"/>
+      <span id="id_of_element_to_blink">스마트 주소록</span>
       <div>
         <a href="https://soda-phonebook.ga/api/login"><button class="google">Google로 로그인</button></a>
       </div>
       <div>
-        <button @click="ready">Facebook으로 로그인</button>
+        <button class="facebook" @click="ready">Facebook으로 로그인</button>
       </div>
       <!-- <router-link to="/list"><button @click="loginFunc">테스트 계정으로 로그인</button></router-link> -->
       <!-- <router-link to="/list"><button class="google">Google로 로그인</button></router-link> -->
@@ -25,9 +26,11 @@ export default {
     return {
       confirmContent: {},
       openConfirmModal: false,
+      session: '',
     }
   },
   mounted () {
+    // this.blink();
     console.log(this.currentUrl, this)
   },
   watch: {
@@ -59,6 +62,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   @import "Login.scss"
 </style>
