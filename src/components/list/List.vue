@@ -76,6 +76,7 @@ export default {
     // console.log('contactData', this.contactData);
     setTimeout(() => {
       this.getContactList();
+      this.init();
     }, 500)
     console.log(this.currentUrl)
   },
@@ -163,6 +164,50 @@ export default {
           alert('오류가 발생했습니다.')
         })
     },
+    init () {
+      // this.addTag("가족");
+      // this.addTag("친구");
+      // this.addTag("학교");
+      // this.addTag("직장");
+      // this.addCategory('DIGIT', '휴대전화')
+      // this.addCategory('DIGIT', '집')
+      // this.addCategory('DIGIT', '직장')
+      // this.addCategory('DIGIT', '팩스')
+      // this.addCategory('DIGIT', '기타')
+      // this.addCategory('URL', '개인')
+      // this.addCategory('URL', '직장')
+      // this.addCategory('URL', '기타')
+      // this.addCategory('EMAIL', '개인')
+      // this.addCategory('EMAIL', '직장')
+      // this.addCategory('EMAIL', '기타')
+      // this.addCategory('DATE', '생일')
+      // this.addCategory('DATE', '기념일')
+      // this.addCategory('DATE', '기타')
+      // this.addCategory('ADDRESS', '집')
+      // this.addCategory('ADDRESS', '직장')
+      // this.addCategory('ADDRESS', '기타')
+    },
+    addTag (_name) {
+      console.log('태그 추가')
+      this.$http.post(`/tags/`, {
+        name: _name
+      }).then((result => {
+        }))
+        .catch(error => {
+          alert('오류가 발생했습니다.')
+        })
+    },
+    addCategory (_categoryType, _categoryName) {
+      console.log('add Category')
+      this.$http.post(`/categories/${_categoryType}`, {
+        name: _categoryName,
+        type: _categoryType
+      }).then((result => {
+        }))
+        .catch(error => {
+          alert('오류가 발생했습니다.')
+        })
+    }
   },
   components: {
     DetailComponent,

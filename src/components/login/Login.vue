@@ -4,10 +4,18 @@
       <img src="../../../static/favicon.png"/>
       <span id="id_of_element_to_blink">스마트 주소록</span>
       <div>
-        <a href="https://soda-phonebook.ga/api/login"><button class="google">Google로 로그인</button></a>
+        <!-- <a href="https://soda-phonebook.ga/api/login"> -->
+          <button class="google" @click="googleLogin">
+            <i class="fa fa-google"></i>
+            <span>Google로 로그인</span>
+          </button>
+        <!-- </a> -->
       </div>
       <div>
-        <button class="facebook" @click="ready">Facebook으로 로그인</button>
+        <button class="facebook" @click="ready">
+          <i class="fa fa-facebook-square"></i>
+          <span>Facebook으로 로그인</span>
+        </button>
       </div>
       <!-- <router-link to="/list"><button @click="loginFunc">테스트 계정으로 로그인</button></router-link> -->
       <!-- <router-link to="/list"><button class="google">Google로 로그인</button></router-link> -->
@@ -26,16 +34,40 @@ export default {
     return {
       confirmContent: {},
       openConfirmModal: false,
-      session: '',
+      session: null,
     }
   },
   mounted () {
     // this.blink();
-    console.log(this.currentUrl, this)
+    console.log('login mounted')
+    var c = document.cookie;
+    console.log('cookie', c)
+    var name = 'SESSION';
+    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    this.session = (value ? value[2] : null);
+    console.log('session value', value);
+    if (document.cookie !== null) {
+      console.log('session 감지')
+      // window.location.href = 'https://soda-phonebook.ga/#/list';
+    }
   },
   watch: {
+    // session () {
+    //   if (this.session !== null) {
+    //     console.log('session 감지')
+    //     window.location.href = 'https://soda-phonebook.ga/#/list';
+    //   }
+    // }
   },
   methods: {
+    googleLogin () {
+      window.location.href = 'https://soda-phonebook.ga/api/login';
+    },
+    // getCookie () {
+    //   var name = 'SESSION';
+    //   var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    //   this.session = (value ? value[2] : null);
+    // },
     ready () {
       this.openConfirmModal = true;
       this.confirmContent = ConfirmData['ready'];

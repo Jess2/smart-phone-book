@@ -518,6 +518,7 @@ export default {
               alert('오류가 발생했습니다.')
               this.initialize();
               console.log('---------')
+              console.log(this.type)
               console.log(this.selectedContact.id, this.addressArray, this.dateArray, this.phoneArray, this.emailArray, this.memoContents, this.name, this.fileBase64, this.type, this.urlArray, this.tagArray)
             })
         }

@@ -91,21 +91,22 @@
         }
 
         input {
-            width: 60%;
+            width: 55%;
             border: 1px solid lightgray;
             padding: 0 5px;
         }
 
         .addClass {
             float: right;
-            width: 65px;
+            width: 60px;
             margin: 0;
             height: 30px;
             font-size: 0.8em;
             background: #6cd800;
+            color: white;
             box-shadow: 1px 1px 1px lightgrey;
             border-radius: 10px;
-            font-size: .8em;
+            font-size: .7em;
             border: none;
         }
     }
