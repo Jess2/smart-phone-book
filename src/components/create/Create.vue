@@ -54,7 +54,7 @@
               </b-dropdown>
             </span>
           </div>
-          <input id="number" type="text" placeholder="전화" v-model="phone.number" @keyup="phoneNumberChange">
+          <input id="tel" type="text" placeholder="전화" v-model="phone.number" @keyup="phoneNumberChange(phone.number)">
         </div>
 
         <div class="addDetailList addTitle">
@@ -422,7 +422,7 @@ export default {
     addTagButton () {
       this.openTagSelect = true;
     },
-    phoneNumberChange () {
+    phoneNumberChange (_number) {
     },
     backFunc () {
       this.$emit('close')
