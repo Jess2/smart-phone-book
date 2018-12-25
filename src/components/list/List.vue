@@ -7,12 +7,11 @@
       <span class="rightIcon">
         <b-dropdown right class="dropdown">
           <b-dropdown-item @click="openCreateFunc">연락처 추가</b-dropdown-item>
-          <!-- <b-dropdown-item>명함 추가</b-dropdown-item> -->
-          <!-- <b-dropdown-divider></b-dropdown-divider> -->
-          <!-- <b-dropdown-item>연락처 가져오기</b-dropdown-item> -->
-          <!-- <b-dropdown-item>연락처 내보내기</b-dropdown-item> -->
+          <b-dropdown-item @click="ready">명함 추가</b-dropdown-item>
           <b-dropdown-divider></b-dropdown-divider>
-          <!-- <b-dropdown-item>마이페이지</b-dropdown-item> -->
+          <b-dropdown-item @click="ready">연락처 가져오기</b-dropdown-item>
+          <b-dropdown-item @click="ready">연락처 내보내기</b-dropdown-item>
+          <b-dropdown-divider></b-dropdown-divider>
           <b-dropdown-item href="https://soda-phonebook.ga/api/logout_processing">로그아웃</b-dropdown-item>
         </b-dropdown>
       </span>
@@ -43,6 +42,7 @@
     <tag-component :show="openTag" @close="openTag = false"></tag-component>
     <detail-component :show="openDetail" :userId="selectedUserId" :root="'list'" @close="openDetail = false"></detail-component>
     <create-component :show="openCreate" @close="openCreate = false"></create-component>
+    <confirm-modal :show="openConfirmModal" :content="confirmContent" @close="openConfirmModal = false"></confirm-modal>
   </div>
 </template>
 
@@ -51,6 +51,8 @@ import FavoriteComponent from '../favorite/Favorite'
 import TagComponent from '../tag/Tag'
 import DetailComponent from '../detail/Detail'
 import CreateComponent from '../create/Create'
+import ConfirmModal from '../../utilities/confirmModal/ConfirmModal'
+import ConfirmData from '../../utilities/confirmModal/ConfirmData.json'
 
 export default {
   name: 'List',
@@ -65,6 +67,8 @@ export default {
       selectedUserId: 0,
       searchContent: "",
       currentUrl: window.location.href,
+      confirmContent: {},
+      openConfirmModal: false,
     }
   },
   mounted () {
@@ -121,6 +125,12 @@ export default {
     },
   },
   methods: {
+    ready () {
+      console.log('ready')
+      this.openConfirmModal = true;
+      this.confirmContent = ConfirmData['ready'];
+      console.log(this.openConfirmModal)
+    },
     loginFunc () {
       this.$emit('login', false);
     },
@@ -158,7 +168,8 @@ export default {
     DetailComponent,
     CreateComponent,
     TagComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    ConfirmModal,
   }
 }
 </script>
