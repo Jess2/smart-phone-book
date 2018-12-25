@@ -2,42 +2,41 @@
   <div class="login">
     <div class="loginWrapper">
       <!-- <button class="google" @click="loginTry">Google로 로그인</button><br> -->
-      <a href="https://soda-phonebook.ga/api/login"><button class="google">Google로 로그인</button></a>
-      <!-- <button @click="loginFunc">Facebook으로 로그인</button> -->
-      <!-- <button @click="loginTry">test</button> -->
+      <div>
+        <a href="https://soda-phonebook.ga/api/login"><button class="google">Google로 로그인</button></a>
+      </div>
+      <div>
+        <button @click="ready">Facebook으로 로그인</button>
+      </div>
+      <!-- <router-link to="/list"><button @click="loginFunc">테스트 계정으로 로그인</button></router-link> -->
       <!-- <router-link to="/list"><button class="google">Google로 로그인</button></router-link> -->
     </div>
+    <confirm-modal :show="openConfirmModal" :content="confirmContent" @close="openConfirmModal = false"></confirm-modal>
   </div>
 </template>
 
 <script>
-// window.onpopstate = function(event) {
-//   console.log("location: " + document.location + ", state: " + JSON.stringify(event.state));
-//     document.location.replace('https://naver.com');
-//   if (document.location == "https://soda-phonebook.ga/me") {
-//     console.log('hi')
-//     document.location.replace('https://naver.com');
-//   }
-// };
+import ConfirmModal from '../../utilities/confirmModal/ConfirmModal'
+import ConfirmData from '../../utilities/confirmModal/ConfirmData.json'
+
 export default {
   name: 'Login',
   data () {
     return {
-      currentUrl: window.location.href
+      confirmContent: {},
+      openConfirmModal: false,
     }
   },
   mounted () {
     console.log(this.currentUrl, this)
   },
   watch: {
-    currentUrl () {
-      // console.log(this.currentUrl)
-      // if (this.currentUrl === 'https://soda-phonebook.ga/api/me') {
-      //   this.loginFunc();
-      // }
-    }
   },
   methods: {
+    ready () {
+      this.openConfirmModal = true;
+      this.confirmContent = ConfirmData['ready'];
+    },
     loginTry () {
       console.log('로그인 시도');
       this.$http.get(`/me`, {
@@ -53,6 +52,9 @@ export default {
       console.log('loginFunc')
       this.$emit('login', true);
     }
+  },
+  components: {
+    ConfirmModal,
   }
 }
 </script>

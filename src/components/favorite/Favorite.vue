@@ -30,7 +30,6 @@
         selectedUserId: 0,
         searchContent: "",
         favoriteContacts: [],
-        myId: 1,
       }
     },
     watch: {
@@ -61,7 +60,7 @@
         this.searchContent = $('#favoriteSearchId').val();
       },
       getFavorites () {
-        this.$http.get(`/users/${this.myId}/favorites`, {
+        this.$http.get(`/users/favorites`, {
         }).then((result => {
             this.favoriteContacts = result.data;
           }))

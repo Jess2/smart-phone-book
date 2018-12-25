@@ -2,9 +2,10 @@
   <div class="confirmModal" v-if="show">
     <div class="popUpGridWrapepr">
       <div class="title">
-        <span v-if="content.type !== 3"><b>"{{tagName}}"</b> {{content.title}}</span>
+        <span v-if="content.type === 1 || content.type === 2"><b>"{{tagName}}"</b> {{content.title}}</span>
         <span v-if="content.type === 2"><b>"{{contactName}}"</b> {{content.title2}}</span>
         <span v-if="content.type === 3"><b>"{{contactName}}"</b> {{content.title}}</span>
+        <span v-if="content.type >= 4">{{content.title}}</span>
       </div>
 
       <!-- 태그 삭제 -->
@@ -29,6 +30,12 @@
         <button class="btn btn-secondary" @click="$emit('close')">{{ content.button1 }}</button>
         <!-- 삭제하기 -->
         <button class="btn btn-danger" @click="deleteContact">{{ content.button2 }}</button>
+      </div>
+      
+      <!-- 준비 중입니다. -->
+      <div class="buttons" v-if="content.type === 4">
+        <!-- 확인 -->
+        <button class="btn btn-primary" @click="$emit('close')">{{ content.button1 }}</button>
       </div>
 
     </div>

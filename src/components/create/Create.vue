@@ -212,7 +212,7 @@ export default {
       type: "DEFAULT", // DEFAULT, FAVORITED, ME
       photoArray: "",
       newPhone: {
-        // id: 0,
+        id: 0,
         number: "",
         category: { id: 1, name: "휴대전화" },
         numbers: {
@@ -222,22 +222,22 @@ export default {
         }
       },
       newEmail: {
-        // id: 0,
+        id: 0,
         category: { id: 9, name: "개인" },
         contents: ""
       },
       newAddress: {
-        // id: 0,
+        id: 0,
         category: { id: 15, name: "집" },
         contents: ""
       },
       newDate: {
-        // id: 0,
+        id: 0,
         category: { id: 12, name: "생일" },
         contents: ""
       },
       newUrl: {
-        // id: 0,
+        id: 0,
         category: { id: 6, name: "개인" },
         contents: ""
       }
@@ -436,6 +436,7 @@ export default {
             third: this.phoneArray[i].number.split('-')[2],
           }
           delete this.phoneArray[i].number;
+          delete this.phoneArray[i].id;
           delete this.phoneArray[i].category.isDefault;
         }
       }
@@ -447,24 +448,28 @@ export default {
       if (this.emailArray.length > 0) {
         for (let i=0; i<this.emailArray.length; i++) {
           delete this.emailArray[i].category.isDefault;
+          delete this.emailArray[i].id;
         }
       }
       if (this.addressArray.length > 0) {
         for (let i=0; i<this.addressArray.length; i++) {
           delete this.addressArray[i].category.isDefault;
+          delete this.addressArray[i].id;
         }
       }
       if (this.dateArray.length > 0) {
         for (let i=0; i<this.dateArray.length; i++) {
           delete this.dateArray[i].category.isDefault;
+          delete this.dateArray[i].id;
         }
       }
       if (this.urlArray.length > 0) {
         for (let i=0; i<this.urlArray.length; i++) {
           delete this.urlArray[i].category.isDefault;
+          delete this.urlArray[i].id;
         }
       }
-      if (this.name !== "" && this.name.length <= 10) {
+      if (this.name !== "") {
         if (!this.selectedContact) {
           this.$http.post(`/contacts`, {
             addresses: this.addressArray,
@@ -515,14 +520,12 @@ export default {
         }
       } else if (this.name === "") {
         alert('이름을 입력해주세요.')
-      } else if (this.name.length > 10) {
-        alert('이름 길이는 10 글자를 초과할 수 없습니다.')
       }
     },
     // 번호 추가
     addPhone () {
       var _newPhone = Object.assign({}, this.newPhone);
-      // var _newPhone = Object.assign({}, this.newPhone, {id: new Date().getTime()});
+      var _newPhone = Object.assign({}, this.newPhone, {id: new Date().getTime()});
       this.phoneArray.push(_newPhone);
       console.log('phoneArray', this.phoneArray);
     },
@@ -534,7 +537,7 @@ export default {
     // 이메일 추가
     addEmail () {
       var _newEmail = Object.assign({}, this.newEmail);
-      // var _newEmail = Object.assign({}, this.newEmail, {id: new Date().getTime()});
+      var _newEmail = Object.assign({}, this.newEmail, {id: new Date().getTime()});
       this.emailArray.push(_newEmail);
       console.log('emailArray', this.emailArray);
     },
@@ -546,7 +549,7 @@ export default {
     // 주소 추가
     addAddress () {
       var _newAddress = Object.assign({}, this.newAddress);
-      // var _newAddress = Object.assign({}, this.newAddress, {id: new Date().getTime()});
+      var _newAddress = Object.assign({}, this.newAddress, {id: new Date().getTime()});
       this.addressArray.push(_newAddress);
       console.log('addressArray', this.addressArray);
     },
@@ -558,7 +561,7 @@ export default {
     // 생일 추가
     addDate () {
       var _newDate = Object.assign({}, this.newDate);
-      // var _newDate = Object.assign({}, this.newDate, {id: new Date().getTime()});
+      var _newDate = Object.assign({}, this.newDate, {id: new Date().getTime()});
       this.dateArray.push(_newDate);
       console.log(this.dateArray)
     },
@@ -569,7 +572,7 @@ export default {
     // url 추가
     addUrl () {
       var _newUrl = Object.assign({}, this.newUrl);
-      // var _newUrl = Object.assign({}, this.newUrl, {id: new Date().getTime()});
+      var _newUrl = Object.assign({}, this.newUrl, {id: new Date().getTime()});
       this.urlArray.push(_newUrl);
     },
     // url 제거
