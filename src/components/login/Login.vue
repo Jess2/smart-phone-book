@@ -38,7 +38,7 @@ export default {
     }
   },
   mounted () {
-    // this.blink();
+    // document.cookie = "SESSION=Hello";
     console.log('login mounted')
     var c = document.cookie;
     console.log('cookie', c)
@@ -46,28 +46,15 @@ export default {
     var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
     this.session = (value ? value[2] : null);
     console.log('session value', value);
-    if (document.cookie !== null) {
+    if (document.cookie) {
       console.log('session 감지')
-      // window.location.href = 'https://soda-phonebook.ga/#/list';
+      window.location.href = 'https://soda-phonebook.ga/#/list';
     }
-  },
-  watch: {
-    // session () {
-    //   if (this.session !== null) {
-    //     console.log('session 감지')
-    //     window.location.href = 'https://soda-phonebook.ga/#/list';
-    //   }
-    // }
   },
   methods: {
     googleLogin () {
       window.location.href = 'https://soda-phonebook.ga/api/login';
     },
-    // getCookie () {
-    //   var name = 'SESSION';
-    //   var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-    //   this.session = (value ? value[2] : null);
-    // },
     ready () {
       this.openConfirmModal = true;
       this.confirmContent = ConfirmData['ready'];
