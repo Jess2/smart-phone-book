@@ -16,9 +16,6 @@
 - 주소록 즐겨찾기
 - 주소록 태그(그룹)
 - 주소록 검색
-- 집/직장 주소 구글 API 지도 표시
-- 명함 인식
-- 주소록 백업 Excel Export/Import(미정)
 
 ## Stack
 - Front-end
